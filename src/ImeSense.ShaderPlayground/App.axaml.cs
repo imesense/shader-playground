@@ -20,6 +20,9 @@ public partial class App : Application {
         services.AddSingleton<MainViewModel>();
         services.AddSingleton<MainWindow>();
 
+        services.AddTransient<MenuViewModel>();
+        services.AddTransient<MenuView>();
+
         return services;
     }
 
