@@ -3,7 +3,7 @@ using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 
-using ImeSense.ShaderPlayground.ViewModels;
+using ReactiveUI;
 
 namespace ImeSense.ShaderPlayground;
 
@@ -22,6 +22,6 @@ public class ViewLocator : IDataTemplate {
     }
 
     public bool Match(object? data) {
-        return data is ViewModelBase;
+        return data is ReactiveObject;
     }
 }

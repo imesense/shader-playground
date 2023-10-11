@@ -7,12 +7,102 @@
         xmlns:vm="using:ImeSense.ShaderPlayground.ViewModels"
         mc:Ignorable="d"
         Icon="/Assets/avalonia-logo.ico"
-        Title="ImeSense ShaderPlayground">
+        Title="{Binding TitleName}"
+        Height="{Binding WindowHeight}"
+        Width="{Binding WindowWidth}"
+        WindowStartupLocation="CenterScreen">
     <Design.DataContext>
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0"
+               VerticalAlignment="Top"
+               HorizontalAlignment="Left"
+               Margin="0,2,0,0"
+               Width="25"
+               Height="25" />
+
+        <StackPanel Grid.Row="0"
+                    Margin="30,2,0,0"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Width="230">
+            <Button Content="{Binding File}"
+                    Foreground="#d6d6d6"
+                    Height="25"
+                    Width=""
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Margin="0,0,4,0" />
+            <Button Content="{Binding Tools}"
+                    Foreground="#d6d6d6"
+                    Height="25"
+                    Width=""
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Margin="0,0,4,0" />
+            <Button Content="{Binding Settings}"
+                    Foreground="#d6d6d6"
+                    Height="25"
+                    Width=""
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Margin="0,0,4,0" />
+            <Button Content="{Binding Help}"
+                    Foreground="#d6d6d6"
+                    Height="25"
+                    Width=""
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Margin="0,0,4,0" />
+        </StackPanel>
+
+        <Separator Margin="590,750,0,0"
+                   HorizontalAlignment="Center"
+                   RenderTransformOrigin="0.5,0.5"
+                   Width="755"
+                   BorderThickness="0.1">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1" />
+                    <SkewTransform />
+                    <RotateTransform Angle="90" />
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+
+        <Separator Margin="590,0,0,0"
+                   HorizontalAlignment="Right"
+                   RenderTransformOrigin="0.5,0.5"
+                   Width="755"
+                   BorderThickness="0.1">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1" />
+                    <SkewTransform />
+                    <RotateTransform Angle="0" />
+                    <TranslateTransform />
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+    </Grid>
 </Window>
