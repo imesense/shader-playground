@@ -24,13 +24,13 @@ public class MainViewModel : ReactiveObject {
     /// Ширина окна
     /// </summary>
     [Reactive]
-    public int WindowHeight { get; set; } = 600;
+    public int WindowHeight { get; set; } = 720;
 
     /// <summary>
     /// Высота окна
     /// </summary>
     [Reactive]
-    public int WindowWidth { get; set; } = 800;
+    public int WindowWidth { get; set; } = 1280;
 
     /// <summary>
     /// Название окна
