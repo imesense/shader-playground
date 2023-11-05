@@ -1,6 +1,6 @@
 #pragma once
 
-#include "resource.h"
+#include "..\resource.h"
 
 #define WIN32_LEAN_AND_MEAN // Excludes rarely used libraries in Windows.h
 

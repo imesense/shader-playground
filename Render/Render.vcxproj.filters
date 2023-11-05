@@ -1,37 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Исходные файлы">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Файлы заголовков">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Файлы ресурсов">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Render.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
+    <Filter Include="Headers">
+      <UniqueIdentifier>{abed3f37-d126-4062-b0de-bde615747470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderFiles">
+      <UniqueIdentifier>{54c4f0e4-7577-4911-a5c3-2131162a69d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderFiles\Window">
+      <UniqueIdentifier>{a049ee28-d2a5-40bc-9c92-8c69cdfd5f59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderFiles\DirectX11">
+      <UniqueIdentifier>{31a8c2ef-8c4a-4067-b9b0-57a40635e16f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\DirectX11">
+      <UniqueIdentifier>{76f4484d-a6f9-4888-8200-bb64fba6c201}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Render.rc">
@@ -48,5 +36,44 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Headers\Render.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\framework.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Main.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="targetver.h" />
+    <ClInclude Include="Headers\DirectX11\DirectX11.h">
+      <Filter>Headers\DirectX11</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RendersFiles\Window\About.cpp">
+      <Filter>RenderFiles\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\Window\InitInstance.cpp">
+      <Filter>RenderFiles\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\Window\Main.cpp">
+      <Filter>RenderFiles\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\Window\RegisterClass.cpp">
+      <Filter>RenderFiles\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\Window\WndProc.cpp">
+      <Filter>RenderFiles\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\Window\wWinMain.cpp">
+      <Filter>RenderFiles\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\DirectX11\DirectX11.cpp">
+      <Filter>RenderFiles\DirectX11</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
