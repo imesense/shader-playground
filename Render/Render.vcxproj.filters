@@ -20,6 +20,12 @@
     <Filter Include="Headers\DirectX11">
       <UniqueIdentifier>{76f4484d-a6f9-4888-8200-bb64fba6c201}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\DirectX10">
+      <UniqueIdentifier>{4c9cc0e8-4626-40e1-9077-f9980cdd3b87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderFiles\DirectX10">
+      <UniqueIdentifier>{dca6d91c-097b-4ea2-8bf1-d950802ceb6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Render.rc">
@@ -52,6 +58,9 @@
     <ClInclude Include="Headers\DirectX11\DirectX11.h">
       <Filter>Headers\DirectX11</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\DirectX10\DirectX10.h">
+      <Filter>Headers\DirectX10</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RendersFiles\Window\About.cpp">
@@ -74,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="RendersFiles\DirectX11\DirectX11.cpp">
       <Filter>RenderFiles\DirectX11</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\DirectX10\DirectX10.cpp">
+      <Filter>RenderFiles\DirectX10</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
