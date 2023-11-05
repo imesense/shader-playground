@@ -5,8 +5,11 @@ DirectX10* pDirectX10 = nullptr;
 DirectX10::DirectX10()
 {
     sd = {};
+    viewport = {};
+
     g_pd3dDevice = nullptr;
     g_pSwapChain = nullptr;
+
     g_pRenderTargetView = nullptr;
 }
 
@@ -61,16 +64,14 @@ BOOL DirectX10::CreateWindowDirectX10(HWND hWnd)
     g_pd3dDevice->OMSetRenderTargets(1, &g_pRenderTargetView, nullptr);
 
     // Устанавливаем окно Viewport
-    D3D10_VIEWPORT vp = {};
+    viewport.Width = width;
+    viewport.Height = height;
+    viewport.MinDepth = 0.0f;
+    viewport.MaxDepth = 1.0f;
+    viewport.TopLeftX = 0;
+    viewport.TopLeftY = 0;
 
-    vp.Width = width;
-    vp.Height = height;
-    vp.MinDepth = 0.0f;
-    vp.MaxDepth = 1.0f;
-    vp.TopLeftX = 0;
-    vp.TopLeftY = 0;
-
-    g_pd3dDevice->RSSetViewports(1, &vp);
+    g_pd3dDevice->RSSetViewports(1, &viewport);
 
     return TRUE;
 }

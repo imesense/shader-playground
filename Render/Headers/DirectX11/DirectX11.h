@@ -10,6 +10,10 @@ public:
 	BOOL CreateWindowDirectX11(HWND hWnd);
 
 public:
+	D3D11_VIEWPORT viewport;
+
+	DXGI_SWAP_CHAIN_DESC sd;
+
 	ID3D11Device* g_pd3dDevice;
 	IDXGISwapChain* g_pSwapChain;
 

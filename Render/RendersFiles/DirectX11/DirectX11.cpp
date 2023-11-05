@@ -4,6 +4,9 @@ DirectX11* pDirectX11 = nullptr;
 
 DirectX11::DirectX11()
 {
+    sd = {};
+    viewport = {};
+
     g_pd3dDevice = nullptr;
     g_pSwapChain = nullptr;
 
@@ -64,7 +67,6 @@ BOOL DirectX11::CreateWindowDirectX11(HWND hWnd)
        return FALSE;
 
    // Создаем Swap Chain
-   DXGI_SWAP_CHAIN_DESC sd = {};
    sd.BufferCount = 1;
    sd.BufferDesc.Width = width;
    sd.BufferDesc.Height = height;
@@ -100,16 +102,14 @@ BOOL DirectX11::CreateWindowDirectX11(HWND hWnd)
    g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView, nullptr);
 
    // Устанавливаем окно Viewport
-   D3D11_VIEWPORT vp = {};
+   viewport.Width = static_cast<FLOAT>(width);
+   viewport.Height = static_cast<FLOAT>(height);
+   viewport.MinDepth = 0.0f;
+   viewport.MaxDepth = 1.0f;
+   viewport.TopLeftX = 0;
+   viewport.TopLeftY = 0;
 
-   vp.Width = static_cast<FLOAT>(width);
-   vp.Height = static_cast<FLOAT>(height);
-   vp.MinDepth = 0.0f;
-   vp.MaxDepth = 1.0f;
-   vp.TopLeftX = 0;
-   vp.TopLeftY = 0;
-
-   g_pImmediateContext->RSSetViewports(1, &vp);
+   g_pImmediateContext->RSSetViewports(1, &viewport);
 
    return TRUE;
 }
