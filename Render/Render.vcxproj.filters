@@ -26,6 +26,12 @@
     <Filter Include="RenderFiles\DirectX10">
       <UniqueIdentifier>{dca6d91c-097b-4ea2-8bf1-d950802ceb6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\OpenGL">
+      <UniqueIdentifier>{144c01bb-e354-4451-9ba2-396cd673f443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderFiles\OpenGL">
+      <UniqueIdentifier>{1db8bb38-c175-443d-8c69-6145f9b3250d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Render.rc">
@@ -61,6 +67,9 @@
     <ClInclude Include="Headers\DirectX10\DirectX10.h">
       <Filter>Headers\DirectX10</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\OpenGL\OpenGL.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RendersFiles\Window\About.cpp">
@@ -86,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="RendersFiles\DirectX10\DirectX10.cpp">
       <Filter>RenderFiles\DirectX10</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\OpenGL\OpenGL.cpp">
+      <Filter>RenderFiles\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 #include "..\..\Headers\Main.h"
 #include "..\..\Headers\DirectX10\DirectX10.h"
 #include "..\..\Headers\DirectX11\DirectX11.h"
+#include "..\..\Headers\OpenGL\OpenGL.h"
 
 /*
     Сохраняет маркер экземпляра и создает главное окно
@@ -14,7 +15,7 @@ BOOL window::InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
     hInst = hInstance; // Сохранить маркер экземпляра в глобальной переменной
 
-    pDirectX10 = new DirectX10();
+    //pDirectX10 = new DirectX10();
 
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
@@ -26,7 +27,9 @@ BOOL window::InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     ShowWindow(hWnd, nCmdShow);
 
-    pDirectX10->CreateWindowDirectX10(hWnd);
+    _main();
+    //pDirectX10->CreateWindowDirectX10(hWnd);
+
 
     UpdateWindow(hWnd);
 
