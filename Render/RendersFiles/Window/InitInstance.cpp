@@ -13,25 +13,27 @@
 */
 BOOL window::InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
+#ifndef OPEN_GL
     hInst = hInstance; // Сохранить маркер экземпляра в глобальной переменной
 
-    //pDirectX10 = new DirectX10();
+    pDirectX10 = new DirectX10();
 
     HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
     if (!hWnd)
-    {
         return FALSE;
-    }
 
     ShowWindow(hWnd, nCmdShow);
 
-    _main();
-    //pDirectX10->CreateWindowDirectX10(hWnd);
-
+    pDirectX10->CreateWindowDirectX10(hWnd);
 
     UpdateWindow(hWnd);
+#else
+    pOpenGL = new OpenGL();
+
+    pOpenGL->CreateWindowOpenGL();
+#endif
 
     return TRUE;
 }

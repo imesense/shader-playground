@@ -1,7 +1,24 @@
 #pragma once
+#include "..\..\Headers\Render.h"
+
+//#define OPEN_GL
 
 #include <GLFW/glfw3.h>
 
-extern void _main();
+class OpenGL
+{
+public:
+    OpenGL();
+    ~OpenGL();
+    
+    BOOL CreateWindowOpenGL();
+public:
+   
+    void render();
+    static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+    {
+        glViewport(0, 0, width, height);
+    };
+};
 
-extern void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+extern OpenGL* pOpenGL;

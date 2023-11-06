@@ -1,49 +1,60 @@
 #include "..\..\Headers\OpenGL\OpenGL.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+OpenGL* pOpenGL = nullptr;
+
+OpenGL::OpenGL()
 {
-    glViewport(0, 0, width, height);
+
 }
 
-void _main()
+OpenGL::~OpenGL()
 {
-    // Инициализация GLFW
-    if (!glfwInit())
-        return;
 
-    // Устанавливаем версию OpenGL и создаем окно
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+}
+
+BOOL OpenGL::CreateWindowOpenGL()
+{
+    // Initialize GLFW
+    if (!glfwInit())
+        return FALSE;
+
+    // Create a GLFW window
     GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL Window", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
-        return;
+        return FALSE;
     }
 
-    // Устанавливаем контекст текущим и устанавливаем callback функцию изменения размера окна
+    // Set the GLFW window as the current context
     glfwMakeContextCurrent(window);
+
+    // Set the framebuffer size callback
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-    // Основной цикл приложения
+    // Main loop
     while (!glfwWindowShouldClose(window))
     {
-        // Отрисовываем что-то с использованием OpenGL
-        glClear(GL_COLOR_BUFFER_BIT);
-        glBegin(GL_TRIANGLES);
-        glVertex2f(-0.5f, -0.5f);
-        glVertex2f(0.5f, -0.5f);
-        glVertex2f(0.0f, 0.5f);
-        glEnd();
-
-        // Поддерживаем двойную буферизацию
+        render();
         glfwSwapBuffers(window);
-
-        // Проверяем события
         glfwPollEvents();
     }
 
-    // Закрываем GLFW и завершаем программу
     glfwTerminate();
-    return;
+}
+
+void OpenGL::render()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glBegin(GL_TRIANGLES);
+    glVertex2f(-0.5f, -0.5f);
+    glVertex2f(0.5f, -0.5f);
+    glVertex2f(0.0f, 0.5f);
+    glEnd();
+}
+
+//-' Callback
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
 }
