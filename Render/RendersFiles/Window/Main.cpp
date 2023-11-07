@@ -1,5 +1,5 @@
-#pragma once
-#include "..\..\Headers\framework.h"
+#include "stdafx.h"
+#include "Headers\framework.h"
 
 namespace window
 {

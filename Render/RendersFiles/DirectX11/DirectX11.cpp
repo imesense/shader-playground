@@ -1,4 +1,5 @@
-#include "..\..\Headers\DirectX11\DirectX11.h"
+#include "stdafx.h"
+#include "Headers\DirectX11\DirectX11.h"
 
 DirectX11* pDirectX11 = nullptr;
 

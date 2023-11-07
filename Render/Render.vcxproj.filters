@@ -70,6 +70,13 @@
     <ClInclude Include="Headers\OpenGL\OpenGL.h">
       <Filter>Headers\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\Camera.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Timer.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RendersFiles\Window\About.cpp">
@@ -99,5 +106,12 @@
     <ClCompile Include="RendersFiles\OpenGL\OpenGL.cpp">
       <Filter>RenderFiles\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="RendersFiles\Camera.cpp">
+      <Filter>RenderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\Timer.cpp">
+      <Filter>RenderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
 </Project>

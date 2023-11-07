@@ -1,5 +1,5 @@
 #pragma once
-#include "..\..\Headers\Render.h"
+#include "Headers/Render.h"
 
 class DirectX11
 {

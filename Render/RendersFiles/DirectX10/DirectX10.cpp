@@ -1,4 +1,5 @@
-#include "..\..\Headers\DirectX10\DirectX10.h"
+#include "stdafx.h"
+#include "Headers\DirectX10\DirectX10.h"
 
 DirectX10* pDirectX10 = nullptr;
 

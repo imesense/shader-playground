@@ -1,6 +1,7 @@
-#include "..\..\Headers\framework.h"
-#include "..\..\Headers\Render.h"
-#include "..\..\Headers\Main.h"
+#include "stdafx.h"
+#include "Headers\framework.h"
+#include "Headers\Render.h"
+#include "Headers\Main.h"
 
 /*
     Обработчик сообщений для окна "О программе"

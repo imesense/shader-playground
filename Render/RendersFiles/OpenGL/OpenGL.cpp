@@ -1,4 +1,5 @@
-#include "..\..\Headers\OpenGL\OpenGL.h"
+#include "stdafx.h"
+#include "Headers\OpenGL\OpenGL.h"
 
 OpenGL* pOpenGL = nullptr;
 

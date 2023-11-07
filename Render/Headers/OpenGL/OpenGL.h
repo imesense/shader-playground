@@ -1,7 +1,5 @@
 #pragma once
-#include "..\..\Headers\Render.h"
-
-//#define OPEN_GL
+#include "Headers/Render.h"
 
 #include <GLFW/glfw3.h>
 

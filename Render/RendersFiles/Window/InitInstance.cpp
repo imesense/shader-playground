@@ -1,9 +1,10 @@
-#include "..\..\Headers\framework.h"
-#include "..\..\Headers\Render.h"
-#include "..\..\Headers\Main.h"
-#include "..\..\Headers\DirectX10\DirectX10.h"
-#include "..\..\Headers\DirectX11\DirectX11.h"
-#include "..\..\Headers\OpenGL\OpenGL.h"
+#include "stdafx.h"
+#include "Headers\framework.h"
+#include "Headers\Render.h"
+#include "Headers\Main.h"
+#include "Headers\DirectX10\DirectX10.h"
+#include "Headers\DirectX11\DirectX11.h"
+#include "Headers\OpenGL\OpenGL.h"
 
 /*
     Сохраняет маркер экземпляра и создает главное окно
