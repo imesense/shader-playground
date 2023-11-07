@@ -1,22 +1,12 @@
 #pragma once
-#include "Headers/Render.h"
 
 #include <GLFW/glfw3.h>
 
-class OpenGL
+class OpenGLWindowsObjects
 {
 public:
-    OpenGL();
-    ~OpenGL();
-    
-    BOOL CreateWindowOpenGL();
-public:
-   
-    void render();
-    static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-    {
-        glViewport(0, 0, width, height);
-    };
+    OpenGLWindowsObjects();
+    ~OpenGLWindowsObjects();
 };
 
-extern OpenGL* pOpenGL;
+extern OpenGLWindowsObjects* pOpenGL;

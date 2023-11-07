@@ -1,5 +1,4 @@
 #pragma once
-#include "Headers/Render.h"
 #include "Headers/Timer.h"
 
 namespace Camera

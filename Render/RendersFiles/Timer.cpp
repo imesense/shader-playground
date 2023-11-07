@@ -1,6 +1,4 @@
 #include "stdafx.h"
-
-#include "Headers/Render.h"
 #include "Headers/Timer.h"
 
 namespace Timer

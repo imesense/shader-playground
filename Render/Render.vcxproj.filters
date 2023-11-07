@@ -77,23 +77,14 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Headers\WindowDirectX.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\WindowOpenGL.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RendersFiles\Window\About.cpp">
-      <Filter>RenderFiles\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="RendersFiles\Window\InitInstance.cpp">
-      <Filter>RenderFiles\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="RendersFiles\Window\Main.cpp">
-      <Filter>RenderFiles\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="RendersFiles\Window\RegisterClass.cpp">
-      <Filter>RenderFiles\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="RendersFiles\Window\WndProc.cpp">
-      <Filter>RenderFiles\Window</Filter>
-    </ClCompile>
     <ClCompile Include="RendersFiles\Window\wWinMain.cpp">
       <Filter>RenderFiles\Window</Filter>
     </ClCompile>
@@ -113,5 +104,11 @@
       <Filter>RenderFiles</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="RendersFiles\WindowDirectX.cpp">
+      <Filter>RenderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="RendersFiles\WindowOpenGL.cpp">
+      <Filter>RenderFiles</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

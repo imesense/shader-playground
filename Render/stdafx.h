@@ -20,3 +20,7 @@
 #include <dxgi.h>        // DirectX Graphics Infrastructure 
 #include <d3dcompiler.h> // Shader compiler
 #include <DirectXMath.h> // SIMD math library utilizing SSE
+
+#include <GL/gl.h>
+#include "GL/glext.h"
+#include "GL/wglext.h"

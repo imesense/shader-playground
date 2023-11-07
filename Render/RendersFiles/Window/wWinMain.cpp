@@ -1,41 +1,47 @@
 ﻿#include "stdafx.h"
+
 #include "Headers\framework.h"
-#include "Headers\Render.h"
 #include "Headers\Main.h"
 
-/*
-    Основная точка входа в приложение
-*/
+#include "Headers\WindowOpenGL.h"
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
-    MSG msg;
+	int result;
+#if 0
+	// Создаем объект Window
+	window::Window wnd;
 
-    using namespace window;
+	result = 1;
 
-    UNREFERENCED_PARAMETER(hPrevInstance);
-    UNREFERENCED_PARAMETER(lpCmdLine);
+	// Заполняем DescWindow структуру с нужными параметрами
+	window::DescWindow desc;
+	desc.width = 1280;
+	desc.height = 720;
+	desc.caption = L"DirectX Window";
 
-    //-' Инициализация глобальных строк
-    LoadStringW(hInstance, IDS_APP_TITLE, szTitle, 100);
-    LoadStringW(hInstance, IDC_RENDER, szWindowClass, 100);
+	// Вызываем метод Create
+	bool success = wnd.Create(desc);
 
-    _RegisterClass(hInstance);
+	if (success)
+	{
+		// Окно успешно создано, можно начинать обработку сообщений
+		while (!wnd.IsExit())
+		{
+			wnd.RunEvent();
+			// Здесь можно добавить свой код для обработки событий
+		}
+	}
+#else
+	//LoggerCreate("lesson01.log");
 
-    //-' Выполнить инициализацию приложения:
-    if (!InitInstance(hInstance, nCmdShow))
-        return FALSE;
+	if (!WindowOpenGL::GLWindowCreate("OpenGL Window", 1280, 720, false))
+		return 1;
 
-    HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_RENDER));
+	result = WindowOpenGL::GLWindowMainLoop();
 
-    //-' Цикл основного сообщения:
-    while (GetMessage(&msg, nullptr, 0, 0))
-    {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
-        {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
-        }
-    }
+	WindowOpenGL::GLWindowDestroy();
+	//LoggerDestroy();
+#endif
 
-    return (int) msg.wParam;
+	return result;
 }
