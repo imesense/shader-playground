@@ -18,23 +18,29 @@ extern GLenum g_OpenGLError;
 
 namespace WindowOpenGL
 {
-	// структура для хранения стейта окна GLWindow
-	struct GLWindow
+	class WindowOpenGL
 	{
-		// размеры окна
-		int width;
-		int height;
+	public:
+		struct GLWindow
+		{
+			//-' Размеры окна
+			int width;
+			int height;
 
-		// флаги состояние
-		bool fullScreen;
-		bool active;
-		bool running;
+			//-' Флаги состояние
+			bool active;
+			bool running;
+		};
+
+		bool GLWindowCreate(const char* title, int width, int height);
+		void GLWindowDestroy();
+
+		void GLWindowSetSize(int width, int height);
+
+		int GLWindowMainLoop();
+
+		static LRESULT CALLBACK GLWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	};
-
-	bool GLWindowCreate(const char* title, int width, int height, bool fullScreen = false);
-	void GLWindowDestroy();
-
-	void GLWindowSetSize(int width, int height, bool fullScreen = false);
-
-	int GLWindowMainLoop();
 }
+
+extern WindowOpenGL::WindowOpenGL* pWindowOpenGL;

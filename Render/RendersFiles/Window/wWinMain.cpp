@@ -34,12 +34,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 #else
 	//LoggerCreate("lesson01.log");
 
-	if (!WindowOpenGL::GLWindowCreate("OpenGL Window", 1280, 720, false))
+	pWindowOpenGL = new WindowOpenGL::WindowOpenGL();
+
+	if (!pWindowOpenGL->GLWindowCreate("OpenGL Window", 1280, 720/*, false*/))
 		return 1;
 
-	result = WindowOpenGL::GLWindowMainLoop();
+	result = pWindowOpenGL->GLWindowMainLoop();
 
-	WindowOpenGL::GLWindowDestroy();
+	pWindowOpenGL->GLWindowDestroy();
+	delete pWindowOpenGL;
 	//LoggerDestroy();
 #endif
 

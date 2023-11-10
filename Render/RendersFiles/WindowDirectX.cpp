@@ -72,8 +72,8 @@ namespace WindowDirectX
 
 		ShowWindow(m_hwnd, SW_SHOW);
 
-		//pDirectX10 = new DirectX10();
-		//pDirectX10->CreateWindowDirectX10(m_hwnd);
+		pDirectX10 = new DirectX10();
+		pDirectX10->CreateWindowDirectX10(m_hwnd);
 
 		UpdateWindow(m_hwnd);
 

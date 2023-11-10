@@ -5,27 +5,27 @@ namespace WindowDirectX
 {
 	//class InputMgr;
 
-	struct DescWindow
-	{
-		DescWindow() :
-			caption(L""),
-			width(640),
-			height(480),
-			posx(200),
-			posy(20),
-			resizing(true)
-		{}
-
-		int posx;
-		int posy;
-		std::wstring caption;	///< заголовок окна
-		int width;				///< ширина клиентской части окна
-		int height;				///< высота клиентской части окна
-		bool resizing;
-	};
-
 	class Window
 	{
+		struct DescWindow
+		{
+			DescWindow() :
+				caption(L""),
+				width(640),
+				height(480),
+				posx(200),
+				posy(20),
+				resizing(true)
+			{}
+
+			int posx;
+			int posy;
+			std::wstring caption;	///< заголовок окна
+			int width;				///< ширина клиентской части окна
+			int height;				///< высота клиентской части окна
+			bool resizing;
+		};
+
 	public:
 		Window();
 

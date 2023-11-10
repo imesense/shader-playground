@@ -6,21 +6,20 @@
 
 GLenum g_OpenGLError = GL_NO_ERROR;
 
+WindowOpenGL::WindowOpenGL* pWindowOpenGL = nullptr;
+
 namespace WindowOpenGL
 {
 	const char GLWINDOW_CLASS_NAME[] = "GLWindow_class";
 
-	GLWindow  g_window;
+	WindowOpenGL::GLWindow  g_window;
 
 	HINSTANCE g_hInstance;
 	HWND      g_hWnd;
 	HDC       g_hDC;
 	HGLRC     g_hRC;
 
-	// обработчик сообщений окна
-	LRESULT CALLBACK GLWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-	bool GLWindowCreate(const char* title, int width, int height, bool fullScreen)
+	bool WindowOpenGL::GLWindowCreate(const char* title, int width, int height)
 	{
 		//ASSERT(title);
 		//ASSERT(width > 0);
@@ -168,15 +167,15 @@ namespace WindowOpenGL
 		);*/
 
 		// зададим размеры окна
-		GLWindowSetSize(width, height, fullScreen);
+		GLWindowSetSize(width, height/*, fullScreen*/);
 
 		return true;
 	}
 
-	void GLWindowDestroy()
+	void WindowOpenGL::GLWindowDestroy()
 	{
 		// восстановим разрешение экрана
-		if (g_window.fullScreen)
+		if (/*g_window.fullScreen*/false)
 		{
 			ChangeDisplaySettings(NULL, CDS_RESET);
 			ShowCursor(TRUE);
@@ -202,7 +201,7 @@ namespace WindowOpenGL
 			UnregisterClass(L"GLWINDOW_CLASS_NAME", g_hInstance);
 	}
 
-	void GLWindowSetSize(int width, int height, bool fullScreen)
+	void WindowOpenGL::GLWindowSetSize(int width, int height)
 	{
 		//ASSERT(width > 0);
 		//ASSERT(height > 0);
@@ -214,35 +213,35 @@ namespace WindowOpenGL
 		int     x, y;
 
 		// если мы возвращаемся из полноэкранного режима
-		if (g_window.fullScreen && !fullScreen)
+		if (false/*g_window.fullScreen*//* && !fullScreen*/)
 		{
 			ChangeDisplaySettings(NULL, CDS_RESET);
 			ShowCursor(TRUE);
 		}
 
-		g_window.fullScreen = fullScreen;
+		//g_window.fullScreen = false/*fullScreen*/;
 
 		// если необходим полноэкранный режим
-		if (g_window.fullScreen)
-		{
-			memset(&devMode, 0, sizeof(devMode));
-			devMode.dmSize = sizeof(devMode);
-			devMode.dmPelsWidth = width;
-			devMode.dmPelsHeight = height;
-			devMode.dmBitsPerPel = GetDeviceCaps(g_hDC, BITSPIXEL);
-			devMode.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL;
+		//if (g_window.fullScreen)
+		//{
+		//	memset(&devMode, 0, sizeof(devMode));
+		//	devMode.dmSize = sizeof(devMode);
+		//	devMode.dmPelsWidth = width;
+		//	devMode.dmPelsHeight = height;
+		//	devMode.dmBitsPerPel = GetDeviceCaps(g_hDC, BITSPIXEL);
+		//	devMode.dmFields = DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL;
 
-			// попытка установить полноэкранный режим
-			result = ChangeDisplaySettings(&devMode, CDS_FULLSCREEN);
-			if (result != DISP_CHANGE_SUCCESSFUL)
-			{
-				LOG_ERROR("ChangeDisplaySettings fail %dx%d (%d)\n", width, height, result);
-				g_window.fullScreen = false;
-			}
-		}
+		//	// попытка установить полноэкранный режим
+		//	result = ChangeDisplaySettings(&devMode, CDS_FULLSCREEN);
+		//	if (result != DISP_CHANGE_SUCCESSFUL)
+		//	{
+		//		LOG_ERROR("ChangeDisplaySettings fail %dx%d (%d)\n", width, height, result);
+		//		g_window.fullScreen = false;
+		//	}
+		//}
 
 		// если был запрошен полноэкранный режим и его удалось установить
-		if (g_window.fullScreen)
+		/*if (g_window.fullScreen)
 		{
 			ShowCursor(FALSE);
 
@@ -251,7 +250,7 @@ namespace WindowOpenGL
 
 			x = y = 0;
 		}
-		else // если полноэкранный режим не нужен, или его не удалось установить
+		else */// если полноэкранный режим не нужен, или его не удалось установить
 		{
 			style = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
 			exStyle = WS_EX_APPWINDOW;
@@ -298,7 +297,7 @@ namespace WindowOpenGL
 		OPENGL_CHECK_FOR_ERRORS();
 	}
 
-	int GLWindowMainLoop()
+	int WindowOpenGL::GLWindowMainLoop()
 	{
 		MSG msg;
 
@@ -334,7 +333,7 @@ namespace WindowOpenGL
 		return 0;
 	}
 
-	LRESULT CALLBACK GLWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+	LRESULT CALLBACK WindowOpenGL::GLWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	{
 		switch (msg)
 		{
@@ -342,8 +341,8 @@ namespace WindowOpenGL
 			if (wParam == VK_ESCAPE)
 				g_window.running = false;
 
-			if (wParam == VK_F1)
-				GLWindowSetSize(g_window.width, g_window.height, !g_window.fullScreen);
+			//if (wParam == VK_F1)
+			//	GLWindowSetSize(g_window.width, g_window.height/*, !g_window.fullScreen*/);
 
 			return FALSE;
 
@@ -366,8 +365,8 @@ namespace WindowOpenGL
 			{
 			case SC_SCREENSAVE:
 			case SC_MONITORPOWER:
-				if (g_window.fullScreen)
-					return FALSE;
+				/*if (g_window.fullScreen)
+					return FALSE;*/
 				break;
 
 			case SC_KEYMENU:
