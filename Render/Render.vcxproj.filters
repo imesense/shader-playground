@@ -1,114 +1,67 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Файлы ресурсов">
+    <Filter Include="DebugUtils">
+      <UniqueIdentifier>{542f35dd-6eb6-4590-9d5f-612642ebfd83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Constants">
+      <UniqueIdentifier>{7ccd2b29-03d6-4df8-a3a7-c9e5fd230362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Headers">
-      <UniqueIdentifier>{abed3f37-d126-4062-b0de-bde615747470}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RenderFiles">
-      <UniqueIdentifier>{54c4f0e4-7577-4911-a5c3-2131162a69d6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RenderFiles\Window">
-      <UniqueIdentifier>{a049ee28-d2a5-40bc-9c92-8c69cdfd5f59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RenderFiles\DirectX11">
-      <UniqueIdentifier>{31a8c2ef-8c4a-4067-b9b0-57a40635e16f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\DirectX11">
-      <UniqueIdentifier>{76f4484d-a6f9-4888-8200-bb64fba6c201}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\DirectX10">
-      <UniqueIdentifier>{4c9cc0e8-4626-40e1-9077-f9980cdd3b87}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RenderFiles\DirectX10">
-      <UniqueIdentifier>{dca6d91c-097b-4ea2-8bf1-d950802ceb6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\OpenGL">
-      <UniqueIdentifier>{144c01bb-e354-4451-9ba2-396cd673f443}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RenderFiles\OpenGL">
-      <UniqueIdentifier>{1db8bb38-c175-443d-8c69-6145f9b3250d}</UniqueIdentifier>
+    <Filter Include="DirectX">
+      <UniqueIdentifier>{e3529c9e-5db1-4a5e-908b-3d82f19dd8c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Render.rc">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Resources</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Resources</Filter>
     </Image>
     <Image Include="Render.ico">
-      <Filter>Файлы ресурсов</Filter>
+      <Filter>Resources</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Render.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\framework.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Main.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Headers\DirectX11\DirectX11.h">
-      <Filter>Headers\DirectX11</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\DirectX10\DirectX10.h">
-      <Filter>Headers\DirectX10</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\OpenGL\OpenGL.h">
-      <Filter>Headers\OpenGL</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Camera.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\Timer.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Headers\WindowDirectX.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="DebugUtils\ManagerKeys.h">
+      <Filter>DebugUtils</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\WindowOpenGL.h">
-      <Filter>Headers</Filter>
+    <ClInclude Include="Constants\Constants.h">
+      <Filter>Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX\CreateWindowDX.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX\DirectXWndProc.h">
+      <Filter>DirectX</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="RendersFiles\Window\wWinMain.cpp">
-      <Filter>RenderFiles\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="RendersFiles\DirectX11\DirectX11.cpp">
-      <Filter>RenderFiles\DirectX11</Filter>
-    </ClCompile>
-    <ClCompile Include="RendersFiles\DirectX10\DirectX10.cpp">
-      <Filter>RenderFiles\DirectX10</Filter>
-    </ClCompile>
-    <ClCompile Include="RendersFiles\OpenGL\OpenGL.cpp">
-      <Filter>RenderFiles\OpenGL</Filter>
-    </ClCompile>
-    <ClCompile Include="RendersFiles\Camera.cpp">
-      <Filter>RenderFiles</Filter>
-    </ClCompile>
-    <ClCompile Include="RendersFiles\Timer.cpp">
-      <Filter>RenderFiles</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp" />
-    <ClCompile Include="RendersFiles\WindowDirectX.cpp">
-      <Filter>RenderFiles</Filter>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="DebugUtils\ManagerKeys.cpp">
+      <Filter>DebugUtils</Filter>
     </ClCompile>
-    <ClCompile Include="RendersFiles\WindowOpenGL.cpp">
-      <Filter>RenderFiles</Filter>
+    <ClCompile Include="Constants\Constants.cpp">
+      <Filter>Constants</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX\CreateWindowDX.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX\DirectXWndProc.cpp">
+      <Filter>DirectX</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
