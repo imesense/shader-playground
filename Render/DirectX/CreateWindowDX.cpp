@@ -1,7 +1,11 @@
 #include "stdafx.h"
 #include "CreateWindowDX.h"
 #include "../DirectX/DirectXWndProc.h"
+#include "../DirectX/dx10DeviceHW.h"
+#include "../DirectX/dx11DeviceHW.h"
 
+using namespace dx10HW;
+using namespace dx11HW;
 using namespace DirectXProc;
 
 WindowDirectX::CWindowDirectX* m_pGetWndDX = nullptr;
@@ -25,7 +29,7 @@ namespace WindowDirectX
 	
 	}
 
-	bool CWindowDirectX::Create(const Description& desc)
+	bool CWindowDirectX::Create(const Description& desc, bool dx11)
 	{
 		WndDescr = desc;
 
@@ -61,6 +65,18 @@ namespace WindowDirectX
 			return false;
 
 		ShowWindow(m_hWnd, SW_SHOW);
+
+		if (dx11)
+		{
+			pDirectX11 = new DirectX11();
+			pDirectX11->CreateWindowDirectX11(m_hWnd);
+		}
+		else
+		{
+			pDirectX10 = new DirectX10();
+			pDirectX10->CreateWindowDirectX10(m_hWnd);
+		}
+
 		UpdateWindow(m_hWnd);
 
 		return true;
@@ -82,6 +98,16 @@ namespace WindowDirectX
 			DestroyWindow(m_hWnd);
 
 		m_hWnd = nullptr;
+
+		if (!pDirectX10)
+		{
+			delete pDirectX10;
+		}
+
+		if (!pDirectX11)
+		{
+			delete pDirectX11;
+		}
 	}
 
 	void CWindowDirectX::m_UpdateWindowState()

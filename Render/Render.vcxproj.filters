@@ -47,6 +47,12 @@
     <ClInclude Include="DirectX\DirectXWndProc.h">
       <Filter>DirectX</Filter>
     </ClInclude>
+    <ClInclude Include="DirectX\dx11DeviceHW.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectX\dx10DeviceHW.h">
+      <Filter>DirectX</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -61,6 +67,12 @@
       <Filter>DirectX</Filter>
     </ClCompile>
     <ClCompile Include="DirectX\DirectXWndProc.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX\dx11DeviceHW.cpp">
+      <Filter>DirectX</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectX\dx10DeviceHW.cpp">
       <Filter>DirectX</Filter>
     </ClCompile>
   </ItemGroup>

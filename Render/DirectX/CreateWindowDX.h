@@ -33,7 +33,7 @@ namespace WindowDirectX
 		void RunEvent();
 		void Close();
 
-		bool Create(const Description& desc);
+		bool Create(const Description& desc, bool dx11 = false);
 
 		Description* GetWndDescr() { return &WndDescr; };
 		static CWindowDirectX* GetWndDX() { return m_GetWndDX11; }

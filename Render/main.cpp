@@ -43,9 +43,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
 		Desc.width = 1280;
 		Desc.height = 720;
-		Desc.caption = L"DirectX Window 11";
+		Desc.caption = pIntConstantsArray->USE_DX11 ? L"DirectX11 Window" : L"DirectX10 Window";
 
-		bool success = m_pGetWndDX->Create(Desc);
+		bool success = m_pGetWndDX->Create(Desc, pIntConstantsArray->USE_DX11);
 
 		if (success)
 		{
