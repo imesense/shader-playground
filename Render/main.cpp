@@ -1,8 +1,10 @@
 #include "stdafx.h"
-#include "../Constants/Constants.h"
-#include "../DebugUtils/ManagerKeys.h"
-#include "../OpenGL/CreateWindowGL.h"
-#include "../DirectX/CreateWindowDX.h"
+
+#include "Constants/Constants.h"
+#include "Utils/ManagerKeys.h"
+#include "OpenGL/CreateWindowGL.h"
+#include "DirectX/CreateWindowDX.h"
+#include "Allocator/Allocator.h"
 
 using namespace Constants;
 using namespace ManagerKeys;

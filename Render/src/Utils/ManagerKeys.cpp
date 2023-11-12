@@ -5,7 +5,7 @@ ManagerKeys::CommandLineArguments* pCommandLineArguments = nullptr;
 
 namespace ManagerKeys
 {
-    CommandLineArguments::CommandLineArguments(/*char* lpCmdLine, int nCmdShow*/) : m_argc(0), m_argv(nullptr)
+    CommandLineArguments::CommandLineArguments() : m_argc(0), m_argv(nullptr)
     {
         int argc;
         LPWSTR* argvW = CommandLineToArgvW(GetCommandLineW(), &argc);

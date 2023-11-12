@@ -20,6 +20,8 @@
 #include <d3dcompiler.h> // Shader compiler
 #include <DirectXMath.h> // SIMD math library utilizing SSE
 
+#include <mmsystem.h>
+
 #include <GL/gl.h>
 #include "GL/glext.h"
 #include "GL/wglext.h"

@@ -18,7 +18,7 @@ namespace ManagerKeys
     class CommandLineArguments
     {
     public:
-        CommandLineArguments(/*char* lpCmdLine, int nCmdShow*/);
+        CommandLineArguments();
         ~CommandLineArguments();
         bool CheckKey(const std::string& key);
 

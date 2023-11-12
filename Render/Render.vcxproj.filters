@@ -1,21 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="DebugUtils">
-      <UniqueIdentifier>{542f35dd-6eb6-4590-9d5f-612642ebfd83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Constants">
-      <UniqueIdentifier>{7ccd2b29-03d6-4df8-a3a7-c9e5fd230362}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="DirectX">
-      <UniqueIdentifier>{e3529c9e-5db1-4a5e-908b-3d82f19dd8c2}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{a0c14630-ab27-4f71-a56c-92d5056a03a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OpenGL">
-      <UniqueIdentifier>{fe222739-d595-45d7-8631-6a98402f1278}</UniqueIdentifier>
+    <Filter Include="src\Allocator">
+      <UniqueIdentifier>{c672056b-e9e5-4ff7-a401-ac2a72c2baec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Constants">
+      <UniqueIdentifier>{bad42623-98ab-4850-9215-52afa31bb29f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\DirectX">
+      <UniqueIdentifier>{100ec4e8-0afb-4a31-a1fb-938a69c67efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Frame">
+      <UniqueIdentifier>{8101207a-51cf-4bff-b798-874b0073200b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Input">
+      <UniqueIdentifier>{19111868-efdb-4dee-83f4-ef415bae8121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\OpenGL">
+      <UniqueIdentifier>{1dd9c9a4-84ed-4097-95df-ef191d5396fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Timer">
+      <UniqueIdentifier>{4f0cb5cc-f05e-4826-a9cf-03d5d7a306e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Utils">
+      <UniqueIdentifier>{c1bc5ec9-a28a-4685-90e1-801293bead71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -38,63 +53,87 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="DebugUtils\ManagerKeys.h">
-      <Filter>DebugUtils</Filter>
+    <ClInclude Include="src\Allocator\Allocator.h">
+      <Filter>src\Allocator</Filter>
     </ClInclude>
-    <ClInclude Include="Constants\Constants.h">
-      <Filter>Constants</Filter>
+    <ClInclude Include="src\Constants\Constants.h">
+      <Filter>src\Constants</Filter>
     </ClInclude>
-    <ClInclude Include="DirectX\CreateWindowDX.h">
-      <Filter>DirectX</Filter>
+    <ClInclude Include="src\DirectX\Camera.h">
+      <Filter>src\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="DirectX\DirectXWndProc.h">
-      <Filter>DirectX</Filter>
+    <ClInclude Include="src\DirectX\CreateWindowDX.h">
+      <Filter>src\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="DirectX\dx11DeviceHW.h">
-      <Filter>DirectX</Filter>
+    <ClInclude Include="src\DirectX\DirectXWndProc.h">
+      <Filter>src\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="DirectX\dx10DeviceHW.h">
-      <Filter>DirectX</Filter>
+    <ClInclude Include="src\DirectX\dx10DeviceHW.h">
+      <Filter>src\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="OpenGL\CreateWindowGL.h">
-      <Filter>OpenGL</Filter>
+    <ClInclude Include="src\DirectX\dx11DeviceHW.h">
+      <Filter>src\DirectX</Filter>
     </ClInclude>
-    <ClInclude Include="OpenGL\glDeviceHW.h">
-      <Filter>OpenGL</Filter>
+    <ClInclude Include="src\Frame\Fps.h">
+      <Filter>src\Frame</Filter>
     </ClInclude>
-    <ClInclude Include="OpenGL\OpenGLWndProc.h">
-      <Filter>OpenGL</Filter>
+    <ClInclude Include="src\Input\InputSDK.h">
+      <Filter>src\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\ManagerKeys.h">
+      <Filter>src\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Timer\Timer.h">
+      <Filter>src\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGL\CreateWindowGL.h">
+      <Filter>src\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGL\glDeviceHW.h">
+      <Filter>src\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OpenGL\OpenGLWndProc.h">
+      <Filter>src\OpenGL</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="DebugUtils\ManagerKeys.cpp">
-      <Filter>DebugUtils</Filter>
+    <ClCompile Include="src\Constants\Constants.cpp">
+      <Filter>src\Constants</Filter>
     </ClCompile>
-    <ClCompile Include="Constants\Constants.cpp">
-      <Filter>Constants</Filter>
+    <ClCompile Include="src\DirectX\Camera.cpp">
+      <Filter>src\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="DirectX\CreateWindowDX.cpp">
-      <Filter>DirectX</Filter>
+    <ClCompile Include="src\DirectX\CreateWindowDX.cpp">
+      <Filter>src\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="DirectX\DirectXWndProc.cpp">
-      <Filter>DirectX</Filter>
+    <ClCompile Include="src\DirectX\DirectXWndProc.cpp">
+      <Filter>src\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="DirectX\dx11DeviceHW.cpp">
-      <Filter>DirectX</Filter>
+    <ClCompile Include="src\DirectX\dx10DeviceHW.cpp">
+      <Filter>src\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="DirectX\dx10DeviceHW.cpp">
-      <Filter>DirectX</Filter>
+    <ClCompile Include="src\DirectX\dx11DeviceHW.cpp">
+      <Filter>src\DirectX</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL\CreateWindowGL.cpp">
-      <Filter>OpenGL</Filter>
+    <ClCompile Include="src\Frame\Fps.cpp">
+      <Filter>src\Frame</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL\glDeviceHW.cpp">
-      <Filter>OpenGL</Filter>
+    <ClCompile Include="src\Utils\ManagerKeys.cpp">
+      <Filter>src\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL\OpenGLWndProc.cpp">
-      <Filter>OpenGL</Filter>
+    <ClCompile Include="src\Timer\Timer.cpp">
+      <Filter>src\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGL\CreateWindowGL.cpp">
+      <Filter>src\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGL\glDeviceHW.cpp">
+      <Filter>src\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OpenGL\OpenGLWndProc.cpp">
+      <Filter>src\OpenGL</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
