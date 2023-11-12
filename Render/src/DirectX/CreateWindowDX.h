@@ -1,5 +1,8 @@
 #pragma once
 
+#include "../Input/Input.h"
+using namespace Input;
+
 namespace WindowDirectX
 {
 	struct Description
@@ -35,6 +38,8 @@ namespace WindowDirectX
 
 		bool Create(const Description& desc, bool dx11 = false);
 
+		CInput* Input() { return m_pInput; };
+
 		Description* GetWndDescr() { return &WndDescr; };
 		static CWindowDirectX* GetWndDX() { return m_GetWndDX11; }
 
@@ -61,6 +66,7 @@ namespace WindowDirectX
 		}
 
 		void m_UpdateWindowState();
+		void SetInput(CInput* Input);
 
 		void UpdatePosition(int x, int y)
 		{
@@ -77,8 +83,10 @@ namespace WindowDirectX
 		bool CheckNotRsizing() { return !WndDescr.resizing; };
 
 	private:
-		Description WndDescr;
+		CInput* m_pInput;
 
+		Description WndDescr;
+		
 		static CWindowDirectX* m_GetWndDX11;
 
 		bool m_isexit;

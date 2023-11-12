@@ -95,6 +95,12 @@
     <ClInclude Include="src\OpenGL\OpenGLWndProc.h">
       <Filter>src\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Input\Input.h">
+      <Filter>src\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input\InputEvent.h">
+      <Filter>src\Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
@@ -134,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="src\OpenGL\OpenGLWndProc.cpp">
       <Filter>src\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Input.cpp">
+      <Filter>src\Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

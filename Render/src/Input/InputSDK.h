@@ -1,8 +1,8 @@
 #pragma once
 
-namespace InputCodec
+namespace Input
 {
-	enum class eMouseKeyCodes
+	enum eMouseKeyCodes
 	{
 		MOUSE_LEFT = 0,
 		MOUSE_MIDDLE,
@@ -11,7 +11,7 @@ namespace InputCodec
 		MOUSE_MAX
 	};
 
-	enum class eKeyCodes
+	enum eKeyCodes
 	{
 		KEY_LBUTTON = 0x01, // Left mouse button
 		KEY_RBUTTON = 0x02, // Right mouse button

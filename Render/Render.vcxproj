@@ -163,6 +163,8 @@
     <ClInclude Include="src\DirectX\dx10DeviceHW.h" />
     <ClInclude Include="src\DirectX\dx11DeviceHW.h" />
     <ClInclude Include="src\Frame\Fps.h" />
+    <ClInclude Include="src\Input\Input.h" />
+    <ClInclude Include="src\Input\InputEvent.h" />
     <ClInclude Include="src\Input\InputSDK.h" />
     <ClInclude Include="src\OpenGL\CreateWindowGL.h" />
     <ClInclude Include="src\OpenGL\glDeviceHW.h" />
@@ -181,6 +183,7 @@
     <ClCompile Include="src\DirectX\dx10DeviceHW.cpp" />
     <ClCompile Include="src\DirectX\dx11DeviceHW.cpp" />
     <ClCompile Include="src\Frame\Fps.cpp" />
+    <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\OpenGL\CreateWindowGL.cpp" />
     <ClCompile Include="src\OpenGL\glDeviceHW.cpp" />
     <ClCompile Include="src\OpenGL\OpenGLWndProc.cpp" />

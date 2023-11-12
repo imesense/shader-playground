@@ -16,7 +16,7 @@ namespace WindowDirectX
 	{
 		m_hWnd = {};
 		WndCls = {};
-
+		m_pInput = {};
 		m_isexit = {};
 		m_active = {};
 		m_minimized = {};
@@ -117,5 +117,14 @@ namespace WindowDirectX
 		ClientRect.top = WndDescr.posy;
 		ClientRect.right = WndDescr.width;
 		ClientRect.bottom = WndDescr.height;
+
+		if (m_pInput)
+			m_pInput->SetWinRect(ClientRect);
+	}
+
+	void CWindowDirectX::SetInput(CInput* Input)
+	{
+		m_pInput = Input;
+		m_UpdateWindowState();
 	}
 }

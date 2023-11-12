@@ -64,8 +64,10 @@ namespace DirectXProc
 
 			return 0;
 		case WM_MOUSEMOVE: case WM_LBUTTONUP: case WM_LBUTTONDOWN: case WM_MBUTTONUP: case WM_MBUTTONDOWN: case WM_RBUTTONUP: case WM_RBUTTONDOWN: case WM_MOUSEWHEEL: case WM_KEYDOWN: case WM_KEYUP:
-			//if (m_inputmgr)
-			//	m_inputmgr->Run(nMsg, wParam, lParam);
+
+			if (m_pGetWndDX->Input())
+				m_pGetWndDX->Input()->Run(nMsg, wParam, lParam);
+
 			return 0;
 		}
 
