@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "../Constants/Constants.h"
 #include "../DebugUtils/ManagerKeys.h"
+#include "../OpenGL/CreateWindowGL.h"
 #include "../DirectX/CreateWindowDX.h"
 
 using namespace Constants;
@@ -55,6 +56,22 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 				m_pGetWndDX->RunEvent();
 			}
 		}
+	}
+	else
+	{
+	//-' LoggerCreate("lesson01.log");
+
+		pWindowOpenGL = new WindowOpenGL::WindowOpenGL();
+
+		if (!pWindowOpenGL->GLWindowCreate("OpenGL Window", 1280, 720))
+			return 1;
+
+		result = pWindowOpenGL->GLWindowMainLoop();
+
+		pWindowOpenGL->GLWindowDestroy();
+		delete pWindowOpenGL;
+
+	//-' LoggerDestroy();
 	}
 
 #if 0
