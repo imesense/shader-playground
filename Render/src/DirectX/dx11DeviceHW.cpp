@@ -70,7 +70,7 @@ namespace dx11HW
             return FALSE;
 
         // Создаем Swap Chain
-        sd.BufferCount = 1;
+        sd.BufferCount = 2;
         sd.BufferDesc.Width = width;
         sd.BufferDesc.Height = height;
         sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
@@ -80,6 +80,7 @@ namespace dx11HW
         sd.OutputWindow = hWnd;
         sd.SampleDesc.Count = 1;
         sd.SampleDesc.Quality = 0;
+        sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
         sd.Windowed = TRUE;
 
         hr = D3D11CreateDeviceAndSwapChain(nullptr, D3D_DRIVER_TYPE_HARDWARE, nullptr, createDeviceFlags, featureLevels, numFeatureLevels,

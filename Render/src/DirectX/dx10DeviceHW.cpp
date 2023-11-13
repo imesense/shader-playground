@@ -37,8 +37,9 @@ namespace dx10HW
         sd.SampleDesc.Count = 1;
         sd.SampleDesc.Quality = 0;
         sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-        sd.BufferCount = 1;
+        sd.BufferCount = 2;
         sd.OutputWindow = hWnd;
+        sd.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD;
         sd.Windowed = TRUE;
 
         sd.BufferDesc.Width = width;
