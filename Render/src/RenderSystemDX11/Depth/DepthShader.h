@@ -4,19 +4,19 @@
 
 using namespace D3D11View;
 
-class MyRender;
+class DX11ViewRender;
 
 class DepthShader
 {
 public:
-	DepthShader(MyRender *render);
+	DepthShader(DX11ViewRender* render);
 
 	bool Init();
 	void Close();
 	void Render(int index, CXMMATRIX WVP);
 
 private:
-	MyRender *m_render;
+	DX11ViewRender*m_render;
 
 	Shader *m_shader;
 	ID3D11Buffer *m_matrixBuffer;

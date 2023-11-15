@@ -10,7 +10,7 @@ struct Vertex
 	XMFLOAT3 normal;
 };
 
-MyRender::MyRender()
+DX11ViewRender::DX11ViewRender()
 {
 	m_key_up = false;
 	m_key_down = false;
@@ -22,7 +22,7 @@ MyRender::MyRender()
 	m_key_x = false;
 }
 
-bool MyRender::Init()
+bool DX11ViewRender::Init()
 {	
 	// создаем вьюпорт окна. Вообще это неверное решение, так как данный 
 	// вьюпорт мы создавали во фреймворке. Но так как там нет метода для его получения, мы создаем его еще раз
@@ -143,19 +143,20 @@ bool MyRender::Init()
 	return true;
 }
 
-bool MyRender::Draw()
-{	
+bool DX11ViewRender::Draw()
+{
 	static float lightPositionX = -5.0f;
 	static bool reverse = false;
+
 	// изменяем позицию света по X
 	if (!reverse)
-		lightPositionX += 0.05f;
+		lightPositionX += 0.002f;
 	else
-		lightPositionX -= 0.05f;
+		lightPositionX -= 0.002f;
 
-	if(lightPositionX > 5.0f)
+	if (lightPositionX > 18.0f)
 		reverse = true;
-	else if(lightPositionX < -5.0f)
+	else if (lightPositionX < -18.0f)
 		reverse = false;
 
 	m_Light.SetPosition(lightPositionX, 8.0f, -5.0f);
@@ -183,7 +184,7 @@ bool MyRender::Draw()
 	return true;
 }
 
-void MyRender::RenderSceneToTexture()
+void DX11ViewRender::RenderSceneToTexture()
 {
 	XMMATRIX WVP;
 	unsigned int stride = sizeof(Vertex); 
@@ -216,7 +217,7 @@ void MyRender::RenderSceneToTexture()
 	m_DepthShader->Render(6, WVP);
 }
 
-void MyRender::RenderSceneToWindow()
+void DX11ViewRender::RenderSceneToWindow()
 {
 	// Сбрасываем render target (теперь снова будет рисовать на экран)
 	m_pImmediateContext->OMSetRenderTargets(1, &m_pRenderTargetView, m_pDepthStencilView);
@@ -259,7 +260,7 @@ void MyRender::RenderSceneToWindow()
 
 }
 
-void MyRender::Close()
+void DX11ViewRender::Close()
 {
 	_CLOSE(m_RenderTexture);
 	_CLOSE(m_DepthShader);

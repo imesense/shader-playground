@@ -5,7 +5,7 @@
 const int SHADOWMAP_WIDTH = 1024;
 const int SHADOWMAP_HEIGHT = 1024;
 
-RenderTarget::RenderTarget(MyRender *render)
+RenderTarget::RenderTarget(DX11ViewRender*render)
 {
 	m_RTTexture = nullptr;
 	m_RTV = nullptr;

@@ -8,10 +8,10 @@
 
 using namespace D3D11View;
 
-class MyRender : public Render
+class DX11ViewRender : public Render
 {
 public:
-	MyRender();
+	DX11ViewRender();
 	bool Init();
 	bool Draw();
 	void Close();

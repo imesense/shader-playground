@@ -4,12 +4,12 @@
 
 using namespace D3D11View;
 
-class MyRender;
+class DX11ViewRender;
 
 class RenderTarget
 {
 public:
-	RenderTarget(MyRender *render);
+	RenderTarget(DX11ViewRender *render);
 
 	bool Init(float screenNear, float screenDepth);
 	void Close();
@@ -37,7 +37,7 @@ private:
 	XMMATRIX m_orthoMatrix;
 	D3D11_VIEWPORT m_viewport;
 
-	MyRender *m_render;
+	DX11ViewRender* m_render;
 
 	ID3D11Texture2D* m_RTTexture;
 	ID3D11Texture2D* m_DSTexture;

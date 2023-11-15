@@ -22,7 +22,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
 	Framework framework;
 
-	MyRender* render = new MyRender();
+	DX11ViewRender* render = new DX11ViewRender();
 	MyInput* input = new MyInput(render);
 
 	FrameworkDesc desc;

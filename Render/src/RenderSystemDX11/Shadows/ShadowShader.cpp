@@ -21,7 +21,7 @@ struct LightBufferType2
 	float padding;
 };
 
-ShadowShader::ShadowShader(MyRender *render)
+ShadowShader::ShadowShader(DX11ViewRender* render)
 {
 	m_render = render;
 	m_shader = nullptr;

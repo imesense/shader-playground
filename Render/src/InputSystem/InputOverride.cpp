@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "InputOverride.h"
 
-MyInput::MyInput(MyRender *render)
+MyInput::MyInput(DX11ViewRender*render)
 {
 	m_render = render;
 }

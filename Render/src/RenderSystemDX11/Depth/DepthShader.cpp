@@ -7,7 +7,7 @@ struct MatrixBufferType
 	XMMATRIX WVP;
 };
 
-DepthShader::DepthShader(MyRender *render)
+DepthShader::DepthShader(DX11ViewRender* render)
 {
 	m_shader = nullptr;
 	m_matrixBuffer = nullptr;

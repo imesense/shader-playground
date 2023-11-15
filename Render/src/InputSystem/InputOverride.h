@@ -8,11 +8,11 @@ using namespace D3D11View;
 class MyInput : public InputListener
 {
 public:
-	MyInput(MyRender *render);
+	MyInput(DX11ViewRender*render);
 
 	bool KeyPressed(const KeyEvent &arg);
 	bool KeyReleased(const KeyEvent &arg);
 
 private:
-	MyRender *m_render;
+	DX11ViewRender*m_render;
 };
