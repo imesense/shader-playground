@@ -83,7 +83,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;d3d10.lib;dxgi.lib;d3dcompiler.lib;opengl32.lib;winmm.lib;$(SolutionDir)packages\glfw.3.3.8\build\native\lib\static\v143\win32\glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -119,7 +119,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <AdditionalDependencies>d3d11.lib;d3d10.lib;dxgi.lib;d3dcompiler.lib;opengl32.lib;winmm.lib;$(SolutionDir)packages\glfw.3.3.8\build\native\lib\static\v143\win32\glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -155,40 +155,61 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="src\Allocator\Allocator.h" />
-    <ClInclude Include="src\Constants\Constants.h" />
-    <ClInclude Include="src\DirectX\Camera.h" />
-    <ClInclude Include="src\DirectX\CreateWindowDX.h" />
-    <ClInclude Include="src\DirectX\DirectXWndProc.h" />
-    <ClInclude Include="src\DirectX\dx10DeviceHW.h" />
-    <ClInclude Include="src\DirectX\dx11DeviceHW.h" />
-    <ClInclude Include="src\Frame\Fps.h" />
-    <ClInclude Include="src\Input\Input.h" />
-    <ClInclude Include="src\Input\InputEvent.h" />
-    <ClInclude Include="src\Input\InputSDK.h" />
-    <ClInclude Include="src\OpenGL\CreateWindowGL.h" />
-    <ClInclude Include="src\OpenGL\glDeviceHW.h" />
-    <ClInclude Include="src\OpenGL\OpenGLWndProc.h" />
-    <ClInclude Include="src\Timer\Timer.h" />
-    <ClInclude Include="src\Utils\ManagerKeys.h" />
+    <ClInclude Include="src\Common\macros.h" />
+    <ClInclude Include="src\D3D11_Framework.h" />
+    <ClInclude Include="src\Frame\Framework.h" />
+    <ClInclude Include="src\InputSystem\InputCodes.h" />
+    <ClInclude Include="src\InputSystem\InputListener.h" />
+    <ClInclude Include="src\InputSystem\InputMgr.h" />
+    <ClInclude Include="src\InputSystem\InputOverride.h" />
+    <ClInclude Include="src\RenderSystemDX11\BitmapFont.h" />
+    <ClInclude Include="src\RenderSystemDX11\Buffer.h" />
+    <ClInclude Include="src\RenderSystemDX11\Camera.h" />
+    <ClInclude Include="src\RenderSystemDX11\Depth\DepthShader.h" />
+    <ClInclude Include="src\RenderSystemDX11\Frustum.h" />
+    <ClInclude Include="src\RenderSystemDX11\Image.h" />
+    <ClInclude Include="src\RenderSystemDX11\Light\Light.h" />
+    <ClInclude Include="src\RenderSystemDX11\ms3dspec.h" />
+    <ClInclude Include="src\RenderSystemDX11\Render.h" />
+    <ClInclude Include="src\RenderSystemDX11\RenderState.h" />
+    <ClInclude Include="src\RenderSystemDX11\Rendertarget\RenderTarget.h" />
+    <ClInclude Include="src\RenderSystemDX11\RenderView\RenderView.h" />
+    <ClInclude Include="src\RenderSystemDX11\Shader.h" />
+    <ClInclude Include="src\RenderSystemDX11\Shadows\ShadowShader.h" />
+    <ClInclude Include="src\RenderSystemDX11\StaticMesh.h" />
+    <ClInclude Include="src\RenderSystemDX11\Text.h" />
+    <ClInclude Include="src\RenderSystemDX11\Window.h" />
+    <ClInclude Include="src\Utils\Fps.h" />
+    <ClInclude Include="src\Utils\Log.h" />
+    <ClInclude Include="src\Utils\Timer.h" />
+    <ClInclude Include="src\Utils\Util.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\Constants\Constants.cpp" />
-    <ClCompile Include="src\DirectX\Camera.cpp" />
-    <ClCompile Include="src\DirectX\CreateWindowDX.cpp" />
-    <ClCompile Include="src\DirectX\DirectXWndProc.cpp" />
-    <ClCompile Include="src\DirectX\dx10DeviceHW.cpp" />
-    <ClCompile Include="src\DirectX\dx11DeviceHW.cpp" />
-    <ClCompile Include="src\Frame\Fps.cpp" />
-    <ClCompile Include="src\Input\Input.cpp" />
-    <ClCompile Include="src\OpenGL\CreateWindowGL.cpp" />
-    <ClCompile Include="src\OpenGL\glDeviceHW.cpp" />
-    <ClCompile Include="src\OpenGL\OpenGLWndProc.cpp" />
-    <ClCompile Include="src\Timer\Timer.cpp" />
-    <ClCompile Include="src\Utils\ManagerKeys.cpp" />
+    <ClCompile Include="src\Frame\Framework.cpp" />
+    <ClCompile Include="src\InputSystem\InputMgr.cpp" />
+    <ClCompile Include="src\InputSystem\InputOverride.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\BitmapFont.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Buffer.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Camera.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Depth\DepthShader.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Frustum.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Image.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Light\Light.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Render.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\RenderState.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Rendertarget\RenderTarget.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\RenderView\RenderView.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Shader.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Shadows\ShadowShader.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\StaticMesh.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Text.cpp" />
+    <ClCompile Include="src\RenderSystemDX11\Window.cpp" />
+    <ClCompile Include="src\Utils\Fps.cpp" />
+    <ClCompile Include="src\Utils\Log.cpp" />
+    <ClCompile Include="src\Utils\Timer.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>

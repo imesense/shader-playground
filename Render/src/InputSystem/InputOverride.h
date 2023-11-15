@@ -1,0 +1,18 @@
+#pragma once
+
+#include "D3D11_Framework.h"
+#include "..\RenderSystemDX11\RenderView\RenderView.h"
+
+using namespace D3D11View;
+
+class MyInput : public InputListener
+{
+public:
+	MyInput(MyRender *render);
+
+	bool KeyPressed(const KeyEvent &arg);
+	bool KeyReleased(const KeyEvent &arg);
+
+private:
+	MyRender *m_render;
+};

@@ -8,29 +8,41 @@
     <Filter Include="src">
       <UniqueIdentifier>{a0c14630-ab27-4f71-a56c-92d5056a03a1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Allocator">
-      <UniqueIdentifier>{c672056b-e9e5-4ff7-a401-ac2a72c2baec}</UniqueIdentifier>
+    <Filter Include="src\RenderSystemDX11">
+      <UniqueIdentifier>{18ee0cbf-ca58-48c9-8329-745c5eb392c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Constants">
-      <UniqueIdentifier>{bad42623-98ab-4850-9215-52afa31bb29f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\DirectX">
-      <UniqueIdentifier>{100ec4e8-0afb-4a31-a1fb-938a69c67efb}</UniqueIdentifier>
+    <Filter Include="src\Common">
+      <UniqueIdentifier>{56bd1f69-cafc-4bdf-bf63-762f8ae7e42e}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Frame">
-      <UniqueIdentifier>{8101207a-51cf-4bff-b798-874b0073200b}</UniqueIdentifier>
+      <UniqueIdentifier>{39ffd629-ced0-45a4-b6a0-07c1e33e1822}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Input">
-      <UniqueIdentifier>{19111868-efdb-4dee-83f4-ef415bae8121}</UniqueIdentifier>
+    <Filter Include="src\InputSystem">
+      <UniqueIdentifier>{8cd9070f-4d21-4752-b45c-2377c143792b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\OpenGL">
-      <UniqueIdentifier>{1dd9c9a4-84ed-4097-95df-ef191d5396fa}</UniqueIdentifier>
+    <Filter Include="src\RenderSystemDX10">
+      <UniqueIdentifier>{f183a76b-5ea8-4198-93ff-bc1eb19f98b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\Timer">
-      <UniqueIdentifier>{4f0cb5cc-f05e-4826-a9cf-03d5d7a306e9}</UniqueIdentifier>
+    <Filter Include="src\RenderSystemGL">
+      <UniqueIdentifier>{fd7e3f2b-f822-4c4c-ad1b-0b459688bdcb}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Utils">
-      <UniqueIdentifier>{c1bc5ec9-a28a-4685-90e1-801293bead71}</UniqueIdentifier>
+      <UniqueIdentifier>{3252354a-6e17-4e6b-a886-4699da20fdb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\RenderSystemDX11\Light">
+      <UniqueIdentifier>{59939ba7-53c7-4ee5-9fb9-603e150d3248}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\RenderSystemDX11\Shadows">
+      <UniqueIdentifier>{dcad987f-81f7-4969-bf0b-12dc01ed7061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\RenderSystemDX11\Depth">
+      <UniqueIdentifier>{c125defd-3fa7-4bd2-87ad-17de8bdec203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\RenderSystemDX11\Rendertarget">
+      <UniqueIdentifier>{97e52c04-cd42-4db5-9689-4818f41d0360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\RenderSystemDX11\RenderView">
+      <UniqueIdentifier>{f61d8081-0d21-4276-8765-ec6c0803feb3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -53,96 +65,157 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="src\Allocator\Allocator.h">
-      <Filter>src\Allocator</Filter>
+    <ClInclude Include="src\Common\macros.h">
+      <Filter>src\Common</Filter>
     </ClInclude>
-    <ClInclude Include="src\Constants\Constants.h">
-      <Filter>src\Constants</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\Camera.h">
-      <Filter>src\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\CreateWindowDX.h">
-      <Filter>src\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\DirectXWndProc.h">
-      <Filter>src\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\dx10DeviceHW.h">
-      <Filter>src\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="src\DirectX\dx11DeviceHW.h">
-      <Filter>src\DirectX</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Frame\Fps.h">
+    <ClInclude Include="src\Frame\Framework.h">
       <Filter>src\Frame</Filter>
     </ClInclude>
-    <ClInclude Include="src\Input\InputSDK.h">
-      <Filter>src\Input</Filter>
+    <ClInclude Include="src\InputSystem\InputCodes.h">
+      <Filter>src\InputSystem</Filter>
     </ClInclude>
-    <ClInclude Include="src\Utils\ManagerKeys.h">
+    <ClInclude Include="src\InputSystem\InputListener.h">
+      <Filter>src\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputSystem\InputMgr.h">
+      <Filter>src\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utils\Fps.h">
       <Filter>src\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\Timer\Timer.h">
-      <Filter>src\Timer</Filter>
+    <ClInclude Include="src\Utils\Log.h">
+      <Filter>src\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\OpenGL\CreateWindowGL.h">
-      <Filter>src\OpenGL</Filter>
+    <ClInclude Include="src\Utils\Timer.h">
+      <Filter>src\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\OpenGL\glDeviceHW.h">
-      <Filter>src\OpenGL</Filter>
+    <ClInclude Include="src\Utils\Util.h">
+      <Filter>src\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="src\OpenGL\OpenGLWndProc.h">
-      <Filter>src\OpenGL</Filter>
+    <ClInclude Include="src\RenderSystemDX11\BitmapFont.h">
+      <Filter>src\RenderSystemDX11</Filter>
     </ClInclude>
-    <ClInclude Include="src\Input\Input.h">
-      <Filter>src\Input</Filter>
+    <ClInclude Include="src\RenderSystemDX11\Buffer.h">
+      <Filter>src\RenderSystemDX11</Filter>
     </ClInclude>
-    <ClInclude Include="src\Input\InputEvent.h">
-      <Filter>src\Input</Filter>
+    <ClInclude Include="src\RenderSystemDX11\Camera.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\Frustum.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\Image.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\ms3dspec.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\Render.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\RenderState.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\Shader.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\StaticMesh.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\Text.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\Window.h">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClInclude>
+    <ClInclude Include="src\D3D11_Framework.h" />
+    <ClInclude Include="src\RenderSystemDX11\Light\Light.h">
+      <Filter>src\RenderSystemDX11\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\Shadows\ShadowShader.h">
+      <Filter>src\RenderSystemDX11\Shadows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\Depth\DepthShader.h">
+      <Filter>src\RenderSystemDX11\Depth</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputSystem\InputOverride.h">
+      <Filter>src\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\Rendertarget\RenderTarget.h">
+      <Filter>src\RenderSystemDX11\Rendertarget</Filter>
+    </ClInclude>
+    <ClInclude Include="src\RenderSystemDX11\RenderView\RenderView.h">
+      <Filter>src\RenderSystemDX11\RenderView</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="src\Constants\Constants.cpp">
-      <Filter>src\Constants</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\Camera.cpp">
-      <Filter>src\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\CreateWindowDX.cpp">
-      <Filter>src\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\DirectXWndProc.cpp">
-      <Filter>src\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\dx10DeviceHW.cpp">
-      <Filter>src\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DirectX\dx11DeviceHW.cpp">
-      <Filter>src\DirectX</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Frame\Fps.cpp">
+    <ClCompile Include="src\Frame\Framework.cpp">
       <Filter>src\Frame</Filter>
     </ClCompile>
-    <ClCompile Include="src\Utils\ManagerKeys.cpp">
+    <ClCompile Include="src\InputSystem\InputMgr.cpp">
+      <Filter>src\InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\Fps.cpp">
       <Filter>src\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\Timer\Timer.cpp">
-      <Filter>src\Timer</Filter>
+    <ClCompile Include="src\Utils\Log.cpp">
+      <Filter>src\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenGL\CreateWindowGL.cpp">
-      <Filter>src\OpenGL</Filter>
+    <ClCompile Include="src\Utils\Timer.cpp">
+      <Filter>src\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenGL\glDeviceHW.cpp">
-      <Filter>src\OpenGL</Filter>
+    <ClCompile Include="src\RenderSystemDX11\BitmapFont.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
     </ClCompile>
-    <ClCompile Include="src\OpenGL\OpenGLWndProc.cpp">
-      <Filter>src\OpenGL</Filter>
+    <ClCompile Include="src\RenderSystemDX11\Buffer.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
     </ClCompile>
-    <ClCompile Include="src\Input\Input.cpp">
-      <Filter>src\Input</Filter>
+    <ClCompile Include="src\RenderSystemDX11\Camera.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Frustum.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Image.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Render.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\RenderState.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Shader.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\StaticMesh.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Text.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Window.cpp">
+      <Filter>src\RenderSystemDX11</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Light\Light.cpp">
+      <Filter>src\RenderSystemDX11\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Shadows\ShadowShader.cpp">
+      <Filter>src\RenderSystemDX11\Shadows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Depth\DepthShader.cpp">
+      <Filter>src\RenderSystemDX11\Depth</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputSystem\InputOverride.cpp">
+      <Filter>src\InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\Rendertarget\RenderTarget.cpp">
+      <Filter>src\RenderSystemDX11\Rendertarget</Filter>
+    </ClCompile>
+    <ClCompile Include="src\RenderSystemDX11\RenderView\RenderView.cpp">
+      <Filter>src\RenderSystemDX11\RenderView</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

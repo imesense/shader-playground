@@ -1,100 +1,101 @@
 #include "stdafx.h"
+#include "Frame/Framework.h"
+//#include "MyRender.h"
+//#include "MyInput.h"
 
-#include "Constants/Constants.h"
-#include "Utils/ManagerKeys.h"
-#include "OpenGL/CreateWindowGL.h"
-#include "DirectX/CreateWindowDX.h"
-#include "Allocator/Allocator.h"
+#include "InputSystem/InputOverride.h"
 
-using namespace Constants;
-using namespace ManagerKeys;
-using namespace WindowDirectX;
+using namespace D3D11View;
+//#include "Constants/Constants.h"
+//#include "Utils/ManagerKeys.h"
+//#include "OpenGL/CreateWindowGL.h"
+//#include "DirectX/CreateWindowDX.h"
+//#include "Allocator/Allocator.h"
+
+//using namespace Constants;
+//using namespace Utils;
+//using namespace DirectXOBJECT;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
 	int result = -1;
 
-	pIntConstantsArray = new IntConstantsArray();
-	pCommandLineArguments = new CommandLineArguments();
+	Framework framework;
 
-	for (std::string& key : keys)
-	{
-		if (key == "-use_dx10" && pCommandLineArguments->CheckKey(key))
-		{
-			pIntConstantsArray->USE_DX10 = true;
-			result = 0;
-		}
+	MyRender* render = new MyRender();
+	MyInput* input = new MyInput(render);
 
-		if (key == "-use_dx11" && pCommandLineArguments->CheckKey(key))
-		{
-			pIntConstantsArray->USE_DX11 = true;
-			result = 1;
-		}
+	FrameworkDesc desc;
+	desc.render = render;
 
-		if (key == "-use_open_gl" && pCommandLineArguments->CheckKey(key))
-		{
-			pIntConstantsArray->USE_OPEN_GL = true;
-			result = 2;
-		}
-	}
+	framework.Init(desc);
+	framework.AddInputListener(input);
+	framework.Run();
+	framework.Close();
 
-	if (!pIntConstantsArray->USE_OPEN_GL)
-	{
-		m_pGetWndDX = new CWindowDirectX();
+	//pIntConstantsArray = new IntConstantsArray();
+	//pCommandLineArguments = new CommandLineArguments();
 
-		WindowDirectX::Description Desc;
+	//for (std::string& key : keys)
+	//{
+	//	if (key == "-use_dx10" && pCommandLineArguments->CheckKey(key))
+	//	{
+	//		pIntConstantsArray->USE_DX10 = true;
+	//		result = 0;
+	//	}
 
-		Desc.width = 1280;
-		Desc.height = 720;
-		Desc.caption = pIntConstantsArray->USE_DX11 ? L"DirectX11 Window" : L"DirectX10 Window";
+	//	if (key == "-use_dx11" && pCommandLineArguments->CheckKey(key))
+	//	{
+	//		pIntConstantsArray->USE_DX11 = true;
+	//		result = 1;
+	//	}
 
-		bool success = m_pGetWndDX->Create(Desc, pIntConstantsArray->USE_DX11);
+	//	if (key == "-use_open_gl" && pCommandLineArguments->CheckKey(key))
+	//	{
+	//		pIntConstantsArray->USE_OPEN_GL = true;
+	//		result = 2;
+	//	}
+	//}
 
-		if (success)
-		{
-			// Окно успешно создано, можно начинать обработку сообщений
-			while (!m_pGetWndDX->GetIsExit())
-			{
-				m_pGetWndDX->RunEvent();
-			}
-		}
-	}
-	else
-	{
-	//-' LoggerCreate("lesson01.log");
+	//if (!pIntConstantsArray->USE_OPEN_GL)
+	//{
+	//	m_pGetWndDX = new CWindowDirectX();
 
-		pWindowOpenGL = new WindowOpenGL::WindowOpenGL();
+	//	DirectXOBJECT::Description Desc;
 
-		if (!pWindowOpenGL->GLWindowCreate("OpenGL Window", 1280, 720))
-			return 1;
+	//	Desc.width = 1280;
+	//	Desc.height = 720;
+	//	Desc.caption = pIntConstantsArray->USE_DX11 ? L"DirectX11 Window" : L"DirectX10 Window";
 
-		result = pWindowOpenGL->GLWindowMainLoop();
+	//	bool success = m_pGetWndDX->Create(Desc, pIntConstantsArray->USE_DX11);
 
-		pWindowOpenGL->GLWindowDestroy();
-		delete pWindowOpenGL;
+	//	if (success)
+	//	{
+	//		// Окно успешно создано, можно начинать обработку сообщений
+	//		while (!m_pGetWndDX->GetIsExit())
+	//		{
+	//			m_pGetWndDX->RunEvent();
+	//		}
+	//	}
+	//}
+	//else
+	//{
+	////-' LoggerCreate("lesson01.log");
 
-	//-' LoggerDestroy();
-	}
+	//	pWindowOpenGL = new WindowOpenGL::WindowOpenGL();
 
-#if 0
-	//-' LoggerCreate("lesson01.log");
+	//	if (!pWindowOpenGL->GLWindowCreate("OpenGL Window", 1280, 720))
+	//		return 1;
 
-	/*
-	pWindowOpenGL = new WindowOpenGL::WindowOpenGL();
+	//	result = pWindowOpenGL->GLWindowMainLoop();
 
-	if (!pWindowOpenGL->GLWindowCreate("OpenGL Window", 1280, 720))
-		return 1;
+	//	pWindowOpenGL->GLWindowDestroy();
+	//	delete pWindowOpenGL;
 
-	result = pWindowOpenGL->GLWindowMainLoop();
+	////-' LoggerDestroy();
+	//}
 
-	pWindowOpenGL->GLWindowDestroy();
-	delete pWindowOpenGL;
-	*/
-
-	//-' LoggerDestroy();
-#endif
-
-	delete m_pGetWndDX;
+	//delete m_pGetWndDX;
 
 	return result;
 }
