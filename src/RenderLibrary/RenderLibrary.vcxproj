@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -170,5 +171,20 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\packages\directxmath.2022.12.12.1\build\native\directxmath.targets" Condition="Exists('..\..\packages\directxmath.2022.12.12.1\build\native\directxmath.targets')" />
+    <Import Project="..\..\packages\directxmesh_desktop_win10.2023.10.31.2\build\native\directxmesh_desktop_win10.targets" Condition="Exists('..\..\packages\directxmesh_desktop_win10.2023.10.31.2\build\native\directxmesh_desktop_win10.targets')" />
+    <Import Project="..\..\packages\directxtex_desktop_win10.2023.10.31.1\build\native\directxtex_desktop_win10.targets" Condition="Exists('..\..\packages\directxtex_desktop_win10.2023.10.31.1\build\native\directxtex_desktop_win10.targets')" />
+    <Import Project="..\..\packages\glfw.3.3.8\build\native\glfw.targets" Condition="Exists('..\..\packages\glfw.3.3.8\build\native\glfw.targets')" />
+    <Import Project="..\..\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets" Condition="Exists('..\..\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\directxmath.2022.12.12.1\build\native\directxmath.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\directxmath.2022.12.12.1\build\native\directxmath.targets'))" />
+    <Error Condition="!Exists('..\..\packages\directxmesh_desktop_win10.2023.10.31.2\build\native\directxmesh_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\directxmesh_desktop_win10.2023.10.31.2\build\native\directxmesh_desktop_win10.targets'))" />
+    <Error Condition="!Exists('..\..\packages\directxtex_desktop_win10.2023.10.31.1\build\native\directxtex_desktop_win10.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\directxtex_desktop_win10.2023.10.31.1\build\native\directxtex_desktop_win10.targets'))" />
+    <Error Condition="!Exists('..\..\packages\glfw.3.3.8\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\glfw.3.3.8\build\native\glfw.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets'))" />
+  </Target>
 </Project>
