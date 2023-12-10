@@ -1,12 +1,35 @@
 <Project>
     <PropertyGroup>
-        <ProjectDir>$(MSBuildThisFileDirectory)</ProjectDir>
-        <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
-        <BaseOutputPath>$(MSBuildThisFileDirectory)bin\</BaseOutputPath>
+        <RootPath>$(MSBuildThisFileDirectory)</RootPath>
+        <NativeOutputPath>$(RootPath)bin\$(Platform)\$(Configuration)\</NativeOutputPath>
+        <NativeIntermediatePath>$(RootPath)obj\$(MSBuildProjectName)\$(Platform)\$(Configuration)\</NativeIntermediatePath>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <ProjectDir>$(RootPath)</ProjectDir>
+        <BaseIntermediateOutputPath>$(RootPath)\obj\$(MSBuildProjectName)\</BaseIntermediateOutputPath>
+        <BaseOutputPath>$(RootPath)\bin\</BaseOutputPath>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
         <DebugSymbols>false</DebugSymbols>
         <DebugType>None</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+        <OutDir>$(NativeOutputPath)</OutDir>
+        <IntDir>$(NativeIntermediatePath)</IntDir>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+        <OutDir>$(NativeOutputPath)</OutDir>
+        <IntDir>$(NativeIntermediatePath)</IntDir>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+        <OutDir>$(NativeOutputPath)</OutDir>
+        <IntDir>$(NativeIntermediatePath)</IntDir>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+        <OutDir>$(NativeOutputPath)</OutDir>
+        <IntDir>$(NativeIntermediatePath)</IntDir>
     </PropertyGroup>
 </Project>
