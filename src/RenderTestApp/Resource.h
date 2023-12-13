@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by RenderTestApp.rc
+// Used by Program.rc
 
 #define IDS_APP_TITLE			103
 
