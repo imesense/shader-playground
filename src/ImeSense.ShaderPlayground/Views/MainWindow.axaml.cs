@@ -1,31 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
+
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using Avalonia.Media.Imaging;
+
+using AvaloniaEdit;
 using AvaloniaEdit.CodeCompletion;
-//using AvaloniaEdit.Demo.Resources;
 using AvaloniaEdit.Document;
 using AvaloniaEdit.Editing;
 using AvaloniaEdit.Folding;
+using AvaloniaEdit.Indentation.CSharp;
 using AvaloniaEdit.Rendering;
 using AvaloniaEdit.TextMate;
+
 using TextMateSharp.Grammars;
-using Avalonia.Diagnostics;
-using AvaloniaEdit;
-using AvaloniaEdit.Indentation.CSharp;
-using System.Resources;
 
 namespace ImeSense.ShaderPlayground.Views;
 
-public partial class MainWindow : Window 
-{
+public partial class MainWindow : Window {
     private readonly TextEditor _textEditor;
     private FoldingManager _foldingManager;
     private readonly TextMate.Installation _textMateInstallation;
@@ -40,8 +36,7 @@ public partial class MainWindow : Window
     private RegistryOptions _registryOptions;
     private int _currentTheme = (int) ThemeName.DarkPlus;
 
-    public MainWindow() 
-    {
+    public MainWindow() {
         InitializeComponent();
 
         _textEditor = this.FindControl<TextEditor>("Editor");
@@ -66,7 +61,7 @@ public partial class MainWindow : Window
         _textEditor.TextArea.RightClickMovesCaret = true;
 
         //_addControlButton = this.FindControl<Button>("addControlBtn");
-       // _addControlButton.Click += AddControlButton_Click;
+        // _addControlButton.Click += AddControlButton_Click;
 
         //_clearControlButton = this.FindControl<Button>("clearControlBtn");
         //_clearControlButton.Click += ClearControlButton_Click;
@@ -81,20 +76,22 @@ public partial class MainWindow : Window
 
         _textMateInstallation = _textEditor.InstallTextMate(_registryOptions);
 
-        Language csharpLanguage = _registryOptions.GetLanguageByExtension(".cs");
+        Language hlslLanguage = _registryOptions.GetLanguageByExtension(".hlsl");
 
         _syntaxModeCombo = this.FindControl<ComboBox>("syntaxModeCombo");
-        _syntaxModeCombo.ItemsSource = _registryOptions.GetAvailableLanguages();
-        _syntaxModeCombo.SelectedItem = csharpLanguage;
+        _syntaxModeCombo.ItemsSource = new List<Language> {
+            hlslLanguage,
+        };//_registryOptions.GetAvailableLanguages();
+        _syntaxModeCombo.SelectedItem = hlslLanguage;
         _syntaxModeCombo.SelectionChanged += SyntaxModeCombo_SelectionChanged;
 
-        string scopeName = _registryOptions.GetScopeByLanguageId(csharpLanguage.Id);
+        string scopeName = _registryOptions.GetScopeByLanguageId(hlslLanguage.Id);
 
         _textEditor.Document = new TextDocument(
             "// AvaloniaEdit supports displaying control chars: \a or \b or \v" + Environment.NewLine +
             "// AvaloniaEdit supports displaying underline and strikethrough" + Environment.NewLine +
             ResourceLoader.LoadSampleFile(scopeName));
-        _textMateInstallation.SetGrammar(_registryOptions.GetScopeByLanguageId(csharpLanguage.Id));
+        _textMateInstallation.SetGrammar(_registryOptions.GetScopeByLanguageId(hlslLanguage.Id));
         _textEditor.TextArea.TextView.LineTransformers.Add(new UnderlineAndStrikeThroughTransformer());
 
         _statusTextBlock = this.Find<TextBlock>("StatusText");
