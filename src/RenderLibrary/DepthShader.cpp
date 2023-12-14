@@ -1,0 +1,66 @@
+#include "StdAfx.h"
+
+#include <vector>
+#include <d3d11.h>
+#include <DirectXmath.h>
+
+using namespace DirectX;
+
+#include "RenderState.hpp"
+#include "Render.hpp"
+#include "Shader.hpp"
+#include "RenderTarget.hpp"
+#include "DepthShader.hpp"
+#include "Buffer.hpp"
+#include "Helpers.h"
+#include "Timer.hpp"
+#include "Camera.hpp"
+#include "Light.hpp"
+#include "ShadowShader.hpp"
+#include "DX11ViewRender.hpp"
+
+using namespace ShaderPlayground;
+
+struct MatrixBufferType {
+    XMMATRIX WVP;
+};
+
+DepthShader::DepthShader(DX11ViewRender* render) {
+    _shader = nullptr;
+    _matrixBuffer = nullptr;
+    _render = render;
+}
+
+bool DepthShader::Init() {
+    // Инициализируем шейдер и входной формат
+    _shader = new Shader(_render);
+    _shader->AddInputElementDesc("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);
+
+    wchar_t vertexShader[] = L"depth.vs";
+    wchar_t pixelShader[] = L"depth.ps";
+
+    if (!_shader->CreateShader(vertexShader, pixelShader)) {
+        return false;
+    }
+
+    // Создаем константный буфер
+    _matrixBuffer = Buffer::CreateConstantBuffer(_render->_pd3dDevice, sizeof(MatrixBufferType), false);
+
+    return true;
+}
+
+void DepthShader::Render(int index, CXMMATRIX wvp) {
+    MatrixBufferType cb{};
+    cb.WVP = XMMatrixTranspose(wvp);
+    _render->_pImmediateContext->UpdateSubresource(_matrixBuffer, 0, NULL, &cb, 0, 0);
+    _render->_pImmediateContext->VSSetConstantBuffers(0, 1, &_matrixBuffer);
+
+    _shader->Draw();
+    _render->_pImmediateContext->DrawIndexed(index, 0, 0);
+}
+
+void DepthShader::Close()
+{
+    _CLOSE(_shader);
+    _RELEASE(_matrixBuffer);
+}

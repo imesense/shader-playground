@@ -3,4 +3,6 @@
 
 #include "Framework.h"
 
+#define RENDERLIBRARY_API __declspec(dllimport)
+
 #endif // STDAFX
