@@ -53,8 +53,8 @@ bool Image::Init(const wchar_t* textureFilename, float bitmapWidth, float bitmap
     _shader->AddInputElementDesc("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);
     _shader->AddInputElementDesc("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT);
 
-    wchar_t vertexShader[] = L"image.vs";
-    wchar_t pixelShader[] = L"image.ps";
+    char vertexShader[] = "image.vs";
+    char pixelShader[] = "image.ps";
 
     if (!_shader->CreateShader(vertexShader, pixelShader)) {
         return false;

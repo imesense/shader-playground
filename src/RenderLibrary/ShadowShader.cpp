@@ -56,8 +56,8 @@ bool ShadowShader::Init() {
     _shader->AddInputElementDesc("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT);
     _shader->AddInputElementDesc("NORMAL", DXGI_FORMAT_R32G32B32_FLOAT);
 
-    wchar_t vertexShader[] = L"shadow.vs";
-    wchar_t pixelShader[] = L"shadow.ps";
+    char vertexShader[] = "shadow.vs";
+    char pixelShader[] = "shadow.ps";
 
     if (!_shader->CreateShader(vertexShader, pixelShader)) {
         return false;

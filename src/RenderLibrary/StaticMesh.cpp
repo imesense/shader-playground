@@ -47,8 +47,8 @@ bool StaticMesh::Init(wchar_t* name) {
     _shader->AddInputElementDesc("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);
     _shader->AddInputElementDesc("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT);
 
-    wchar_t vertexShader[] = L"mesh.vs";
-    wchar_t pixelShader[] = L"mesh.ps";
+    char vertexShader[] = "mesh.vs";
+    char pixelShader[] = "mesh.ps";
 
     if (!_shader->CreateShader(vertexShader, pixelShader)) {
         return false;

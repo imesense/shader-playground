@@ -13,7 +13,7 @@ namespace ShaderPlayground {
         unsigned int _numlayout;
 
     private:
-        HRESULT Compileshaderfromfile(WCHAR* FileName, LPCSTR EntryPoint, LPCSTR ShaderModel, ID3DBlob** ppBlobOut);
+        HRESULT Compileshaderfromfile(char* FileName, LPCSTR EntryPoint, LPCSTR ShaderModel, ID3DBlob** ppBlobOut);
 
     public:
         Shader(Render* render);
@@ -25,7 +25,7 @@ namespace ShaderPlayground {
             D3D11_INPUT_CLASSIFICATION InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA,
             unsigned int InstanceDataStepRate = 0);
 
-        bool CreateShader(wchar_t* namevs, wchar_t* nameps);
+        bool CreateShader(char* namevs, char* nameps);
         bool AddTexture(const wchar_t* name);
 
         void Draw();

@@ -46,8 +46,8 @@ bool BitmapFont::Init(char* fontFilename) {
     _shader->AddInputElementDesc("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);
     _shader->AddInputElementDesc("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT);
 
-    wchar_t vertexShader[] = L"BitmapFont.vs";
-    wchar_t pixelShader[] = L"BitmapFont.ps";
+    char vertexShader[] = "BitmapFont.vs";
+    char pixelShader[] = "BitmapFont.ps";
 
     if (!_shader->CreateShader(vertexShader, pixelShader)) {
         return false;

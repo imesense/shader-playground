@@ -82,7 +82,7 @@ void Shader::AddInputElementDesc(const char* SemanticName, unsigned int Semantic
     _numlayout++;
 }
 
-bool Shader::CreateShader(wchar_t* namevs, wchar_t* nameps) {
+bool Shader::CreateShader(char* namevs, char* nameps) {
     HRESULT hr = S_OK;
     ID3DBlob* vertexShaderBuffer = nullptr;
     hr = Compileshaderfromfile(namevs, "VS", "vs_4_0", &vertexShaderBuffer);
@@ -124,7 +124,7 @@ bool Shader::CreateShader(wchar_t* namevs, wchar_t* nameps) {
     return true;
 }
 
-HRESULT Shader::Compileshaderfromfile(WCHAR* FileName, LPCSTR EntryPoint, LPCSTR ShaderModel, ID3DBlob** ppBlobOut) {
+HRESULT Shader::Compileshaderfromfile(char* FileName, LPCSTR EntryPoint, LPCSTR ShaderModel, ID3DBlob** ppBlobOut) {
     HRESULT hr = S_OK;
 
     DWORD ShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
@@ -134,7 +134,7 @@ HRESULT Shader::Compileshaderfromfile(WCHAR* FileName, LPCSTR EntryPoint, LPCSTR
 #endif
 
     ID3DBlob* pErrorBlob = nullptr;
-    hr = D3DX11CompileFromFile(FileName, NULL, NULL, EntryPoint, ShaderModel, ShaderFlags, 0, NULL, ppBlobOut, &pErrorBlob, NULL);
+    hr = D3DX11CompileFromFileA(FileName, NULL, NULL, EntryPoint, ShaderModel, ShaderFlags, 0, NULL, ppBlobOut, &pErrorBlob, NULL);
     if (FAILED(hr) && pErrorBlob) {
         Log::Get()->Err((char*)pErrorBlob->GetBufferPointer());
     }

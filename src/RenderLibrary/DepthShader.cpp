@@ -36,8 +36,8 @@ bool DepthShader::Init() {
     _shader = new Shader(_render);
     _shader->AddInputElementDesc("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);
 
-    wchar_t vertexShader[] = L"depth.vs";
-    wchar_t pixelShader[] = L"depth.ps";
+    char vertexShader[] = "depth.vs";
+    char pixelShader[] = "depth.ps";
 
     if (!_shader->CreateShader(vertexShader, pixelShader)) {
         return false;
