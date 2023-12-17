@@ -1,15 +1,15 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API FpsCounter {
+    class FpsCounter {
     private:
         int _fps;
         int _count;
         unsigned long _startTime;
 
     public:
-        void Initialize();
-        void Frame();
-        int GetFps() const;
+        RENDERLIBRARY_API void Initialize();
+        RENDERLIBRARY_API void Frame();
+        RENDERLIBRARY_API int GetFps() const;
     };
 }

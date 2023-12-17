@@ -3,7 +3,7 @@
 namespace ShaderPlayground {
     class DX11ViewRender;
 
-    class RENDERLIBRARY_API DepthShader {
+    class DepthShader {
     private:
         DX11ViewRender* _render;
 
@@ -11,10 +11,10 @@ namespace ShaderPlayground {
         ID3D11Buffer* _matrixBuffer;
 
     public:
-        DepthShader(DX11ViewRender* render);
+        RENDERLIBRARY_API DepthShader(DX11ViewRender* render);
 
-        bool Init();
-        void Close();
-        void Render(int index, CXMMATRIX wvp);
+        RENDERLIBRARY_API bool Init();
+        RENDERLIBRARY_API void Close();
+        RENDERLIBRARY_API void Render(int index, CXMMATRIX wvp);
     };
 }

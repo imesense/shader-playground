@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API DX11ViewRender : public Render, public Allocator {
+    class DX11ViewRender : public Render, public Allocator {
     private:
         friend DepthShader;
         friend RenderTarget;
@@ -43,13 +43,13 @@ namespace ShaderPlayground {
         bool _key_x;
 
     public:
-        DX11ViewRender();
+        RENDERLIBRARY_API DX11ViewRender();
 
-        bool Init();
-        bool Draw();
-        void Close();
+        RENDERLIBRARY_API bool Init();
+        RENDERLIBRARY_API bool Draw();
+        RENDERLIBRARY_API void Close();
 
-        void RenderSceneToTexture();
-        void RenderSceneToWindow();
+        RENDERLIBRARY_API void RenderSceneToTexture();
+        RENDERLIBRARY_API void RenderSceneToWindow();
     };
 }

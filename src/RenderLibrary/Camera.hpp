@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API Camera {
+    class Camera {
     private:
         Timer _time;
 
@@ -19,34 +19,34 @@ namespace ShaderPlayground {
         float _lookUpSpeed, _lookDownSpeed;
 
     public:
-        Camera();
+        RENDERLIBRARY_API Camera();
 
-        void Render();
+        RENDERLIBRARY_API void Render();
 
-        void MoveForward(bool keydown);
-        void MoveBackward(bool keydown);
-        void MoveLeft(bool keydown);
-        void MoveRight(bool keydown);
+        RENDERLIBRARY_API void MoveForward(bool keydown);
+        RENDERLIBRARY_API void MoveBackward(bool keydown);
+        RENDERLIBRARY_API void MoveLeft(bool keydown);
+        RENDERLIBRARY_API void MoveRight(bool keydown);
 
-        void MoveUpward(bool keydown);
-        void MoveDownward(bool keydown);
+        RENDERLIBRARY_API void MoveUpward(bool keydown);
+        RENDERLIBRARY_API void MoveDownward(bool keydown);
 
-        void RotateLeft(bool keydown);
-        void RotateRight(bool keydown);
+        RENDERLIBRARY_API void RotateLeft(bool keydown);
+        RENDERLIBRARY_API void RotateRight(bool keydown);
 
-        void LookUpward(bool keydown);
-        void LookDownward(bool keydown);
+        RENDERLIBRARY_API void LookUpward(bool keydown);
+        RENDERLIBRARY_API void LookDownward(bool keydown);
 
-        void SetPos(float x, float y, float z);
-        void SetRot(float x, float y, float z);
+        RENDERLIBRARY_API void SetPos(float x, float y, float z);
+        RENDERLIBRARY_API void SetRot(float x, float y, float z);
 
-        XMFLOAT3 GetPos() {
+        RENDERLIBRARY_API XMFLOAT3 GetPos() {
             return _pos;
         }
-        XMFLOAT3 GetRot() {
+        RENDERLIBRARY_API XMFLOAT3 GetRot() {
             return _rot;
         }
 
-        CXMMATRIX GetViewMatrix();
+        RENDERLIBRARY_API CXMMATRIX GetViewMatrix();
     };
 }

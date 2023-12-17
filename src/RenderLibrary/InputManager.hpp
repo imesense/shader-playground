@@ -3,7 +3,7 @@
 namespace ShaderPlayground {
     class InputListener;
 
-    class RENDERLIBRARY_API InputManager {
+    class InputManager {
     private:
         std::list<InputListener*> _listener;
 
@@ -23,14 +23,14 @@ namespace ShaderPlayground {
         void EventKey(const KeyCodes keyCode, const wchar_t ch, bool press);
 
     public:
-        void Initialize();
-        void Close();
+        RENDERLIBRARY_API void Initialize();
+        RENDERLIBRARY_API void Close();
 
-        void Run(const UINT& msg, WPARAM wParam, LPARAM lParam);
+        RENDERLIBRARY_API void Run(const UINT& msg, WPARAM wParam, LPARAM lParam);
 
-        void AddListener(InputListener* listener);
+        RENDERLIBRARY_API void AddListener(InputListener* listener);
 
         // зона окна
-        void SetWinRect(const RECT& winrect);
+        RENDERLIBRARY_API void SetWinRect(const RECT& winrect);
     };
 }

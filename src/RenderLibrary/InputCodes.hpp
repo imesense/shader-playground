@@ -1,14 +1,14 @@
 #pragma once
 
 namespace ShaderPlayground {
-    enum MouseKeyCodes {
+    enum RENDERLIBRARY_API MouseKeyCodes {
         MOUSE_LEFT = 0,
         MOUSE_MIDDLE = 1,
         MOUSE_RIGHT = 2,
         MOUSE_MAX = 3
     };
 
-    enum KeyCodes {
+    enum RENDERLIBRARY_API KeyCodes {
         KEY_LBUTTON = 0x01, // Left mouse button
         KEY_RBUTTON = 0x02, // Right mouse button
         KEY_CANCEL = 0x03, // Control-break processing

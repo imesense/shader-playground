@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API Timer {
+    class Timer {
     private:
         INT64 _frequency;
         INT64 _startTime;
@@ -10,9 +10,9 @@ namespace ShaderPlayground {
         float _frameTime;
 
     public:
-        bool Init();
-        void Frame();
+        RENDERLIBRARY_API bool Init();
+        RENDERLIBRARY_API void Frame();
 
-        float GetTime() const;
+        RENDERLIBRARY_API float GetTime() const;
     };
 }

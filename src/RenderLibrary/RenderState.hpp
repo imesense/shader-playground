@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API RenderState {
+    class RenderState {
     private:
         ID3D11Device* _pd3dDevice;
         ID3D11DeviceContext* _pImmediateContext;
@@ -22,15 +22,15 @@ namespace ShaderPlayground {
         bool Createsamplerstate();
 
     public:
-        RenderState(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pImmediateContext);
+        RENDERLIBRARY_API RenderState(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pImmediateContext);
 
-        bool Init();
-        void Close();
+        RENDERLIBRARY_API bool Init();
+        RENDERLIBRARY_API void Close();
 
-        void TurnZBufferOn();
-        void TurnZBufferOff();
+        RENDERLIBRARY_API void TurnZBufferOn();
+        RENDERLIBRARY_API void TurnZBufferOff();
 
-        void TurnOnAlphaBlending();
-        void TurnOffAlphaBlending();
+        RENDERLIBRARY_API void TurnOnAlphaBlending();
+        RENDERLIBRARY_API void TurnOffAlphaBlending();
     };
 }

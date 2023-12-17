@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API Log {
+    class Log {
     private:
         static Log* _instance;
 
@@ -12,15 +12,15 @@ namespace ShaderPlayground {
         FILE* _file;
 
     public:
-        Log();
-        ~Log();
+        RENDERLIBRARY_API Log();
+        RENDERLIBRARY_API ~Log();
 
-        static Log* Get() {
+        RENDERLIBRARY_API static Log* Get() {
             return _instance;
         }
 
-        void Print(const char* message, ...);
-        void Debug(const char* message, ...);
-        void Err(const char* message, ...);
+        RENDERLIBRARY_API void Print(const char* message, ...);
+        RENDERLIBRARY_API void Debug(const char* message, ...);
+        RENDERLIBRARY_API void Err(const char* message, ...);
     };
 }

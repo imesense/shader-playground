@@ -3,7 +3,7 @@
 namespace ShaderPlayground {
     class DX11ViewRender;
 
-    class RENDERLIBRARY_API RenderTarget {
+    class RenderTarget {
     private:
         XMMATRIX _projectionMatrix;
         XMMATRIX _orthoMatrix;
@@ -18,18 +18,18 @@ namespace ShaderPlayground {
         ID3D11DepthStencilView* _DSV;
 
     public:
-        RenderTarget(DX11ViewRender* render);
+        RENDERLIBRARY_API RenderTarget(DX11ViewRender* render);
 
-        bool Init(float screenNear, float screenDepth);
-        void Close();
+        RENDERLIBRARY_API bool Init(float screenNear, float screenDepth);
+        RENDERLIBRARY_API void Close();
 
-        void SetRenderTarget();
-        void ClearRenderTarget(float, float, float, float);
+        RENDERLIBRARY_API void SetRenderTarget();
+        RENDERLIBRARY_API void ClearRenderTarget(float, float, float, float);
 
         // Получаем текстуру RT в виде shader resource view
-        ID3D11ShaderResourceView* GetShaderResourceView();
+        RENDERLIBRARY_API ID3D11ShaderResourceView* GetShaderResourceView();
 
-        XMMATRIX GetProjectionMatrix();
+        RENDERLIBRARY_API XMMATRIX GetProjectionMatrix();
 
         //void* operator new(size_t i) {
         //    return _aligned_malloc(i, 16);

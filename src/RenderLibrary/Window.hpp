@@ -1,8 +1,9 @@
 #pragma once
 
 namespace ShaderPlayground {
-    struct RENDERLIBRARY_API DescWindow {
-        DescWindow() :
+    struct DescWindow {
+    public:
+        RENDERLIBRARY_API DescWindow() :
             caption(L""),
             width(640),
             height(480),
@@ -19,7 +20,7 @@ namespace ShaderPlayground {
         bool resizing;
     };
 
-    class RENDERLIBRARY_API Window {
+    class Window {
     private:
         static Window* _wndthis;
 
@@ -37,64 +38,64 @@ namespace ShaderPlayground {
         void UpdateWindowState();
 
     public:
-        Window();
+        RENDERLIBRARY_API Window();
 
-        static Window* Get() {
+        RENDERLIBRARY_API static Window* Get() {
             return _wndthis;
         }
 
         // Создать окно
-        bool Create(const DescWindow& desc);
+        RENDERLIBRARY_API bool Create(const DescWindow& desc);
 
         // Обработка событий окна
-        void RunEvent();
+        RENDERLIBRARY_API void RunEvent();
 
         // Закрыть окно.
-        void Close();
+        RENDERLIBRARY_API void Close();
 
-        void SetInputMgr(InputManager* inputmgr);
+        RENDERLIBRARY_API void SetInputMgr(InputManager* inputmgr);
 
-        HWND GetHWND() const {
+        RENDERLIBRARY_API HWND GetHWND() const {
             return _hwnd;
         }
-        int GetLeft() const {
+        RENDERLIBRARY_API int GetLeft() const {
             return _desc.posx;
         }
-        int GetTop() const {
+        RENDERLIBRARY_API int GetTop() const {
             return _desc.posy;
         }
-        int GetWidth() const {
+        RENDERLIBRARY_API int GetWidth() const {
             return _desc.width;
         }
-        int GetHeight() const {
+        RENDERLIBRARY_API int GetHeight() const {
             return _desc.height;
         }
 
         // Вернуть заголовок окна
-        const std::wstring& GetCaption() const {
+        RENDERLIBRARY_API const std::wstring& GetCaption() const {
             return _desc.caption;
         }
 
         // сообщает, было ли сообщение о выходе
-        bool IsExit() const {
+        RENDERLIBRARY_API bool IsExit() const {
             return _isexit;
         }
 
         // сообщает об активности окна
-        bool IsActive() const {
+        RENDERLIBRARY_API bool IsActive() const {
             return _active;
         }
 
         // сообщает об изменении окна
         // предупреждение: после вызова оповещает окно об обработке события
-        bool IsResize() {
+        RENDERLIBRARY_API bool IsResize() {
             bool ret = _isresize;
             _isresize = false;
             return ret;
         }
 
         // обработка событий
-        LRESULT WndProc(HWND hwnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
+        RENDERLIBRARY_API LRESULT WndProc(HWND hwnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
     };
 
     // обработка событий

@@ -1,21 +1,22 @@
 #pragma once
 
 namespace ShaderPlayground {
-    struct RENDERLIBRARY_API FrameworkDesc {
+    struct FrameworkDesc {
+    public:
         DescWindow wnd;
         Render* render;
     };
 
-    class RENDERLIBRARY_API Framework {
+    class Framework {
     public:
-        Framework();
-        ~Framework();
+        RENDERLIBRARY_API Framework();
+        RENDERLIBRARY_API ~Framework();
 
-        bool Init(const FrameworkDesc& desc);
-        void Run();
-        void Close();
+        RENDERLIBRARY_API bool Init(const FrameworkDesc& desc);
+        RENDERLIBRARY_API void Run();
+        RENDERLIBRARY_API void Close();
 
-        void AddInputListener(InputListener* listener);
+        RENDERLIBRARY_API void AddInputListener(InputListener* listener);
 
     protected:
         bool Frame();

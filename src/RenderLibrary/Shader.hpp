@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API Shader {
+    class Shader {
     private:
         Render* _render;
 
@@ -16,19 +16,19 @@ namespace ShaderPlayground {
         HRESULT Compileshaderfromfile(const char* FileName, LPCSTR EntryPoint, LPCSTR ShaderModel, ID3DBlob** ppBlobOut);
 
     public:
-        Shader(Render* render);
+        RENDERLIBRARY_API Shader(Render* render);
 
         // данную функцию мы должны вызывать до вызова CreateShader
-        void AddInputElementDesc(const char* SemanticName, DXGI_FORMAT format);
-        void AddInputElementDesc(const char* SemanticName, unsigned int SemanticIndex, DXGI_FORMAT format,
+        RENDERLIBRARY_API void AddInputElementDesc(const char* SemanticName, DXGI_FORMAT format);
+        RENDERLIBRARY_API void AddInputElementDesc(const char* SemanticName, unsigned int SemanticIndex, DXGI_FORMAT format,
             unsigned int InputSlot = 0, bool AlignedByteOffset = true,
             D3D11_INPUT_CLASSIFICATION InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA,
             unsigned int InstanceDataStepRate = 0);
 
-        bool CreateShader(const char* namevs, const char* nameps);
-        bool AddTexture(const wchar_t* name);
+        RENDERLIBRARY_API bool CreateShader(const char* namevs, const char* nameps);
+        RENDERLIBRARY_API bool AddTexture(const wchar_t* name);
 
-        void Draw();
-        void Close();
+        RENDERLIBRARY_API void Draw();
+        RENDERLIBRARY_API void Close();
     };
 }

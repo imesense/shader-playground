@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API Render {
+    class Render {
         friend class StaticMesh;
         friend class Image;
         friend class BitmapFont;
@@ -9,23 +9,23 @@ namespace ShaderPlayground {
         friend class Shader;
 
     public:
-        Render();
-        virtual ~Render();
+        RENDERLIBRARY_API Render();
+        RENDERLIBRARY_API virtual ~Render();
 
-        bool CreateDevice(HWND hwnd);
-        void BeginFrame();
-        void EndFrame();
-        void Shutdown();
+        RENDERLIBRARY_API bool CreateDevice(HWND hwnd);
+        RENDERLIBRARY_API void BeginFrame();
+        RENDERLIBRARY_API void EndFrame();
+        RENDERLIBRARY_API void Shutdown();
 
-        virtual bool Init() = 0;
-        virtual bool Draw() = 0;
-        virtual void Close() = 0;
+        RENDERLIBRARY_API virtual bool Init() = 0;
+        RENDERLIBRARY_API virtual bool Draw() = 0;
+        RENDERLIBRARY_API virtual void Close() = 0;
 
-        void TurnZBufferOn();
-        void TurnZBufferOff();
+        RENDERLIBRARY_API void TurnZBufferOn();
+        RENDERLIBRARY_API void TurnZBufferOff();
 
-        void TurnOnAlphaBlending();
-        void TurnOffAlphaBlending();
+        RENDERLIBRARY_API void TurnOnAlphaBlending();
+        RENDERLIBRARY_API void TurnOffAlphaBlending();
 
         //void* operator new(size_t i) {
         //    return _aligned_malloc(i, 16);

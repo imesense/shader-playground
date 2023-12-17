@@ -3,7 +3,7 @@
 namespace ShaderPlayground {
     class DX11ViewRender;
 
-    class RENDERLIBRARY_API ShadowShader : public Allocator {
+    class ShadowShader : public Allocator {
     private:
         DX11ViewRender* _render;
         Shader* _shader;
@@ -14,11 +14,12 @@ namespace ShaderPlayground {
         ID3D11Buffer* _lightBuffer2;
 
     public:
-        ShadowShader(DX11ViewRender* render);
+        RENDERLIBRARY_API ShadowShader(DX11ViewRender* render);
 
-        bool Init();
-        void Close();
-        void Render(int indexCount, CXMMATRIX worldMatrix, CXMMATRIX WVP, CXMMATRIX WVPlight,
+        RENDERLIBRARY_API bool Init();
+        RENDERLIBRARY_API void Close();
+
+        RENDERLIBRARY_API void Render(int indexCount, CXMMATRIX worldMatrix, CXMMATRIX WVP, CXMMATRIX WVPlight,
             ID3D11ShaderResourceView* texture, ID3D11ShaderResourceView* depthMapTexture,
             Light& light);
     };

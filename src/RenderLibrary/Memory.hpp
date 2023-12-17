@@ -1,20 +1,20 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API Allocator {
+    class Allocator {
     public:
-        Allocator() {}
-        ~Allocator() {}
+        RENDERLIBRARY_API Allocator() {}
+        RENDERLIBRARY_API ~Allocator() {}
 
-        void* operator new(std::size_t size);
-        void operator delete(void* ptr) noexcept;
+        RENDERLIBRARY_API void* operator new(std::size_t size);
+        RENDERLIBRARY_API void operator delete(void* ptr) noexcept;
 
-        void* operator new[](std::size_t size);
-        void operator delete[](void* ptr) noexcept;
+        RENDERLIBRARY_API void* operator new[](std::size_t size);
+        RENDERLIBRARY_API void operator delete[](void* ptr) noexcept;
 
-        static void AddToCollection(void* ptr);
-        static void RemoveFromCollection(void* ptr);
-        static void PrintCollection();
+        RENDERLIBRARY_API static void AddToCollection(void* ptr);
+        RENDERLIBRARY_API static void RemoveFromCollection(void* ptr);
+        RENDERLIBRARY_API static void PrintCollection();
 
     private:
         static std::unordered_set<void*> objectCollection;

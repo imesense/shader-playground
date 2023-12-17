@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API Text {
+    class Text {
     private:
         Render* _render;
 
@@ -21,15 +21,15 @@ namespace ShaderPlayground {
         bool Updatebuffer(const std::wstring& text);
 
     public:
-        Text(Render* render, BitmapFont* font);
+        RENDERLIBRARY_API Text(Render* render, BitmapFont* font);
 
         // text - текст который нужно вывести
         // static - если true, то данный текст нельзя изменить
         // size - максимальное количество букв которые можно вывести. 0 означает что это число равно размеру text
-        bool Init(const std::wstring& text, bool statictext = true, int charsize = 0);
-        void Draw(float r, float g, float b, float x, float y);
-        void Close();
+        RENDERLIBRARY_API bool Init(const std::wstring& text, bool statictext = true, int charsize = 0);
+        RENDERLIBRARY_API void Draw(float r, float g, float b, float x, float y);
+        RENDERLIBRARY_API void Close();
 
-        bool SetText(const std::wstring& text);
+        RENDERLIBRARY_API bool SetText(const std::wstring& text);
     };
 }
