@@ -1,0 +1,11 @@
+{
+    "folders": [
+        {
+            "path": ".",
+            "name": "Shader Playground"
+        }
+    ],
+    "settings": {
+        "dotnet.defaultSolution": "disable"
+    }
+}
