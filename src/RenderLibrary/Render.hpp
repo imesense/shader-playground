@@ -27,13 +27,13 @@ namespace ShaderPlayground {
         void TurnOnAlphaBlending();
         void TurnOffAlphaBlending();
 
-        void* operator new(size_t i) {
-            return _aligned_malloc(i, 16);
-        }
+        //void* operator new(size_t i) {
+        //    return _aligned_malloc(i, 16);
+        //}
 
-        void operator delete(void* p) {
-            _aligned_free(p);
-        }
+        //void operator delete(void* p) {
+        //    _aligned_free(p);
+        //}
 
     protected:
         bool Createdevice();
