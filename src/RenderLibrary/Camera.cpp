@@ -1,12 +1,11 @@
 #include "StdAfx.h"
 
+#include <unordered_set>
 #include <DirectXMath.h>
 
 using namespace DirectX;
 
-#include <unordered_set>
 #include "Memory.hpp"
-
 #include "Timer.hpp"
 #include "Camera.hpp"
 

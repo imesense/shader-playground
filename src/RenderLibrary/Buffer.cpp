@@ -1,10 +1,9 @@
 #include "StdAfx.h"
 
+#include <unordered_set>
 #include <d3d11.h>
 
 #include "Buffer.hpp"
-
-#include <unordered_set>
 #include "Memory.hpp"
 
 using namespace ShaderPlayground;

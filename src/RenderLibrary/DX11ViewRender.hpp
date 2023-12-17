@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace ShaderPlayground {
     class RENDERLIBRARY_API DX11ViewRender : public Render, public Allocator {
     private:

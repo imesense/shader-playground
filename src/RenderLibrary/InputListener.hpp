@@ -1,7 +1,5 @@
 #pragma once
 
-#include "InputCodes.hpp"
-
 namespace ShaderPlayground {
     // События мыши
     struct RENDERLIBRARY_API MouseEvent {

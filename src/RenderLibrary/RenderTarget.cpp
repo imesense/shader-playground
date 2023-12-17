@@ -1,14 +1,13 @@
 #include "StdAfx.h"
 
+#include <unordered_set>
 #include <vector>
 #include <d3d11.h>
 #include <DirectXMath.h>
 
 using namespace DirectX;
 
-#include <unordered_set>
 #include "Memory.hpp"
-
 #include "RenderState.hpp"
 #include "Render.hpp"
 #include "Shader.hpp"

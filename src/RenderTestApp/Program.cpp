@@ -2,13 +2,13 @@
 
 #include <list>
 #include <string>
+#include <unordered_set>
 #include <d3d11.h>
 #include <DirectXMath.h>
 
 using namespace DirectX;
-#include <unordered_set>
-#include "Memory.hpp"
 
+#include <Memory.hpp>
 #include <InputCodes.hpp>
 #include <InputManager.hpp>
 #include <Window.hpp>
@@ -26,15 +26,13 @@ using namespace DirectX;
 #include <InputListener.hpp>
 #include <InputBinder.hpp>
 
-#include "Framework.h"
-#include "Program.h"
-
 using namespace ShaderPlayground;
 
+#include "Framework.h"
+#include "Program.h"
 #include "StartUp.hpp"
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow) {
-
     Start::Launch();
 
     return 1;

@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstdlib>
-
 namespace ShaderPlayground {
     class RENDERLIBRARY_API Allocator {
     public:

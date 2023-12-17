@@ -2,13 +2,13 @@
 
 #include <list>
 #include <string>
+#include <unordered_set>
 #include <d3d11.h>
 #include <DirectXMath.h>
 
 using namespace DirectX;
-#include <unordered_set>
-#include "Memory.hpp"
 
+#include <Memory.hpp>
 #include <InputCodes.hpp>
 #include <InputManager.hpp>
 #include <Window.hpp>
@@ -26,9 +26,9 @@ using namespace DirectX;
 #include <InputListener.hpp>
 #include <InputBinder.hpp>
 
-#include "Framework.h"
 using namespace ShaderPlayground;
 
+#include "Framework.h"
 #include "StartUp.hpp"
 
 void Start::Launch() {

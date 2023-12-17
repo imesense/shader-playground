@@ -1,7 +1,5 @@
 #pragma once
 
-#include <filesystem>
-
 namespace ShaderPlayground {
     inline static const char* GetApplicationPathLaunch() {
         static std::string pathString;

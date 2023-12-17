@@ -1,10 +1,9 @@
 #include "StdAfx.h"
 
 #include <list>
-
 #include <unordered_set>
-#include "Memory.hpp"
 
+#include "Memory.hpp"
 #include "InputCodes.hpp"
 #include "InputManager.hpp"
 #include "Log.hpp"

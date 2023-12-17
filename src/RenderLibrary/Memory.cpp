@@ -1,11 +1,11 @@
 #include "StdAfx.h"
+
+#include <iostream>
+#include <new>
 #include <unordered_set>
 
 #include "Memory.hpp"
 #include "Log.hpp"
-
-#include <iostream>
-#include <new>
 
 #pragma section(".Hook", read)
 
