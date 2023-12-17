@@ -12,3 +12,6 @@ obj/
 
 # Generated files
 FodyWeavers.xsd
+
+# Logs and parameters
+log.txt
