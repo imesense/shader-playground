@@ -20,6 +20,7 @@ using namespace DirectX;
 #include "Buffer.hpp"
 #include "Light.hpp"
 #include "Helpers.h"
+#include "Utils.hpp"
 
 using namespace ShaderPlayground;
 
@@ -56,10 +57,13 @@ bool ShadowShader::Init() {
     _shader->AddInputElementDesc("TEXCOORD", DXGI_FORMAT_R32G32_FLOAT);
     _shader->AddInputElementDesc("NORMAL", DXGI_FORMAT_R32G32B32_FLOAT);
 
-    char vertexShader[] = "shadow.vs";
-    char pixelShader[] = "shadow.ps";
+    const char* vertexShader = "shadow.vs";
+    const char* pixelShader = "shadow.ps";
 
-    if (!_shader->CreateShader(vertexShader, pixelShader)) {
+    std::string vsPath = CombinedPathForResources(vertexShader);
+    std::string psPath = CombinedPathForResources(pixelShader);
+
+    if (!_shader->CreateShader(vsPath.c_str(), psPath.c_str())) {
         return false;
     }
 

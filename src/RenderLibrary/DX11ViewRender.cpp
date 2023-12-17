@@ -17,6 +17,8 @@ using namespace DirectX;
 #include "DX11ViewRender.hpp"
 #include "Buffer.hpp"
 #include "Helpers.h"
+#include "Memory.hpp"
+#include "Utils.hpp"
 
 using namespace ShaderPlayground;
 
@@ -98,8 +100,11 @@ bool DX11ViewRender::Init() {
    _vb_ground = Buffer::CreateVertexBuffer(_pd3dDevice, sizeof(Vertex) * 6, false, &vert1);
    _ib_ground = Buffer::CreateIndexBuffer(_pd3dDevice, sizeof(unsigned long) * 6, false, &indices1);
 
+   const char* test = "stone01.jpg";
+   std::string Path = CombinedPathForResources(test);
+
    // грузим текстуру для поверхности
-    D3DX11CreateShaderResourceViewFromFile(_pd3dDevice, L"stone01.jpg", NULL, NULL, &_texture_ground, NULL);
+    D3DX11CreateShaderResourceViewFromFileA(_pd3dDevice, Path.c_str(), NULL, NULL, &_texture_ground, NULL);
 
     // геометрия (box)
     Vertex vert2[] = {
@@ -157,9 +162,15 @@ bool DX11ViewRender::Init() {
     _vb_box = Buffer::CreateVertexBuffer(_pd3dDevice, sizeof(Vertex) * 24, false, vert2);
     _ib_box = Buffer::CreateIndexBuffer(_pd3dDevice, sizeof(unsigned long) * 36, false, indices2);
 
+    const char* test1 = "wall01.jpg";
+    std::string Path1 = CombinedPathForResources(test1);
+
+    const char* test2 = "ice.jpg";
+    std::string Path2 = CombinedPathForResources(test2);
+
     // грузим текстуры для кубов
-    D3DX11CreateShaderResourceViewFromFile(_pd3dDevice, L"wall01.jpg", NULL, NULL, &_texture_box1, NULL);
-    D3DX11CreateShaderResourceViewFromFile(_pd3dDevice, L"ice.jpg", NULL, NULL, &_texture_box2, NULL);
+    D3DX11CreateShaderResourceViewFromFileA(_pd3dDevice, Path1.c_str(), NULL, NULL, &_texture_box1, NULL);
+    D3DX11CreateShaderResourceViewFromFileA(_pd3dDevice, Path2.c_str(), NULL, NULL, &_texture_box2, NULL);
 
     return true;
 }

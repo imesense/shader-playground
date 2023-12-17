@@ -29,6 +29,7 @@
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="Framework.cpp" />
+    <ClCompile Include="Memory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -66,6 +67,8 @@
     <ClInclude Include="ShadowShader.hpp" />
     <ClInclude Include="RenderTarget.hpp" />
     <ClInclude Include="Framework.hpp" />
+    <ClInclude Include="Memory.hpp" />
+    <ClInclude Include="Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

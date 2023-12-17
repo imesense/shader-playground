@@ -33,12 +33,6 @@
 #define _VERSION_FRAMEWORK 7
 
 inline wchar_t* CharToWChar(char* mbString) {
-    //int len = 0; 
-    //len = (int)strlen(mbString) + 1; 
-    //wchar_t *ucString = new wchar_t[len]; 
-    //mbstowcs_s(ucString, mbString, len);
-    //return ucString; 
-
     int len = 0;
     len = (int) strlen(mbString) + 1;
     wchar_t* ucString = new wchar_t[len];

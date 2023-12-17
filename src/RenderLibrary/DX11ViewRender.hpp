@@ -2,7 +2,7 @@
 
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API DX11ViewRender : public Render {
+    class RENDERLIBRARY_API DX11ViewRender : public Render/*, public Allocator<DX11ViewRender>*/ {
     private:
         friend DepthShader;
         friend RenderTarget;

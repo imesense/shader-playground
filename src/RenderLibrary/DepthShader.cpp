@@ -18,6 +18,7 @@ using namespace DirectX;
 #include "Light.hpp"
 #include "ShadowShader.hpp"
 #include "DX11ViewRender.hpp"
+#include "Utils.hpp"
 
 using namespace ShaderPlayground;
 
@@ -36,10 +37,13 @@ bool DepthShader::Init() {
     _shader = new Shader(_render);
     _shader->AddInputElementDesc("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);
 
-    char vertexShader[] = "depth.vs";
-    char pixelShader[] = "depth.ps";
+    const char* vertexShader = "depth.vs";
+    const char* pixelShader = "depth.ps";
 
-    if (!_shader->CreateShader(vertexShader, pixelShader)) {
+    std::string vsPath = CombinedPathForResources(vertexShader);
+    std::string psPath = CombinedPathForResources(pixelShader);
+
+    if (!_shader->CreateShader(vsPath.c_str(), psPath.c_str())) {
         return false;
     }
 

@@ -82,7 +82,7 @@ void Shader::AddInputElementDesc(const char* SemanticName, unsigned int Semantic
     _numlayout++;
 }
 
-bool Shader::CreateShader(char* namevs, char* nameps) {
+bool Shader::CreateShader(const char* namevs, const char* nameps) {
     HRESULT hr = S_OK;
     ID3DBlob* vertexShaderBuffer = nullptr;
     hr = Compileshaderfromfile(namevs, "VS", "vs_4_0", &vertexShaderBuffer);
@@ -124,7 +124,7 @@ bool Shader::CreateShader(char* namevs, char* nameps) {
     return true;
 }
 
-HRESULT Shader::Compileshaderfromfile(char* FileName, LPCSTR EntryPoint, LPCSTR ShaderModel, ID3DBlob** ppBlobOut) {
+HRESULT Shader::Compileshaderfromfile(const char* FileName, LPCSTR EntryPoint, LPCSTR ShaderModel, ID3DBlob** ppBlobOut) {
     HRESULT hr = S_OK;
 
     DWORD ShaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;

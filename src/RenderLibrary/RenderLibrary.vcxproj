@@ -94,6 +94,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdAfx.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -112,6 +113,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdAfx.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -130,6 +132,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdAfx.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -148,6 +151,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdAfx.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -192,6 +196,7 @@
     <ClInclude Include="Light.hpp" />
     <ClInclude Include="Log.hpp" />
     <ClInclude Include="InputManager.hpp" />
+    <ClInclude Include="Memory.hpp" />
     <ClInclude Include="Render.hpp" />
     <ClInclude Include="RenderState.hpp" />
     <ClInclude Include="RenderTarget.hpp" />
@@ -201,6 +206,7 @@
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="Text.hpp" />
     <ClInclude Include="Timer.hpp" />
+    <ClInclude Include="Utils.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +224,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Log.cpp" />
+    <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="RenderState.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
