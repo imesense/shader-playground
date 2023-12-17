@@ -2,6 +2,7 @@
 
 #include <list>
 
+#include <unordered_set>
 #include "Memory.hpp"
 
 #include "InputCodes.hpp"

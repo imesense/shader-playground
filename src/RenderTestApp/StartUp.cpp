@@ -6,6 +6,8 @@
 #include <DirectXMath.h>
 
 using namespace DirectX;
+#include <unordered_set>
+#include "Memory.hpp"
 
 #include <InputCodes.hpp>
 #include <InputManager.hpp>
@@ -25,11 +27,9 @@ using namespace DirectX;
 #include <InputBinder.hpp>
 
 #include "Framework.h"
-#include "Memory.hpp"
+using namespace ShaderPlayground;
 
 #include "StartUp.hpp"
-
-using namespace ShaderPlayground;
 
 void Start::Launch() {
     Framework framework;
@@ -37,6 +37,8 @@ void Start::Launch() {
     DX11ViewRender* render = new DX11ViewRender();
 
     InputBinder* input = new InputBinder(render);
+
+    Allocator::PrintCollection();
 
     FrameworkDesc desc;
     desc.render = render;

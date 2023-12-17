@@ -11,6 +11,7 @@
 
 using namespace DirectX;
 
+#include <unordered_set>
 #include "Memory.hpp"
 
 #include "RenderState.hpp"

@@ -6,6 +6,8 @@
 #include <DirectXMath.h>
 
 using namespace DirectX;
+#include <unordered_set>
+#include "Memory.hpp"
 
 #include <InputCodes.hpp>
 #include <InputManager.hpp>
@@ -26,7 +28,6 @@ using namespace DirectX;
 
 #include "Framework.h"
 #include "Program.h"
-#include "Memory.hpp"
 
 using namespace ShaderPlayground;
 
