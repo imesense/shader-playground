@@ -2,6 +2,8 @@
 
 #include <list>
 
+#include "Memory.hpp"
+
 #include "InputCodes.hpp"
 #include "InputManager.hpp"
 #include "Log.hpp"

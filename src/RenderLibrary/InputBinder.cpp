@@ -6,6 +6,8 @@
 
 using namespace DirectX;
 
+#include "Memory.hpp"
+
 #include "InputListener.hpp"
 #include "RenderState.hpp"
 #include "Render.hpp"

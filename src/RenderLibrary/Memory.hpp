@@ -3,17 +3,17 @@
 #include <cstdlib>
 
 namespace ShaderPlayground {
-    template <typename T>
     class RENDERLIBRARY_API Allocator {
-    protected:
-        Allocator(const char* object);
-        ~Allocator();
-
     public:
-        static void* operator new(size_t size);
-        static void operator delete(void* ptr);
+        Allocator() {}
+        ~Allocator() {}
 
-        static void* operator new[](size_t size);
-        static void operator delete[](void* ptr);
+        void* operator new(std::size_t size);
+        void operator delete(void* ptr) noexcept;
+
+        void* operator new[](std::size_t size);
+        void operator delete[](void* ptr) noexcept;
     };
 }
+
+extern RENDERLIBRARY_API ShaderPlayground::Allocator Memory;

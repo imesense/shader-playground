@@ -19,7 +19,6 @@
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="DepthShader.cpp" />
     <ClCompile Include="ShadowShader.cpp" />
@@ -60,7 +59,6 @@
     <ClInclude Include="BitmapFont.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="Image.hpp" />
-    <ClInclude Include="StaticMesh.hpp" />
     <ClInclude Include="Light.hpp" />
     <ClInclude Include="DepthShader.hpp" />
     <ClInclude Include="DX11ViewRender.hpp" />

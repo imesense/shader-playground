@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ShaderPlayground {
-    class RENDERLIBRARY_API InputBinder : public InputListener {
+    class RENDERLIBRARY_API InputBinder : public InputListener, public Allocator {
     private:
         DX11ViewRender* _render;
 

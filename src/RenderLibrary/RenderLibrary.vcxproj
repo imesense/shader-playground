@@ -202,7 +202,6 @@
     <ClInclude Include="RenderTarget.hpp" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="ShadowShader.hpp" />
-    <ClInclude Include="StaticMesh.hpp" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="Text.hpp" />
     <ClInclude Include="Timer.hpp" />
@@ -230,7 +229,6 @@
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShadowShader.cpp" />
-    <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="StdAfx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

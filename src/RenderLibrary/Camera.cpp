@@ -4,6 +4,8 @@
 
 using namespace DirectX;
 
+#include "Memory.hpp"
+
 #include "Timer.hpp"
 #include "Camera.hpp"
 

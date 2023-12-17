@@ -26,24 +26,15 @@ using namespace DirectX;
 
 #include "Framework.h"
 #include "Program.h"
+#include "Memory.hpp"
 
 using namespace ShaderPlayground;
 
+#include "StartUp.hpp"
+
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow) {
-    int result = -1;
 
-    Framework framework;
+    Start::Launch();
 
-    DX11ViewRender* render = new DX11ViewRender();
-    InputBinder* input = new InputBinder(render);
-
-    FrameworkDesc desc;
-    desc.render = render;
-
-    framework.Init(desc);
-    framework.AddInputListener(input);
-    framework.Run();
-    framework.Close();
-
-    return result;
+    return 1;
 }

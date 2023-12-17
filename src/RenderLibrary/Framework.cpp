@@ -7,6 +7,8 @@
 
 using namespace DirectX;
 
+#include "Memory.hpp"
+
 #include "InputCodes.hpp"
 #include "InputManager.hpp"
 #include "Window.hpp"

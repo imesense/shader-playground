@@ -6,6 +6,8 @@
 
 using namespace DirectX;
 
+#include "Memory.hpp"
+
 #include "RenderState.hpp"
 #include "Render.hpp"
 #include "DepthShader.hpp"
@@ -17,7 +19,6 @@ using namespace DirectX;
 #include "DX11ViewRender.hpp"
 #include "Buffer.hpp"
 #include "Helpers.h"
-#include "Memory.hpp"
 #include "Utils.hpp"
 
 using namespace ShaderPlayground;

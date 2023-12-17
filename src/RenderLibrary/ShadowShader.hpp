@@ -3,7 +3,7 @@
 namespace ShaderPlayground {
     class DX11ViewRender;
 
-    class RENDERLIBRARY_API ShadowShader {
+    class RENDERLIBRARY_API ShadowShader : public Allocator {
     private:
         DX11ViewRender* _render;
         Shader* _shader;

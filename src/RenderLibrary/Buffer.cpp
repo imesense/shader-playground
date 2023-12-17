@@ -3,6 +3,7 @@
 #include <d3d11.h>
 
 #include "Buffer.hpp"
+#include "Memory.hpp"
 
 using namespace ShaderPlayground;
 
