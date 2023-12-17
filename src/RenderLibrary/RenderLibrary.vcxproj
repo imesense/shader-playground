@@ -186,7 +186,6 @@
     <ClInclude Include="DX11ViewRender.hpp" />
     <ClInclude Include="Framework.hpp" />
     <ClInclude Include="Frustum.hpp" />
-    <ClInclude Include="Image.hpp" />
     <ClInclude Include="InputBinder.hpp" />
     <ClInclude Include="InputCodes.hpp" />
     <ClInclude Include="FpsCounter.hpp" />
@@ -218,7 +217,6 @@
     <ClCompile Include="FpsCounter.cpp" />
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="Frustum.cpp" />
-    <ClCompile Include="Image.cpp" />
     <ClCompile Include="InputBinder.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Light.cpp" />
