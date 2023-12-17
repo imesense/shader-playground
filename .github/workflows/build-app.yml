@@ -1,0 +1,202 @@
+name: "Build application"
+
+on:
+  push:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/**"
+      - "inc/**"
+      - "src/**"
+      - "*.sln"
+      - "*.config"
+      - "*.props"
+      - "*.targets"
+  pull_request:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/**"
+      - "inc/**"
+      - "src/**"
+      - "*.sln"
+      - "*.config"
+      - "*.props"
+      - "*.targets"
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  build-library:
+    name: "Build library"
+
+    strategy:
+      matrix:
+        system:
+          - windows-latest
+        config:
+          - Debug
+          - Release
+        platform:
+          - x86
+          - x64
+
+    runs-on: ${{ matrix.system }}
+
+    env:
+      RenderSolutionPath: ShaderPlayground.Render.sln
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: '>=5'
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Restore dependencies
+        run: |
+          nuget restore $env:RenderSolutionPath
+
+      - name: Build solution
+        run: |
+          msbuild $env:RenderSolutionPath `
+            -p:Configuration=${{ matrix.config }} `
+            -p:Platform=${{ matrix.platform }} `
+            -maxCpuCount `
+            -nologo
+
+      - name: Upload render (x86)
+        uses: actions/upload-artifact@v3
+        if: matrix.platform == 'x86'
+        with:
+          name: render-${{ matrix.platform }}-${{ matrix.config }}-${{ github.sha }}
+          path: bin/Win32/${{ matrix.config }}/
+
+      - name: Upload render (x86-64)
+        uses: actions/upload-artifact@v3
+        if: matrix.platform == 'x64'
+        with:
+          name: render-${{ matrix.platform }}-${{ matrix.config }}-${{ github.sha }}
+          path: bin/x64/${{ matrix.config }}/
+
+  pack-library:
+    name: "Pack library"
+
+    needs: build-library
+
+    strategy:
+      matrix:
+        system:
+          - windows-latest
+        platform:
+          - x64
+
+    runs-on: ${{ matrix.system }}
+
+    env:
+      RenderSpecPath: src\RenderLibrary\RenderLibrary.nuspec
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: '>=5'
+
+      - name: Get render (Windows x86 Debug)
+        uses: actions/download-artifact@v3
+        with:
+          name: render-x86-Debug-${{ github.sha }}
+          path: bin/Win32/Debug/
+
+      - name: Get render (Windows x86 Release)
+        uses: actions/download-artifact@v3
+        with:
+          name: render-x86-Release-${{ github.sha }}
+          path: bin/Win32/Release/
+
+      - name: Get render (Windows x86-64 Debug)
+        uses: actions/download-artifact@v3
+        with:
+          name: render-x64-Debug-${{ github.sha }}
+          path: bin/x64/Debug/
+
+      - name: Get render (Windows x86-64 Release)
+        uses: actions/download-artifact@v3
+        with:
+          name: render-x64-Release-${{ github.sha }}
+          path: bin/x64/Release/
+
+      - name: Pack render
+        run: |
+          nuget pack $env:RenderSpecPath -OutputDirectory pkg
+
+      - name: Upload package
+        uses: actions/upload-artifact@v3
+        with:
+          name: render-package-${{ github.sha }}
+          path: pkg/*.nupkg
+
+  build-editor:
+    name: "Build editor"
+
+    needs: pack-library
+
+    strategy:
+      matrix:
+        system:
+          - windows-latest
+        config:
+          - Debug
+          - Release
+
+    runs-on: ${{ matrix.system }}
+
+    env:
+      EditorSolutionPath: ShaderPlayground.Editor.sln
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+
+      - name: Get render package
+        uses: actions/download-artifact@v3
+        with:
+          name: render-package-${{ github.sha }}
+          path: pkg/
+
+      - name: Restore dependencies
+        run: |
+          dotnet restore $env:EditorSolutionPath
+
+      - name: Build application
+        run: |
+          dotnet build $env:EditorSolutionPath `
+            --configuration ${{ matrix.config }} `
+            --no-restore
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: editor-${{ matrix.config }}-${{ github.sha }}
+          path: bin/${{ matrix.config }}/

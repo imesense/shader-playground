@@ -13,12 +13,22 @@ insert_final_newline = true
 tab_width = 4
 
 # XML-based files
-[*.{csproj,props,targets,xaml,axaml}]
+[*.{csproj,props,targets,xaml,axaml,nuspec}]
 
 # Common settings
 charset = utf-8
 end_of_line = crlf
 indent_size = 4
+indent_style = space
+insert_final_newline = true
+
+# YAML-based files
+[*.{yml,yaml}]
+
+# Common settings
+charset = utf-8
+end_of_line = lf
+indent_size = 2
 indent_style = space
 insert_final_newline = true
 
