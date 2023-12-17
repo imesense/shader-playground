@@ -2,7 +2,8 @@
 
 # Visual Studio cache and settings
 .vs/
-packages/
+pkg/**
+!pkg/.gitkeep
 *.suo
 *.user
 
