@@ -29,3 +29,30 @@ namespace ShaderPlayground {
         bool _init; // если было инициализировано
     };
 }
+
+extern "C" {
+    RENDERLIBRARY_API ShaderPlayground::Framework* CreateFrameworkInstance() {
+        return new ShaderPlayground::Framework();
+    }
+    RENDERLIBRARY_API void DestroyFrameworkInstance(ShaderPlayground::Framework* instance) {
+        delete instance;
+    }
+
+    RENDERLIBRARY_API void InitializeFramework(ShaderPlayground::Framework* instance,
+        ShaderPlayground::FrameworkDesc properties) {
+        instance->Init(properties);
+    }
+
+    RENDERLIBRARY_API void AddInputListenerToFramework(ShaderPlayground::Framework* instance,
+        ShaderPlayground::InputListener* listener) {
+        instance->AddInputListener(listener);
+    }
+
+    RENDERLIBRARY_API void RunFramework(ShaderPlayground::Framework* instance) {
+        instance->Run();
+    }
+
+    RENDERLIBRARY_API void CloseFramework(ShaderPlayground::Framework* instance) {
+        instance->Close();
+    }
+}
