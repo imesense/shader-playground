@@ -92,15 +92,8 @@
                             Background="#D6D6D6"
                             ResizeDirection="Columns" />
 
-            <Grid Grid.Column="2"
-                    RowDefinitions="*,2,*">
-                <Grid Grid.Row="0" />
-
-                <GridSplitter Grid.Row="1"
-                                Background="#D6D6D6"
-                                ResizeDirection="Rows" />
-
-                <Grid Grid.Row="2" />
+            <Grid Grid.Column="2">
+                <ContentControl x:Name="viewportContentControl" />
             </Grid>
         </Grid>
     </Grid>

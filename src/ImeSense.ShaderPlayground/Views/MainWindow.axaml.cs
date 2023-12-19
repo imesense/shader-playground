@@ -17,6 +17,8 @@ using AvaloniaEdit.Indentation.CSharp;
 using AvaloniaEdit.Rendering;
 using AvaloniaEdit.TextMate;
 
+using ImeSense.ShaderPlayground.Interop;
+
 using TextMateSharp.Grammars;
 
 namespace ImeSense.ShaderPlayground.Views;
@@ -38,6 +40,9 @@ public partial class MainWindow : Window {
 
     public MainWindow() {
         InitializeComponent();
+
+        var viewport = new Viewport();
+        viewportContentControl.Content = viewport;
 
         _textEditor = this.FindControl<TextEditor>("Editor");
         _textEditor.HorizontalScrollBarVisibility = Avalonia.Controls.Primitives.ScrollBarVisibility.Visible;
