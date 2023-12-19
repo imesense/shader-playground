@@ -21,6 +21,7 @@ using namespace DirectX;
 #include "Camera.hpp"
 #include "DX11ViewRender.hpp"
 #include "InputBinder.hpp"
+#include "Helpers.h"
 
 using namespace ShaderPlayground;
 

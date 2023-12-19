@@ -25,6 +25,7 @@ using namespace DirectX;
 #include <DX11ViewRender.hpp>
 #include <InputListener.hpp>
 #include <InputBinder.hpp>
+#include <Exports.h>
 
 using namespace ShaderPlayground;
 
@@ -32,19 +33,23 @@ using namespace ShaderPlayground;
 #include "StartUp.hpp"
 
 void Start::Launch() {
-    Framework framework;
-
-    DX11ViewRender* render = new DX11ViewRender();
-
-    InputBinder* input = new InputBinder(render);
+    Framework* framework = CreateFrameworkInstance();
+    DX11ViewRender* render = CreateRenderInstance();
+    InputBinder* input = CreateInputBinderInstance(render);
 
     Allocator::PrintCollection();
 
     FrameworkDesc desc;
     desc.render = render;
     
-    framework.Init(desc);
-    framework.AddInputListener(input);
-    framework.Run();
-    framework.Close();
+    InitializeFramework(framework, desc);
+    AddInputListenerToFramework(framework, input);
+    RunFramework(framework);
+    CloseFramework(framework);
+
+    /*
+    DestroyInputBinderInstance(input);
+    DestroyRenderInstance(render);
+    DestroyFrameworkInstance(framework);
+    */
 }

@@ -53,12 +53,3 @@ namespace ShaderPlayground {
         RENDERLIBRARY_API void RenderSceneToWindow();
     };
 }
-
-extern "C" {
-    RENDERLIBRARY_API ShaderPlayground::DX11ViewRender* CreateRenderInstance() {
-        return new ShaderPlayground::DX11ViewRender();
-    }
-    RENDERLIBRARY_API void DestroyRenderInstance(ShaderPlayground::DX11ViewRender* instance) {
-        delete instance;
-    }
-}
