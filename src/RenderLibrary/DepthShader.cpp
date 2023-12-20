@@ -22,6 +22,7 @@ using namespace DirectX;
 #include "ShadowShader.hpp"
 #include "DX11ViewRender.hpp"
 #include "Utils.hpp"
+#include "Log.hpp"
 
 using namespace ShaderPlayground;
 
@@ -36,6 +37,8 @@ DepthShader::DepthShader(DX11ViewRender* render) {
 }
 
 bool DepthShader::Init() {
+    Log::Get()->Debug("%s", __FUNCTION__);
+
     // Инициализируем шейдер и входной формат
     _shader = new Shader(_render);
     _shader->AddInputElementDesc("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);

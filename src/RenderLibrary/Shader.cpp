@@ -161,7 +161,7 @@ void Shader::Draw() {
     _render->_pImmediateContext->VSSetShader(_vertexShader, NULL, 0);
     _render->_pImmediateContext->PSSetShader(_pixelShader, NULL, 0);
     if (!_textures.empty()) {
-        _render->_pImmediateContext->PSSetShaderResources(0, _textures.size(), &_textures[0]);
+        _render->_pImmediateContext->PSSetShaderResources(0, static_cast<UINT>(_textures.size()), &_textures[0]);
     }
 }
 

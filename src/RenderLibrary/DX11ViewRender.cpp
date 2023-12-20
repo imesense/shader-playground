@@ -21,6 +21,7 @@ using namespace DirectX;
 #include "Buffer.hpp"
 #include "Helpers.h"
 #include "Utils.hpp"
+#include "Log.hpp"
 
 using namespace ShaderPlayground;
 
@@ -48,6 +49,8 @@ DX11ViewRender::DX11ViewRender() {
 }
 
 bool DX11ViewRender::Init() {
+    Log::Get()->Debug("%s", __FUNCTION__);
+
     // создаем вьюпорт окна. Вообще это неверное решение, так как данный 
     // вьюпорт мы создавали во фреймворке. Но так как там нет метода для его получения, мы создаем его еще раз
     _viewport.Width = (float) _width;

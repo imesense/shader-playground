@@ -1,16 +1,32 @@
 #pragma once
 
 namespace ShaderPlayground {
-    struct DescWindow {
-    public:
-        RENDERLIBRARY_API DescWindow() :
-            caption(L""),
-            width(640),
-            height(480),
-            posx(200),
-            posy(20),
-            resizing(true) {
-        }
+    //struct DescWindow {
+    //public:
+    //    RENDERLIBRARY_API DescWindow() :
+    //        caption(L""),
+    //        width(640),
+    //        height(480),
+    //        posx(200),
+    //        posy(20),
+    //        resizing(true) {
+    //    }
+
+    //    int posx;
+    //    int posy;
+    //    std::wstring caption; // заголовок окна
+    //    int width; // ширина клиентской части окна
+    //    int height; // высота клиентской части окна
+    //    bool resizing;
+    //};
+
+    class Window {
+    private:
+        static Window* _wndthis;
+
+        //DescWindow _desc; // описание окна
+        InputManager* _inputmgr;
+        HWND _hwnd; // дескриптор окна
 
         int posx;
         int posy;
@@ -18,15 +34,6 @@ namespace ShaderPlayground {
         int width; // ширина клиентской части окна
         int height; // высота клиентской части окна
         bool resizing;
-    };
-
-    class Window {
-    private:
-        static Window* _wndthis;
-
-        DescWindow _desc; // описание окна
-        InputManager* _inputmgr;
-        HWND _hwnd; // дескриптор окна
 
         bool _isexit; // флаг сообщающий о событии выхода
         bool _active; // окно активно?
@@ -45,7 +52,7 @@ namespace ShaderPlayground {
         }
 
         // Создать окно
-        RENDERLIBRARY_API bool Create(const DescWindow& desc);
+        RENDERLIBRARY_API bool Create(/*const DescWindow& desc*/);
 
         // Обработка событий окна
         RENDERLIBRARY_API void RunEvent();
@@ -59,21 +66,21 @@ namespace ShaderPlayground {
             return _hwnd;
         }
         RENDERLIBRARY_API int GetLeft() const {
-            return _desc.posx;
+            return /*_desc.*/posx;
         }
         RENDERLIBRARY_API int GetTop() const {
-            return _desc.posy;
+            return /*_desc.*/posy;
         }
         RENDERLIBRARY_API int GetWidth() const {
-            return _desc.width;
+            return /*_desc.*/width;
         }
         RENDERLIBRARY_API int GetHeight() const {
-            return _desc.height;
+            return /*_desc.*/height;
         }
 
         // Вернуть заголовок окна
         RENDERLIBRARY_API const std::wstring& GetCaption() const {
-            return _desc.caption;
+            return /*_desc.*/caption;
         }
 
         // сообщает, было ли сообщение о выходе

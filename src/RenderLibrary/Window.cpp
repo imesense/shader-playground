@@ -19,7 +19,11 @@ Window::Window(void) :
     _active(true),
     _minimized(false),
     _maximized(false),
-    _isresize(false) {
+    _isresize(false), 
+    width(640),
+    height(480),
+    posx(200),
+    posy(20), resizing(true) {
     if (!_wndthis) {
         _wndthis = this;
     } else {
@@ -27,11 +31,11 @@ Window::Window(void) :
     }
 }
 
-bool Window::Create(const DescWindow& desc)
+bool Window::Create(/*const DescWindow& desc*/)
 {
     Log::Get()->Debug("Window Create");
 
-    _desc = desc;
+    //_desc = this;
 
     WNDCLASSEXW wnd{};
 
@@ -54,16 +58,16 @@ bool Window::Create(const DescWindow& desc)
         return false;
     }
 
-    RECT rect = { 0, 0, _desc.width, _desc.height };
+    RECT rect = { 0, 0, width, height };
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW | WS_VISIBLE, FALSE);
 
     long lwidth = rect.right - rect.left;
     long lheight = rect.bottom - rect.top;
 
-    long lleft = (long) _desc.posx;
-    long ltop = (long) _desc.posy;
+    long lleft = (long)posx;
+    long ltop = (long)posy;
 
-    _hwnd = CreateWindowEx(NULL, L"D3D11F", _desc.caption.c_str(), WS_OVERLAPPEDWINDOW | WS_VISIBLE, lleft, ltop, lwidth, lheight, NULL, NULL, NULL, NULL);
+    _hwnd = CreateWindowEx(NULL, L"D3D11F", L"DX11 Window"/*_desc.caption.c_str()*/, WS_OVERLAPPEDWINDOW | WS_VISIBLE, lleft, ltop, lwidth, lheight, NULL, NULL, NULL, NULL);
     if (!_hwnd) {
         Log::Get()->Err("Не удалось создать окно");
         return false;
@@ -108,16 +112,16 @@ LRESULT Window::WndProc(HWND hwnd, UINT nMsg, WPARAM wParam, LPARAM lParam) {
         }
         return 0;
     case WM_MOVE:
-        _desc.posx = LOWORD(lParam);
-        _desc.posy = HIWORD(lParam);
+        /*_desc.*/posx = LOWORD(lParam);
+        /*_desc.*/posy = HIWORD(lParam);
         UpdateWindowState();
         return 0;
     case WM_SIZE:
-        if (!_desc.resizing) {
+        if (!/*_desc.*/resizing) {
             return 0;
         }
-        _desc.width = LOWORD(lParam);
-        _desc.height = HIWORD(lParam);
+        /*_desc.*/width = LOWORD(lParam);
+        /*_desc.*/height = HIWORD(lParam);
         _isresize = true;
         if (wParam == SIZE_MINIMIZED) {
             _active = false;
@@ -165,10 +169,10 @@ void Window::SetInputMgr(InputManager* inputmgr)
 
 void Window::UpdateWindowState() {
     RECT clientRect{};
-    clientRect.left = _desc.posx;
-    clientRect.top = _desc.posy;
-    clientRect.right = _desc.width;
-    clientRect.bottom = _desc.height;
+    clientRect.left = /*_desc.*/posx;
+    clientRect.top = /*_desc.*/posy;
+    clientRect.right = /*_desc.*/width;
+    clientRect.bottom = /*_desc.*/height;
     if (_inputmgr) {
         _inputmgr->SetWinRect(clientRect);
     }

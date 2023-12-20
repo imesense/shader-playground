@@ -18,6 +18,22 @@ using namespace DirectX;
 #include "Framework.hpp"
 #include "Helpers.h"
 
+//#include "Memory.hpp"
+//#include "RenderState.hpp"
+//#include "Render.hpp"
+#include "Shader.hpp"
+#include "RenderTarget.hpp"
+#include "DepthShader.hpp"
+#include "Buffer.hpp"
+//#include "Helpers.h"
+#include "Timer.hpp"
+#include "Camera.hpp"
+#include "Light.hpp"
+#include "ShadowShader.hpp"
+#include "DX11ViewRender.hpp"
+#include "InputListener.hpp"
+#include "InputBinder.hpp"
+
 using namespace ShaderPlayground;
 
 Framework::Framework() :
@@ -31,20 +47,26 @@ Framework::~Framework() {
 }
 
 void Framework::AddInputListener(InputListener* listener) {
+    Log::Get()->Debug("%s", __FUNCTION__);
     if (_input) {
         _input->AddListener(listener);
     }
 }
 
-bool Framework::Init(const FrameworkDesc& desc) {
-    _render = desc.render;
+bool Framework::Init(/*const FrameworkDesc& desc*/) {
+    Log::Get()->Debug("%s", __FUNCTION__);
+
+    DX11ViewRender* render = new DX11ViewRender();
+    InputBinder* input = new InputBinder(render);
+
+    _render = /*desc.render*/render;
 
     _wnd = new Window();
     _input = new InputManager();
 
     _input->Initialize();
 
-    if (!_wnd->Create(desc.wnd)) {
+    if (!_wnd->Create(/*desc.wnd*/)) {
         Log::Get()->Err("Не удалось создать окно");
         return false;
     }
@@ -56,6 +78,9 @@ bool Framework::Init(const FrameworkDesc& desc) {
     }
 
     _init = true;
+
+    AddInputListener(input);
+
     return true;
 }
 

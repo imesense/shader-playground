@@ -24,6 +24,7 @@ using namespace DirectX;
 #include "Light.hpp"
 #include "Helpers.h"
 #include "Utils.hpp"
+#include "Log.hpp"
 
 using namespace ShaderPlayground;
 
@@ -54,6 +55,8 @@ ShadowShader::ShadowShader(DX11ViewRender* render) {
 }
 
 bool ShadowShader::Init() {
+    Log::Get()->Debug("%s", __FUNCTION__);
+
     // инициализируем шейдер и входной формат
     _shader = new Shader(_render);
     _shader->AddInputElementDesc("POSITION", DXGI_FORMAT_R32G32B32_FLOAT);

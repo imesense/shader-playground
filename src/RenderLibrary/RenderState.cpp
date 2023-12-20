@@ -4,6 +4,7 @@
 
 #include "RenderState.hpp"
 #include "Helpers.h"
+#include "Log.hpp"
 
 using namespace ShaderPlayground;
 
@@ -22,6 +23,8 @@ RenderState::RenderState(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pImmedia
 }
 
 bool RenderState::Init() {
+    Log::Get()->Debug("%s", __FUNCTION__);
+
     if (!Createdepthstencilstate()) {
         return false;
     }

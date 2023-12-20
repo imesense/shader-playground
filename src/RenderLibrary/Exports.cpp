@@ -34,20 +34,20 @@ using namespace DirectX;
 using namespace ShaderPlayground;
 
 // InputBinder
-RENDERLIBRARY_API InputBinder* CreateInputBinderInstance(DX11ViewRender* render) {
-    return new InputBinder(render);
-}
-RENDERLIBRARY_API void DestroyInputBinderInstance(InputBinder* instance) {
-    _DELETE(instance);
-}
+//RENDERLIBRARY_API InputBinder* CreateInputBinderInstance(DX11ViewRender* render) {
+//    return new InputBinder(render);
+//}
+//RENDERLIBRARY_API void DestroyInputBinderInstance(InputBinder* instance) {
+//    _DELETE(instance);
+//}
 
 // DX11ViewRender
-RENDERLIBRARY_API DX11ViewRender* CreateRenderInstance() {
-    return new DX11ViewRender();
-}
-RENDERLIBRARY_API void DestroyRenderInstance(DX11ViewRender* instance) {
-    delete instance;
-}
+//RENDERLIBRARY_API DX11ViewRender* CreateRenderInstance() {
+//    return new DX11ViewRender();
+//}
+//RENDERLIBRARY_API void DestroyRenderInstance(DX11ViewRender* instance) {
+//    delete instance;
+//}
 
 // Framework
 RENDERLIBRARY_API Framework* CreateFrameworkInstance() {
@@ -57,12 +57,12 @@ RENDERLIBRARY_API void DestroyFrameworkInstance(Framework* instance) {
     delete instance;
 }
 
-RENDERLIBRARY_API void InitializeFramework(Framework* instance, FrameworkDesc properties) {
-    instance->Init(properties);
+RENDERLIBRARY_API void InitializeFramework(Framework* instance/*, FrameworkDesc properties*/) {
+    instance->Init(/*properties*/);
 }
-RENDERLIBRARY_API void AddInputListenerToFramework(Framework* instance, InputListener* listener) {
-    instance->AddInputListener(listener);
-}
+//RENDERLIBRARY_API void AddInputListenerToFramework(Framework* instance, InputListener* listener) {
+//    instance->AddInputListener(listener);
+//}
 
 RENDERLIBRARY_API void RunFramework(Framework* instance) {
     instance->Run();

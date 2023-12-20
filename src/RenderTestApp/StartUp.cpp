@@ -34,18 +34,20 @@ using namespace ShaderPlayground;
 
 void Start::Launch() {
     Framework* framework = CreateFrameworkInstance();
-    DX11ViewRender* render = CreateRenderInstance();
-    InputBinder* input = CreateInputBinderInstance(render);
+    //DX11ViewRender* render = CreateRenderInstance();
+    //InputBinder* input = CreateInputBinderInstance(render);
 
-    Allocator::PrintCollection();
+    //Allocator::PrintCollection();
 
-    FrameworkDesc desc;
-    desc.render = render;
+    //FrameworkDesc desc;
+    //desc.render = render;
     
-    InitializeFramework(framework, desc);
-    AddInputListenerToFramework(framework, input);
+    InitializeFramework(framework/*, desc*/);
+    //AddInputListenerToFramework(framework, input);
     RunFramework(framework);
     CloseFramework(framework);
+
+    delete framework; // mini hack, rework this
 
     /*
     DestroyInputBinderInstance(input);

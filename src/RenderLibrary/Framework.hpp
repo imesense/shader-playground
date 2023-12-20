@@ -1,18 +1,18 @@
 #pragma once
 
 namespace ShaderPlayground {
-    struct FrameworkDesc {
-    public:
-        DescWindow wnd;
-        Render* render;
-    };
+    //struct FrameworkDesc {
+    //public:
+    //    DescWindow wnd;
+    //    Render* render;
+    //};
 
     class Framework {
     public:
         RENDERLIBRARY_API Framework();
         RENDERLIBRARY_API ~Framework();
 
-        RENDERLIBRARY_API bool Init(const FrameworkDesc& desc);
+        RENDERLIBRARY_API bool Init(/*const FrameworkDesc& desc*/);
         RENDERLIBRARY_API void Run();
         RENDERLIBRARY_API void Close();
 
@@ -21,7 +21,7 @@ namespace ShaderPlayground {
     protected:
         bool Frame();
 
-        FrameworkDesc _desc;
+        /*FrameworkDesc _desc;*/
         Window* _wnd;
         Render* _render;
         InputManager* _input;

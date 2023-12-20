@@ -19,6 +19,7 @@ using namespace DirectX;
 #include "BitmapFont.hpp"
 #include "Buffer.hpp"
 #include "Helpers.h"
+#include "Log.hpp"
 
 using namespace ShaderPlayground;
 
@@ -32,6 +33,8 @@ BitmapFont::BitmapFont(Render* render) {
 }
 
 bool BitmapFont::Init(char* fontFilename) {
+    Log::Get()->Debug("%s", __FUNCTION__);
+
     if (!Parse(fontFilename)) {
         return false;
     }
