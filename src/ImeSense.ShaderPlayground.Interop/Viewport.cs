@@ -15,15 +15,7 @@ public class Viewport : NativeControlHost {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
             _framework = Framework.Create();
 
-            IntPtr render = DX11ViewRender.Create();
-            IntPtr input = InputBinder.Create(render);
-
-            FrameworkDesc desc = new() {
-                render = render
-            };
-
-            Framework.Initialize(_framework, desc);
-            Framework.AddInputListener(_framework, input);
+            Framework.Initialize(_framework);
             Framework.Run(_framework);
 
             return new PlatformHandle(_framework, "Framework");

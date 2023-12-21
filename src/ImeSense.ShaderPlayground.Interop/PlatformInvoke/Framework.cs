@@ -11,10 +11,7 @@ internal class Framework {
     public static extern void Destroy(IntPtr instance);
 
     [DllImport("RenderLibrary", EntryPoint = "InitializeFramework", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void Initialize(IntPtr instance, FrameworkDesc properties);
-
-    [DllImport("RenderLibrary", EntryPoint = "AddInputListenerToFramework", CallingConvention = CallingConvention.Cdecl)]
-    public static extern void AddInputListener(IntPtr instance, IntPtr listener);
+    public static extern void Initialize(IntPtr instance);
 
     [DllImport("RenderLibrary", EntryPoint = "RunFramework", CallingConvention = CallingConvention.Cdecl)]
     public static extern void Run(IntPtr instance);
