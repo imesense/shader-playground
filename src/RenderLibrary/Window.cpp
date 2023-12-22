@@ -1,5 +1,7 @@
 #include "StdAfx.h"
 
+#include "RenderDebugUtils.h"
+
 #include <string>
 #include <list>
 
@@ -10,6 +12,7 @@
 
 using namespace ShaderPlayground;
 
+//HWND Window::_ptrHwnd = nullptr;
 Window* Window::_wndthis = nullptr;
 
 Window::Window(void) :
@@ -26,12 +29,17 @@ Window::Window(void) :
     posy(20), resizing(true) {
     if (!_wndthis) {
         _wndthis = this;
+        //_ptrHwnd = HWND();
     } else {
         Log::Get()->Err("Window уже был создан");
     }
 }
 
-bool Window::Create(/*const DescWindow& desc*/)
+#ifdef ONLY_RENDER
+bool Window::Create()
+#else
+window_handle Window::CreateHWND(window_handle parent, int width, int height)
+#endif
 {
     Log::Get()->Debug("Window Create");
 
@@ -53,6 +61,7 @@ bool Window::Create(/*const DescWindow& desc*/)
     wnd.lpszClassName = L"D3D11F";
     wnd.cbSize = sizeof(WNDCLASSEX);
 
+#ifdef ONLY_RENDER
     if (!RegisterClassEx(&wnd)) {
         Log::Get()->Err("Не удалось зарегистрировать окно");
         return false;
@@ -60,6 +69,13 @@ bool Window::Create(/*const DescWindow& desc*/)
 
     RECT rect = { 0, 0, width, height };
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW | WS_VISIBLE, FALSE);
+#else
+    RegisterClassEx(&wnd);
+    RECT rect{};
+    GetWindowRect(parent, &rect);
+
+    AdjustWindowRect(&rect, WS_CHILD, FALSE);
+#endif
 
     long lwidth = rect.right - rect.left;
     long lheight = rect.bottom - rect.top;
@@ -67,7 +83,20 @@ bool Window::Create(/*const DescWindow& desc*/)
     long lleft = (long)posx;
     long ltop = (long)posy;
 
-    _hwnd = CreateWindowEx(NULL, L"D3D11F", L"DX11 Window"/*_desc.caption.c_str()*/, WS_OVERLAPPEDWINDOW | WS_VISIBLE, lleft, ltop, lwidth, lheight, NULL, NULL, NULL, NULL);
+#ifdef ONLY_RENDER
+    _hwnd = CreateWindowEx(NULL, 
+        wnd.lpszClassName,
+        L"DX11 Window",
+        WS_OVERLAPPEDWINDOW | WS_VISIBLE, 
+        lleft, 
+        ltop, 
+        lwidth, 
+        lheight, 
+        NULL, 
+        NULL, 
+        NULL, 
+        NULL);
+
     if (!_hwnd) {
         Log::Get()->Err("Не удалось создать окно");
         return false;
@@ -77,6 +106,14 @@ bool Window::Create(/*const DescWindow& desc*/)
     UpdateWindow(_hwnd);
 
     return true;
+#else
+    _hwnd = CreateWindowEx(NULL, wnd.lpszClassName, L"DX11 Window", WS_CHILD, lleft, ltop, lwidth, lheight, parent, NULL, NULL, NULL);
+
+    ShowWindow(_hwnd, SW_SHOWNORMAL);
+    UpdateWindow(_hwnd);
+
+    return _hwnd;
+#endif
 }
 
 void Window::RunEvent() {
@@ -89,11 +126,13 @@ void Window::RunEvent() {
 }
 
 void Window::Close() {
-    if (_hwnd) {
+    if (_hwnd /*&& _ptrHwnd*/) {
         DestroyWindow(_hwnd);
+        //DestroyWindow(_ptrHwnd);
     }
     _hwnd = nullptr;
-
+    /*delete *///_ptrHwnd = nullptr;
+    //Log::Get()->Debug("Pointer to window handle: %p", std::to_string(reinterpret_cast<int>(_ptrHwnd)));
     Log::Get()->Debug("Window Close");
 }
 

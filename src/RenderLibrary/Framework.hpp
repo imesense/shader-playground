@@ -11,8 +11,12 @@ namespace ShaderPlayground {
     public:
         RENDERLIBRARY_API Framework();
         RENDERLIBRARY_API ~Framework();
+#ifdef ONLY_RENDER
+        RENDERLIBRARY_API bool Init();
+#else
+        RENDERLIBRARY_API bool Init(window_handle hwnd, int width, int height);
+#endif
 
-        RENDERLIBRARY_API bool Init(/*const FrameworkDesc& desc*/);
         RENDERLIBRARY_API void Run();
         RENDERLIBRARY_API void Close();
 
