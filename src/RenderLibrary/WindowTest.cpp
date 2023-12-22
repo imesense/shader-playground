@@ -40,20 +40,42 @@ using namespace DirectX;
 #include "Exports.h"
 #include "Helpers.h"
 
-LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
-
 using namespace ShaderPlayground;
 
-#define DLL_EXPORT extern "C" __declspec(dllexport)
+LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
+
 using window_handle = HWND;
+window_handle window = nullptr;
 
-window_handle window{ nullptr };
+typedef struct
+{
+    int posx;
+    int posy;
 
-bool InitializeDirectX(HWND hwnd);
-ID3D11Device* g_pd3dDevice = nullptr;
-ID3D11DeviceContext* g_pd3dDeviceContext = nullptr;
-IDXGISwapChain* g_pSwapChain = nullptr;
-DLL_EXPORT window_handle InitializeWin32(window_handle parent)
+    int width; // ширина клиентской части окна
+    int height; // высота клиентской части окна
+    bool resizing;
+
+    bool _isexit; // флаг сообщающий о событии выхода
+    bool _active; // окно активно?
+    bool _minimized;
+    bool _maximized;
+    bool _isresize; // если окно изменило размер
+
+    Render* _render;
+    InputManager* _input;
+
+    RECT clientRect;
+    MSG msg;
+} WindowControl;
+
+WindowControl objControl;
+
+DX11ViewRender* render = new DX11ViewRender();
+InputBinder* input = new InputBinder(render);
+
+extern "C" __declspec(dllexport)
+window_handle InitializeWin32(window_handle parent)
 {
     /* Create window class */
     WNDCLASSEX wc;
@@ -102,70 +124,166 @@ DLL_EXPORT window_handle InitializeWin32(window_handle parent)
         NULL					// extra creation parameters
     );
 
+    objControl._render = render;
+
+    Log::Get()->Print(" %s - %p", __FUNCTION__, objControl._render);
+
+    if (!objControl._render->CreateDevice(window)) {
+        Log::Get()->Err("Не удалось создать рендер");
+        return NULL;
+    }
+    else
+    {
+        Log::Get()->Err("DirectX11 создан");
+    }
+
     ShowWindow(window, SW_SHOWNORMAL);
     UpdateWindow(window);
-
-    if (!InitializeDirectX(window))
-    {
-        // Обработка ошибки и выход
-        return nullptr;
-    }
 
     return window;
 }
 
-bool InitializeDirectX(HWND hwnd)
-{
-    DXGI_SWAP_CHAIN_DESC sc_desc = {};
-    sc_desc.BufferCount = 2;
-    sc_desc.BufferDesc.Width = 0;
-    sc_desc.BufferDesc.Height = 0;
-    sc_desc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-    sc_desc.BufferDesc.RefreshRate.Numerator = 60;
-    sc_desc.BufferDesc.RefreshRate.Denominator = 1;
-    sc_desc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-    sc_desc.OutputWindow = hwnd;
-    sc_desc.SampleDesc.Count = 1;
-    sc_desc.SampleDesc.Quality = 0;
-    sc_desc.Windowed = TRUE;
 
-    // Create the device, device context, and swap chain
-    if (D3D11CreateDeviceAndSwapChain(
-        nullptr,
-        D3D_DRIVER_TYPE_HARDWARE,
-        nullptr,
-        0,
-        nullptr,
-        0,
-        D3D11_SDK_VERSION,
-        &sc_desc,
-        &g_pSwapChain,
-        &g_pd3dDevice,
-        nullptr,
-        &g_pd3dDeviceContext) != S_OK)
-    {
-        // Обработка ошибки и выход
+void UpdateWindowState() {
+    objControl.clientRect.left = objControl.posx;
+    objControl.clientRect.top = objControl.posy;
+    objControl.clientRect.right = objControl.width;
+    objControl.clientRect.bottom = objControl.height;
+    //if (_inputmgr) {
+    //    _inputmgr->SetWinRect(clientRect);
+    //}
+}
+
+void RunEvent() {
+    while (PeekMessage(&objControl.msg, 0, 0, 0, PM_REMOVE)) {
+        TranslateMessage(&objControl.msg);
+        DispatchMessage(&objControl.msg);
+        Log::Get()->Print("Active3");
+    }
+    Log::Get()->Print("Active5");
+}
+
+extern "C" __declspec(dllexport)
+bool Frame()
+{
+    // обрабатываем события окна
+    //_wnd->RunEvent();
+    RunEvent();
+    Log::Get()->Print("- %i", __LINE__);
+    // если окно неактивно - завершаем кадр
+    //if (!objControl._active) {
+    //    return true;
+    //}
+    Log::Get()->Print("- %i", __LINE__);
+    // если окно было закрыто, завершаем работу движка
+    if (objControl._isexit) {
         return false;
     }
-
+    Log::Get()->Print("- %i", __LINE__);
+    // если окно изменило размер
+    if (objControl.resizing) {
+    }
+    Log::Get()->Print("- %i", __LINE__);
+    objControl._render->BeginFrame();
+    if (!objControl._render->Draw()) {
+        return false;
+    }
+    objControl._render->EndFrame();
+    Log::Get()->Print("Active0");
+    Log::Get()->Print("- %i", __LINE__);
     return true;
+}
+
+extern "C" __declspec(dllexport)
+void Run() {
+    //if (_init) {
+        while (Frame());
+        Log::Get()->Print("Active1");
+    //}
 }
 
 LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
 {
-    switch (msg)
-    {
-    case WM_CLOSE:
-        DestroyWindow(hwnd);
+    //switch (msg)
+    //{
+    //case WM_CLOSE:
+    //    DestroyWindow(hwnd);
+    //    return 0;
+    //case WM_DESTROY:
+    //    PostQuitMessage(0);
+    //    return 0;
+    //case WM_SIZE:
+    //    break;
+    //default:
+    //    break;
+    //}
+
+    //return DefWindowProc(hwnd, msg, wparam, lparam);
+    switch (msg) {
+    case WM_CREATE:
         return 0;
-    case WM_DESTROY:
-        PostQuitMessage(0);
+    case WM_CLOSE:
+        objControl._isexit = true;
+        return 0;
+    case WM_ACTIVATE:
+        if (LOWORD(wparam) != WA_INACTIVE) {
+            objControl._active = true;
+        }
+        else {
+            objControl._active = false;
+        }
+        return 0;
+    case WM_MOVE:
+        objControl.posx = LOWORD(lparam);
+        objControl.posy = HIWORD(lparam);
+        UpdateWindowState();
         return 0;
     case WM_SIZE:
-        break;
-    default:
-        break;
+        if (!objControl.resizing) {
+            return 0;
+        }
+        objControl.width = LOWORD(lparam);
+        objControl.height = HIWORD(lparam);
+        objControl._isresize = true;
+        if (wparam == SIZE_MINIMIZED) {
+            objControl._active = false;
+            objControl._minimized = true;
+            objControl._maximized = false;
+        }
+        else if (wparam == SIZE_MAXIMIZED) {
+            objControl._active = true;
+            objControl._minimized = false;
+            objControl._maximized = true;
+        }
+        else if (wparam == SIZE_RESTORED) {
+            if (objControl._minimized) {
+                objControl._active = true;
+                objControl._minimized = false;
+            }
+            else if (objControl._maximized) {
+                objControl._active = true;
+                objControl._maximized = false;
+            }
+        }
+        UpdateWindowState();
+        return 0;
+    case WM_MOUSEMOVE:
+    case WM_LBUTTONUP:
+    case WM_LBUTTONDOWN:
+    case WM_MBUTTONUP:
+    case WM_MBUTTONDOWN:
+    case WM_RBUTTONUP:
+    case WM_RBUTTONDOWN:
+    case WM_MOUSEWHEEL:
+    case WM_KEYDOWN:
+    case WM_KEYUP:
+        /*if (_inputmgr) {
+            _inputmgr->Run(msg, wParam, lParam);
+        }*/
+        return 0;
     }
 
-    return DefWindowProc(hwnd, msg, wparam, lparam);
+    //Log::Get()->Print("ehehehehe");
+
+    return DefWindowProcW(hwnd, msg, wparam, lparam);
 }
