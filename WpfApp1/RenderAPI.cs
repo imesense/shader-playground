@@ -12,13 +12,13 @@ namespace HostRender {
         const string DllPath = "C:\\Users\\User\\Documents\\GitHub\\shader-playground\\bin\\x64\\Debug\\RenderLibrary";
         public static void DisplayDllPath() => Debug.WriteLine($"DLL Path: {DllPath}");
 
-        [DllImport(DllPath, EntryPoint = "InitializeFramework", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr InitializeFramework(IntPtr instance, IntPtr host, int width, int height);
+        [DllImport(DllPath/*, EntryPoint = "InitializeFramework", CallingConvention = CallingConvention.Cdecl)*/)]
+        public static extern IntPtr InitializeFramework(IntPtr instance);
 
         private const string windowDll = @"C:\Users\User\Documents\GitHub\shader-playground\bin\x64\Debug\RenderLibrary";
 
         [DllImport(windowDll)]
-        public static extern IntPtr InitializeWin32(IntPtr host, int width, int height);
+        public static extern IntPtr InitializeWin32(IntPtr host);
 
         /// <summary>
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -38,7 +38,7 @@ Window::Window(void) :
 #ifdef ONLY_RENDER
 bool Window::Create()
 #else
-window_handle Window::CreateHWND(window_handle parent, int width, int height)
+window_handle Window::CreateHWND(window_handle parent)
 #endif
 {
     Log::Get()->Debug("Window Create");
@@ -115,6 +115,8 @@ window_handle Window::CreateHWND(window_handle parent, int width, int height)
     return _hwnd;
 #endif
 }
+
+
 
 void Window::RunEvent() {
     MSG msg; // события окна
