@@ -171,9 +171,9 @@ bool Frame()
     RunEvent();
     Log::Get()->Print("- %i", __LINE__);
     // если окно неактивно - завершаем кадр
-    //if (!objControl._active) {
-    //    return true;
-    //}
+    /*if (!objControl._active) {
+        return true;
+    }*/
     Log::Get()->Print("- %i", __LINE__);
     // если окно было закрыто, завершаем работу движка
     if (objControl._isexit) {
@@ -226,12 +226,12 @@ LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
         objControl._isexit = true;
         return 0;
     case WM_ACTIVATE:
-        if (LOWORD(wparam) != WA_INACTIVE) {
+        /*if (LOWORD(wparam) != WA_INACTIVE) {
             objControl._active = true;
         }
         else {
             objControl._active = false;
-        }
+        }*/
         return 0;
     case WM_MOVE:
         objControl.posx = LOWORD(lparam);
@@ -277,6 +277,7 @@ LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
     case WM_MOUSEWHEEL:
     case WM_KEYDOWN:
     case WM_KEYUP:
+        Log::Get()->Print("WM_KEYUP");
         /*if (_inputmgr) {
             _inputmgr->Run(msg, wParam, lParam);
         }*/
