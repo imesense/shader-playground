@@ -69,6 +69,7 @@
     <ClInclude Include="Utils.hpp" />
     <ClInclude Include="Exports.h" />
     <ClInclude Include="RenderDebugUtils.h" />
+    <ClInclude Include="WindowTest.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

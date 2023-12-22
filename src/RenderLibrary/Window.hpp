@@ -56,7 +56,7 @@ namespace ShaderPlayground {
 #ifdef ONLY_RENDER
         RENDERLIBRARY_API bool Create(/*const DescWindow& desc*/);
 #else
-        RENDERLIBRARY_API window_handle CreateHWND(window_handle parent, int width = 600, int height = 600);
+        RENDERLIBRARY_API window_handle CreateHWND(window_handle parent);
 #endif
 
         // Обработка событий окна

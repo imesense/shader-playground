@@ -10,7 +10,6 @@ using System.Windows.Interop;
 namespace HostRender 
     {
     public class HostRender : HwndHost {
-        private IntPtr _framework;
         private IntPtr windowHandle;
 
         public HostRender() {
@@ -18,9 +17,8 @@ namespace HostRender
         }
 
         protected override HandleRef BuildWindowCore(HandleRef hwndParent) {
-            _framework = RenderAPI.Create();
-            windowHandle = RenderAPI.InitializeFramework(_framework, hwndParent.Handle, 800, 400);
-            RenderAPI.Run(_framework);
+            //windowHandle = RenderAPI.InitializeFramework(_framework, hwndParent.Handle, 800, 400);
+            windowHandle = RenderAPI.InitializeWin32(hwndParent.Handle);
             return new HandleRef(this, windowHandle);
         }
 

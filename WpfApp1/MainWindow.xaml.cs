@@ -18,8 +18,11 @@ using System.Windows.Shapes;
 
 namespace HostRender {
     public partial class MainWindow : Window {
+        private Framework framework = null!;
         public MainWindow() {
             InitializeComponent();
-        }
+            
+        framework = new Framework();
+    }
     }
 }

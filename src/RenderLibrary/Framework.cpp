@@ -58,7 +58,7 @@ void Framework::AddInputListener(InputListener* listener) {
 #ifdef ONLY_RENDER
 bool Framework::Init() 
 #else
-bool Framework::Init(window_handle hwnd, int width, int height)
+bool Framework::Init(window_handle hwnd)
 #endif
 {
     Log::Get()->Debug("%s", __FUNCTION__);
@@ -79,7 +79,7 @@ bool Framework::Init(window_handle hwnd, int width, int height)
         return false;
     }
 #else
-    _wnd->CreateHWND(hwnd, width, height);
+    _wnd->CreateHWND(hwnd);
 #endif
 
     _wnd->SetInputMgr(_input);

@@ -47,9 +47,12 @@ RENDERLIBRARY_API void InitializeFramework(Framework* instance) {
     instance->Init();
 }
 #else
-RENDERLIBRARY_API void InitializeFramework(Framework* instance, window_handle hwnd, int width, int height) {
-    instance->Init(hwnd, width, height);
+RENDERLIBRARY_API void InitializeFramework(Framework* instance, window_handle hwnd) {
+    instance->Init(hwnd);
 }
+//RENDERLIBRARY_API void GetHWND(Framework* instance, window_handle hwnd) {
+//    instance->Init(hwnd);
+//}
 #endif
 
 RENDERLIBRARY_API void RunFramework(Framework* instance) {

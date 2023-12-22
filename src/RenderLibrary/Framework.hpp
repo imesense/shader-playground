@@ -14,7 +14,7 @@ namespace ShaderPlayground {
 #ifdef ONLY_RENDER
         RENDERLIBRARY_API bool Init();
 #else
-        RENDERLIBRARY_API bool Init(window_handle hwnd, int width, int height);
+        RENDERLIBRARY_API bool Init(window_handle hwnd);
 #endif
 
         RENDERLIBRARY_API void Run();

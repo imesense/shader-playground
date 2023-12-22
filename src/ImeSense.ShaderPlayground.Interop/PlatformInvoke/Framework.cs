@@ -18,4 +18,7 @@ internal class Framework {
 
     [DllImport("RenderLibrary", EntryPoint = "CloseFramework", CallingConvention = CallingConvention.Cdecl)]
     public static extern void Close(IntPtr instance);
+
+    [DllImport("RenderLibrary")]
+    public static extern IntPtr InitializeWin32(IntPtr host);
 }

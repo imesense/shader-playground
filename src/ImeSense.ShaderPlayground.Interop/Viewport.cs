@@ -13,12 +13,14 @@ public class Viewport : NativeControlHost {
 
     protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent) {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-            _framework = Framework.Create();
+            //_framework = Framework.Create();
 
-            Framework.Initialize(_framework);
-            Framework.Run(_framework);
+            //Framework.Initialize(_framework);
+            //Framework.Run(_framework);
 
-            return new PlatformHandle(_framework, "Framework");
+            _framework = Framework.InitializeWin32(parent.Handle);
+
+            return new PlatformHandle(_framework, "DX11Window");
         }
 
         return base.CreateNativeControlCore(parent);
@@ -26,7 +28,7 @@ public class Viewport : NativeControlHost {
 
     protected override void DestroyNativeControlCore(IPlatformHandle control) {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-            Framework.Close(_framework);
+            //Framework.Close(_framework);
             return;
         }
 

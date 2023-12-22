@@ -7,7 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderTestApp", "src\Render
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RenderLibrary", "src\RenderLibrary\RenderLibrary.vcxproj", "{F4965027-CAB9-451A-BFC4-3F808AF2EF8E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{96E78FFF-2F24-452A-A889-84ACD49781DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyAppTestRender", "WpfApp1\DummyAppTestRender.csproj", "{96E78FFF-2F24-452A-A889-84ACD49781DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

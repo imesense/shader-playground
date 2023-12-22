@@ -8,7 +8,7 @@ extern "C" {
 #ifdef ONLY_RENDER
     RENDERLIBRARY_API void InitializeFramework(ShaderPlayground::Framework* instance);
 #else
-    RENDERLIBRARY_API void InitializeFramework(ShaderPlayground::Framework* instance, window_handle hwnd = NULL, int width = 648, int height = 480);
+    RENDERLIBRARY_API void InitializeFramework(ShaderPlayground::Framework* instance, window_handle hwnd = NULL);
 #endif
 
     RENDERLIBRARY_API void RunFramework(ShaderPlayground::Framework* instance);
