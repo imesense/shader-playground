@@ -29,6 +29,7 @@
     <ClCompile Include="Framework.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Exports.cpp" />
+    <ClCompile Include="WindowTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -67,6 +68,7 @@
     <ClInclude Include="Memory.hpp" />
     <ClInclude Include="Utils.hpp" />
     <ClInclude Include="Exports.h" />
+    <ClInclude Include="RenderDebugUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

@@ -6,6 +6,8 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
+#include <RenderDebugUtils.h>
+
 using namespace DirectX;
 
 #include <Memory.hpp>
@@ -33,6 +35,7 @@ using namespace ShaderPlayground;
 #include "StartUp.hpp"
 
 void Start::Launch() {
+//#ifdef ONLY_RENDER
     Framework* framework = CreateFrameworkInstance();
     //DX11ViewRender* render = CreateRenderInstance();
     //InputBinder* input = CreateInputBinderInstance(render);
@@ -44,11 +47,14 @@ void Start::Launch() {
     
     InitializeFramework(framework/*, desc*/);
     //AddInputListenerToFramework(framework, input);
+
+    //Log::Get()->Debug("~ %s: %p", __FUNCTION__, GetPtrHandleWindow());
+
     RunFramework(framework);
     CloseFramework(framework);
 
     delete framework; // mini hack, rework this
-
+//#endif
     /*
     DestroyInputBinderInstance(input);
     DestroyRenderInstance(render);

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "WpfApp1": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\User\\Documents\\GitHub\\shader-playground\\bin\\x64\\Debug\\"
+    }
+  }
+}

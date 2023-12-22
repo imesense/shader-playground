@@ -6,6 +6,8 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
+#include "RenderDebugUtils.h"
+
 using namespace DirectX;
 
 #include "Memory.hpp"
@@ -53,23 +55,33 @@ void Framework::AddInputListener(InputListener* listener) {
     }
 }
 
-bool Framework::Init(/*const FrameworkDesc& desc*/) {
+#ifdef ONLY_RENDER
+bool Framework::Init() 
+#else
+bool Framework::Init(window_handle hwnd, int width, int height)
+#endif
+{
     Log::Get()->Debug("%s", __FUNCTION__);
 
     DX11ViewRender* render = new DX11ViewRender();
     InputBinder* input = new InputBinder(render);
 
-    _render = /*desc.render*/render;
+    _render = render;
 
     _wnd = new Window();
     _input = new InputManager();
 
     _input->Initialize();
 
+#ifdef ONLY_RENDER
     if (!_wnd->Create(/*desc.wnd*/)) {
         Log::Get()->Err("Не удалось создать окно");
         return false;
     }
+#else
+    _wnd->CreateHWND(hwnd, width, height);
+#endif
+
     _wnd->SetInputMgr(_input);
 
     if (!_render->CreateDevice(_wnd->GetHWND())) {

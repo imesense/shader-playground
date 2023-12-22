@@ -22,11 +22,12 @@ namespace ShaderPlayground {
 
     class Window {
     private:
+        //static HWND _ptrHwnd;
         static Window* _wndthis;
 
         //DescWindow _desc; // описание окна
         InputManager* _inputmgr;
-        HWND _hwnd; // дескриптор окна
+        /*HWND*/window_handle _hwnd; // дескриптор окна
 
         int posx;
         int posy;
@@ -52,7 +53,11 @@ namespace ShaderPlayground {
         }
 
         // Создать окно
+#ifdef ONLY_RENDER
         RENDERLIBRARY_API bool Create(/*const DescWindow& desc*/);
+#else
+        RENDERLIBRARY_API window_handle CreateHWND(window_handle parent, int width = 600, int height = 600);
+#endif
 
         // Обработка событий окна
         RENDERLIBRARY_API void RunEvent();
@@ -65,6 +70,11 @@ namespace ShaderPlayground {
         RENDERLIBRARY_API HWND GetHWND() const {
             return _hwnd;
         }
+
+        //RENDERLIBRARY_API static const HWND GetHWNDStatic() {
+        //    return _ptrHwnd;
+        //}
+
         RENDERLIBRARY_API int GetLeft() const {
             return /*_desc.*/posx;
         }

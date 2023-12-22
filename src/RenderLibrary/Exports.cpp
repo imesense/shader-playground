@@ -8,6 +8,8 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
+#include "RenderDebugUtils.h"
+
 using namespace DirectX;
 
 #include "Memory.hpp"
@@ -33,23 +35,6 @@ using namespace DirectX;
 
 using namespace ShaderPlayground;
 
-// InputBinder
-//RENDERLIBRARY_API InputBinder* CreateInputBinderInstance(DX11ViewRender* render) {
-//    return new InputBinder(render);
-//}
-//RENDERLIBRARY_API void DestroyInputBinderInstance(InputBinder* instance) {
-//    _DELETE(instance);
-//}
-
-// DX11ViewRender
-//RENDERLIBRARY_API DX11ViewRender* CreateRenderInstance() {
-//    return new DX11ViewRender();
-//}
-//RENDERLIBRARY_API void DestroyRenderInstance(DX11ViewRender* instance) {
-//    delete instance;
-//}
-
-// Framework
 RENDERLIBRARY_API Framework* CreateFrameworkInstance() {
     return new Framework();
 }
@@ -57,12 +42,15 @@ RENDERLIBRARY_API void DestroyFrameworkInstance(Framework* instance) {
     delete instance;
 }
 
-RENDERLIBRARY_API void InitializeFramework(Framework* instance/*, FrameworkDesc properties*/) {
-    instance->Init(/*properties*/);
+#ifdef ONLY_RENDER
+RENDERLIBRARY_API void InitializeFramework(Framework* instance) {
+    instance->Init();
 }
-//RENDERLIBRARY_API void AddInputListenerToFramework(Framework* instance, InputListener* listener) {
-//    instance->AddInputListener(listener);
-//}
+#else
+RENDERLIBRARY_API void InitializeFramework(Framework* instance, window_handle hwnd, int width, int height) {
+    instance->Init(hwnd, width, height);
+}
+#endif
 
 RENDERLIBRARY_API void RunFramework(Framework* instance) {
     instance->Run();
