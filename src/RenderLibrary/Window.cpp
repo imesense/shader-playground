@@ -12,7 +12,6 @@
 
 using namespace ShaderPlayground;
 
-//HWND Window::_ptrHwnd = nullptr;
 Window* Window::_wndthis = nullptr;
 
 Window::Window(void) :
@@ -29,7 +28,6 @@ Window::Window(void) :
     posy(20), resizing(true) {
     if (!_wndthis) {
         _wndthis = this;
-        //_ptrHwnd = HWND();
     } else {
         Log::Get()->Err("Window уже был создан");
     }
@@ -116,11 +114,8 @@ window_handle Window::CreateHWND(window_handle parent)
 #endif
 }
 
-
-
 void Window::RunEvent() {
-    MSG msg; // события окна
-    // просматриваем все поступившие события
+    MSG msg;
     while (PeekMessage(&msg, 0, 0, 0, PM_REMOVE)) {
         TranslateMessage(&msg);
         DispatchMessage(&msg);
@@ -128,13 +123,11 @@ void Window::RunEvent() {
 }
 
 void Window::Close() {
-    if (_hwnd /*&& _ptrHwnd*/) {
+    if (_hwnd) {
         DestroyWindow(_hwnd);
-        //DestroyWindow(_ptrHwnd);
     }
+
     _hwnd = nullptr;
-    /*delete *///_ptrHwnd = nullptr;
-    //Log::Get()->Debug("Pointer to window handle: %p", std::to_string(reinterpret_cast<int>(_ptrHwnd)));
     Log::Get()->Debug("Window Close");
 }
 
@@ -153,16 +146,16 @@ LRESULT Window::WndProc(HWND hwnd, UINT nMsg, WPARAM wParam, LPARAM lParam) {
         }
         return 0;
     case WM_MOVE:
-        /*_desc.*/posx = LOWORD(lParam);
-        /*_desc.*/posy = HIWORD(lParam);
+        posx = LOWORD(lParam);
+        posy = HIWORD(lParam);
         UpdateWindowState();
         return 0;
     case WM_SIZE:
-        if (!/*_desc.*/resizing) {
+        if (!resizing) {
             return 0;
         }
-        /*_desc.*/width = LOWORD(lParam);
-        /*_desc.*/height = HIWORD(lParam);
+        width = LOWORD(lParam);
+        height = HIWORD(lParam);
         _isresize = true;
         if (wParam == SIZE_MINIMIZED) {
             _active = false;
@@ -210,10 +203,10 @@ void Window::SetInputMgr(InputManager* inputmgr)
 
 void Window::UpdateWindowState() {
     RECT clientRect{};
-    clientRect.left = /*_desc.*/posx;
-    clientRect.top = /*_desc.*/posy;
-    clientRect.right = /*_desc.*/width;
-    clientRect.bottom = /*_desc.*/height;
+    clientRect.left = posx;
+    clientRect.top = posy;
+    clientRect.right = width;
+    clientRect.bottom = height;
     if (_inputmgr) {
         _inputmgr->SetWinRect(clientRect);
     }

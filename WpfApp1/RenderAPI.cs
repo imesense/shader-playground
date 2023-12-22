@@ -20,6 +20,9 @@ namespace HostRender {
         [DllImport(windowDll)]
         public static extern IntPtr InitializeWin32(IntPtr host);
 
+        [DllImport(windowDll)]
+        public static extern IntPtr Frame();
+
         /// <summary>
         /// /////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// </summary>
