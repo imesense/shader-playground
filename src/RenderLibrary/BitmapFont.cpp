@@ -33,7 +33,7 @@ BitmapFont::BitmapFont(Render* render) {
 }
 
 bool BitmapFont::Init(char* fontFilename) {
-    Log::Get()->Debug("%s", __FUNCTION__);
+    //Log::Get()->Debug("%s", __FUNCTION__);
 
     if (!Parse(fontFilename)) {
         return false;

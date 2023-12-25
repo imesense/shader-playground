@@ -37,7 +37,7 @@ RenderTarget::RenderTarget(DX11ViewRender* render) {
 
 bool RenderTarget::Init(float screenNear, float screenDepth) {
 
-    Log::Get()->Debug("%s", __FUNCTION__);
+    //Log::Get()->Debug("%s", __FUNCTION__);
 
     // Сначала мы создаем текстуру в которую будем выводить shadow map
 

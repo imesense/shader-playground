@@ -28,6 +28,6 @@ namespace ShaderPlayground
 
     protected:
 
-        Log _log;
+        //Log _log;
     };
 }

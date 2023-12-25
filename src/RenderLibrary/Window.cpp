@@ -1,7 +1,5 @@
 #include "StdAfx.h"
 
-#include "RenderDebugUtils.h"
-
 #include <string>
 #include <list>
 
@@ -29,13 +27,13 @@ Window::Window(void) :
     if (!_wndthis) {
         _wndthis = this;
     } else {
-        Log::Get()->Err("Window уже был создан");
+        //Log::Get()->Err("Window уже был создан");
     }
 }
 
 bool Window::Create()
 {
-    Log::Get()->Debug("%s", __FUNCTION__);
+    //Log::Get()->Debug("%s", __FUNCTION__);
 
     //_desc = this;
 
@@ -56,7 +54,7 @@ bool Window::Create()
     wnd.cbSize = sizeof(WNDCLASSEX);
 
     if (!RegisterClassEx(&wnd)) {
-        Log::Get()->Err("Не удалось зарегистрировать окно");
+        //Log::Get()->Err("Не удалось зарегистрировать окно");
         return false;
     }
 
@@ -83,7 +81,7 @@ bool Window::Create()
         NULL);
 
     if (!_hwnd) {
-        Log::Get()->Err("Не удалось создать окно");
+        //Log::Get()->Err("Не удалось создать окно");
         return false;
     }
 

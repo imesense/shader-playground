@@ -42,7 +42,7 @@ void Allocator::RemoveFromCollection(void* ptr) {
 
 void Allocator::PrintCollection() {
     for (const auto& obj : objectCollection) {
-        Log::Get()->Debug("~ Object at address: %p", obj);
+        //Log::Get()->Debug("~ Object at address: %p", obj);
     }
 }
 

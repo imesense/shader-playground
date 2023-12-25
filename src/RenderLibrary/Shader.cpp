@@ -87,33 +87,33 @@ bool Shader::CreateShader(const char* namevs, const char* nameps) {
     ID3DBlob* vertexShaderBuffer = nullptr;
     hr = Compileshaderfromfile(namevs, "VS", "vs_4_0", &vertexShaderBuffer);
     if (FAILED(hr)) {
-        Log::Get()->Err("Не удалось загрузить вершинный шейдер %ls", namevs);
+        //Log::Get()->Err("Не удалось загрузить вершинный шейдер %ls", namevs);
         return false;
     }
 
     ID3DBlob* pixelShaderBuffer = nullptr;
     hr = Compileshaderfromfile(nameps, "PS", "ps_4_0", &pixelShaderBuffer);
     if (FAILED(hr)) {
-        Log::Get()->Err("Не удалось загрузить пиксельный шейдер %ls", nameps);
+        //Log::Get()->Err("Не удалось загрузить пиксельный шейдер %ls", nameps);
         return false;
     }
 
     hr = _render->_pd3dDevice->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), NULL, &_vertexShader);
     if (FAILED(hr))
     {
-        Log::Get()->Err("Не удалось создать вершинный шейдер");
+        //Log::Get()->Err("Не удалось создать вершинный шейдер");
         return false;
     }
 
     hr = _render->_pd3dDevice->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(), pixelShaderBuffer->GetBufferSize(), NULL, &_pixelShader);
     if (FAILED(hr)) {
-        Log::Get()->Err("Не удалось создать пиксельный шейдер");
+        //Log::Get()->Err("Не удалось создать пиксельный шейдер");
         return false;
     }
 
     hr = _render->_pd3dDevice->CreateInputLayout(_layoutformat, _numlayout, vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &_layout);
     if (FAILED(hr)) {
-        Log::Get()->Err("Не удалось создать формат ввода");
+        //Log::Get()->Err("Не удалось создать формат ввода");
         return false;
     }
     _DELETE_ARRAY(_layoutformat);
@@ -136,7 +136,7 @@ HRESULT Shader::Compileshaderfromfile(const char* FileName, LPCSTR EntryPoint, L
     ID3DBlob* pErrorBlob = nullptr;
     hr = D3DX11CompileFromFileA(FileName, NULL, NULL, EntryPoint, ShaderModel, ShaderFlags, 0, NULL, ppBlobOut, &pErrorBlob, NULL);
     if (FAILED(hr) && pErrorBlob) {
-        Log::Get()->Err((char*)pErrorBlob->GetBufferPointer());
+        //Log::Get()->Err((char*)pErrorBlob->GetBufferPointer());
     }
 
     _RELEASE(pErrorBlob);
@@ -147,7 +147,7 @@ bool Shader::AddTexture(const wchar_t* name) {
     ID3D11ShaderResourceView* texture = nullptr;
     HRESULT hr = D3DX11CreateShaderResourceViewFromFile(_render->_pd3dDevice, name, NULL, NULL, &texture, NULL);
     if (FAILED(hr)) {
-        Log::Get()->Err("Не удалось загрузить текстуру %ls", name);
+        //Log::Get()->Err("Не удалось загрузить текстуру %ls", name);
         return false;
     }
 

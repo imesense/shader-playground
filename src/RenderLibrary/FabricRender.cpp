@@ -6,8 +6,6 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
-#include "RenderDebugUtils.h"
-
 using namespace DirectX;
 
 #include "Memory.hpp"
@@ -55,7 +53,7 @@ CFabricRender::~CFabricRender()
 }
 
 int CFabricRender::CreateFabricRender() {
-    Log::Get()->Debug("%s", __FUNCTION__);
+    //Log::Get()->Debug("%s", __FUNCTION__);
 
     if (!this->bFabricInit)
     {
@@ -75,14 +73,14 @@ int CFabricRender::CreateFabricRender() {
     fabric.inputManager->Initialize();
 
     if (!fabric.window->Create()) {
-        Log::Get()->Err("Не удалось создать окно");
+        //Log::Get()->Err("Не удалось создать окно");
         return false;
     }
 
     fabric.window->SetInputMgr(fabric.inputManager);
 
     if (!fabric.render->CreateDevice(fabric.window->GetHWND())) {
-        Log::Get()->Err("Не удалось создать рендер");
+        //Log::Get()->Err("Не удалось создать рендер");
         return false;
     }
 

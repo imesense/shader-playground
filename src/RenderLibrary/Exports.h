@@ -1,7 +1,7 @@
 #pragma once
 
 extern "C" {
-    RENDERLIBRARY_API HWND CreateNativeWindow();
-    RENDERLIBRARY_API void DestroyNativeWindow();
+    RENDERLIBRARY_API HWND CreateFabricDirectXWindow();
+    RENDERLIBRARY_API void DestroyFabricDirectXWindow();
 }
 

@@ -55,7 +55,7 @@ ShadowShader::ShadowShader(DX11ViewRender* render) {
 }
 
 bool ShadowShader::Init() {
-    Log::Get()->Debug("%s", __FUNCTION__);
+    //Log::Get()->Debug("%s", __FUNCTION__);
 
     // инициализируем шейдер и входной формат
     _shader = new Shader(_render);

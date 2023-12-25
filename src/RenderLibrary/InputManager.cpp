@@ -14,7 +14,7 @@ using namespace ShaderPlayground;
 void InputManager::Initialize() {
     _mouseWheel = _curx = _cury = 0;
 
-    Log::Get()->Debug("%s", __FUNCTION__);
+    //Log::Get()->Debug("%s", __FUNCTION__);
 }
 
 void InputManager::Close() {
