@@ -29,7 +29,6 @@ using namespace DirectX;
 #include "InputManager.hpp"
 #include "Window.hpp"
 #include "Log.hpp"
-#include "Framework.hpp"
 #include "Exports.h"
 #include "Helpers.h"
 

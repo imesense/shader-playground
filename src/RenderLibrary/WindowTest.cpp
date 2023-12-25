@@ -36,7 +36,6 @@ using namespace DirectX;
 #include "InputManager.hpp"
 #include "Window.hpp"
 #include "Log.hpp"
-#include "Framework.hpp"
 #include "Exports.h"
 #include "Helpers.h"
 
@@ -297,32 +296,7 @@ using window_handle = HWND;
 struct RenderWindow
 {
     window_handle window = nullptr;
-
-    int posx;
-    int posy;
-
-    int width; // ширина клиентской части окна
-    int height; // высота клиентской части окна
-    bool resizing;
-
-    bool _isexit; // флаг сообщающий о событии выхода
-    bool _active; // окно активно?
-    bool _minimized;
-    bool _maximized;
-    bool _isresize; // если окно изменило размер
-
-    Render* _render;
-    //InputManager* _input;
-
-    RECT clientRect;
-    MSG msg;
-};
-
-Render* pRender = nullptr;
-DX11ViewRender* pViewRender = nullptr;
-RenderWindow* pRenderWindow = nullptr;
-InputManager* pInputManager = nullptr;
-InputBinder* pInputBinder = nullptr;
+} _renderWindow;
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     switch (message) {
@@ -349,11 +323,7 @@ RENDERLIBRARY_API window_handle CreateNativeWindow() {
 
     const auto CreatePointer = [&]() -> void
     {
-        //pRender = new Render();
-        pViewRender = new DX11ViewRender();
-        pRenderWindow = new RenderWindow();
-        pInputManager = new InputManager();
-        pInputBinder = new InputBinder(pViewRender);
+
     };
 
     CreatePointer();
@@ -372,7 +342,7 @@ RENDERLIBRARY_API window_handle CreateNativeWindow() {
 
     // Create the window.
 
-    pRenderWindow->window = CreateWindowW(
+    _renderWindow.window = CreateWindowW(
         CLASS_NAME, // Window class
         L"NativeWindow",     // Window text
 
@@ -388,16 +358,13 @@ RENDERLIBRARY_API window_handle CreateNativeWindow() {
         nullptr  // Additional application data
     );
 
-    ShowWindow(pRenderWindow->window, SW_SHOWNORMAL);
-    UpdateWindow(pRenderWindow->window);
+    ShowWindow(_renderWindow.window, SW_SHOWNORMAL);
+    UpdateWindow(_renderWindow.window);
 
-    return pRenderWindow->window;
+    return _renderWindow.window;
 }
 
 RENDERLIBRARY_API void DestroyNativeWindow()
 {
-    delete pViewRender;
-    delete pRenderWindow;
-    delete pInputManager;
-    delete pInputBinder;
+    delete _renderWindow.window;
 }

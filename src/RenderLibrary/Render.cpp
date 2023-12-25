@@ -1,15 +1,38 @@
 #include "StdAfx.h"
 
+#include <filesystem>
+#include <list>
+#include <stddef.h>
+#include <string>
+#include <unordered_set>
+#include <vector>
+#include <d3d11.h>
+#include <DirectXMath.h>
 #include <stdio.h>
 #include <d3d11.h>
 #include <DirectXMath.h>
 
 using namespace DirectX;
 
+//#include "RenderState.hpp"
+//#include "Render.hpp"
+//#include "Log.hpp"
+//#include "Helpers.h"
+#include "Memory.hpp"
 #include "RenderState.hpp"
 #include "Render.hpp"
-#include "Log.hpp"
+#include "DepthShader.hpp"
+#include "RenderTarget.hpp"
+#include "Timer.hpp"
+#include "Camera.hpp"
+#include "Light.hpp"
+#include "ShadowShader.hpp"
+#include "DX11ViewRender.hpp"
+#include "Buffer.hpp"
 #include "Helpers.h"
+#include "Utils.hpp"
+#include "Log.hpp"
+#include "DX11ViewRender.hpp"
 
 using namespace ShaderPlayground;
 
@@ -67,11 +90,8 @@ bool Render::CreateDevice(HWND hwnd) {
     _pImmediateContext->RSSetViewports(1, &vp);
 
     Initmatrix();
-#if 1
-    return Init();
-#else
-    return true;
-#endif
+
+    return DX11ViewRender::GetDX11ViewRender()->Init();
 }
 
 bool Render::Createdevice() {
@@ -177,9 +197,8 @@ void Render::EndFrame() {
 }
 
 void Render::Shutdown() {
-#if 1
-    Close();
-#endif
+    DX11ViewRender::GetDX11ViewRender()->Close();
+
     if (_pImmediateContext) {
         _pImmediateContext->ClearState();
     }

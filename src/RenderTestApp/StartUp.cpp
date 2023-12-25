@@ -17,7 +17,6 @@ using namespace DirectX;
 #include <RenderState.hpp>
 #include <Render.hpp>
 #include <Log.hpp>
-#include <Framework.hpp>
 #include <DepthShader.hpp>
 #include <RenderTarget.hpp>
 #include <Light.hpp>
@@ -36,7 +35,6 @@ using namespace ShaderPlayground;
 #include "StartUp.hpp"
 
 void Start::Launch() {
-#ifdef USE_FABRIC_RENDER
     CFabricRender* pLocalCFabricRender = new CFabricRender();
 
     pLocalCFabricRender->CreateFabricRender();
@@ -44,13 +42,4 @@ void Start::Launch() {
     while (pLocalCFabricRender->RunRender());
 
     delete pLocalCFabricRender;
-#else
-    Framework* pFramework = new Framework();
-    pFramework->Init();
-
-    pFramework->Run();
-    pFramework->Close();
-
-    delete pFramework;
-#endif
 }

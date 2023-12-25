@@ -37,6 +37,8 @@ struct Vertex {
     XMFLOAT3 normal;
 };
 
+DX11ViewRender* DX11ViewRender::GetInstance = NULL;
+
 DX11ViewRender::DX11ViewRender() {
     _key_up = false;
     _key_down = false;
@@ -46,6 +48,7 @@ DX11ViewRender::DX11ViewRender() {
     _key_z = false;
     _key_s = false;
     _key_x = false;
+    GetInstance = this;
 }
 
 bool DX11ViewRender::Init() {

@@ -17,6 +17,8 @@ namespace ShaderPlayground {
 
         D3D11_VIEWPORT _viewport;
 
+        static DX11ViewRender* GetInstance;
+
         // индексный и вершинный буферы для ящика и поверхности
         ID3D11Buffer* _vb_ground;
         ID3D11Buffer* _ib_ground;
@@ -51,5 +53,10 @@ namespace ShaderPlayground {
 
         RENDERLIBRARY_API void RenderSceneToTexture();
         RENDERLIBRARY_API void RenderSceneToWindow();
+
+        static DX11ViewRender* GetDX11ViewRender()
+        {
+            return GetInstance;
+        }
     };
 }
