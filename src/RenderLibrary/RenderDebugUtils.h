@@ -1,8 +1,8 @@
 #pragma once
 
-//#define ONLY_RENDER
+//#define USE_FABRIC_RENDER
 
 namespace
 {
-    using window_handle = HWND;
+
 }

@@ -2,8 +2,6 @@
 
 namespace ShaderPlayground {
     class Render {
-        //friend class StaticMesh;
-        //friend class Image;
         friend class BitmapFont;
         friend class Text;
         friend class Shader;

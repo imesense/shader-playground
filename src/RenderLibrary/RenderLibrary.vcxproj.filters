@@ -30,6 +30,7 @@
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Exports.cpp" />
     <ClCompile Include="WindowTest.cpp" />
+    <ClCompile Include="FabricRender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -70,6 +71,7 @@
     <ClInclude Include="Exports.h" />
     <ClInclude Include="RenderDebugUtils.h" />
     <ClInclude Include="WindowTest.h" />
+    <ClInclude Include="FabricRender.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

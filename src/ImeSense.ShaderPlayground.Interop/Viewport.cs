@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 using Avalonia.Controls;
@@ -9,18 +10,17 @@ using ImeSense.ShaderPlayground.Interop.PlatformInvoke;
 namespace ImeSense.ShaderPlayground.Interop;
 
 public class Viewport : NativeControlHost {
-    private IntPtr _framework;
+    private IntPtr _nativeWindowHandle;
+
+    public Viewport() {
+        _nativeWindowHandle = IntPtr.Zero;
+    }
 
     protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent) {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-            //_framework = Framework.Create();
-
-            //Framework.Initialize(_framework);
-            //Framework.Run(_framework);
-
-            _framework = Framework.InitializeWin32(parent.Handle);
-
-            return new PlatformHandle(_framework, "DX11Window");
+            _nativeWindowHandle = Framework.CreateNativeWindow();
+            Debug.Assert(_nativeWindowHandle != IntPtr.Zero);
+            return new PlatformHandle(_nativeWindowHandle, "WND");
         }
 
         return base.CreateNativeControlCore(parent);
@@ -28,8 +28,9 @@ public class Viewport : NativeControlHost {
 
     protected override void DestroyNativeControlCore(IPlatformHandle control) {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-            //Framework.Close(_framework);
-            return;
+            Framework.DestroyWindow(_nativeWindowHandle);
+            Framework.DestroyNativeWindow();
+            _nativeWindowHandle = IntPtr.Zero;
         }
 
         base.DestroyNativeControlCore(control);

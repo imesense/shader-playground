@@ -14,15 +14,13 @@ using namespace ShaderPlayground;
 void InputManager::Initialize() {
     _mouseWheel = _curx = _cury = 0;
 
-    Log::Get()->Debug("InputManager init");
+    Log::Get()->Debug("%s", __FUNCTION__);
 }
 
 void InputManager::Close() {
     if (!_listener.empty()) {
         _listener.clear();
     }
-
-    Log::Get()->Debug("InputManager close");
 }
 
 void InputManager::SetWinRect(const RECT& winrect) {

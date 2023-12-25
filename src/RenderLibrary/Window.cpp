@@ -33,13 +33,9 @@ Window::Window(void) :
     }
 }
 
-#ifdef ONLY_RENDER
 bool Window::Create()
-#else
-window_handle Window::CreateHWND(window_handle parent)
-#endif
 {
-    Log::Get()->Debug("Window Create");
+    Log::Get()->Debug("%s", __FUNCTION__);
 
     //_desc = this;
 
@@ -59,7 +55,6 @@ window_handle Window::CreateHWND(window_handle parent)
     wnd.lpszClassName = L"D3D11F";
     wnd.cbSize = sizeof(WNDCLASSEX);
 
-#ifdef ONLY_RENDER
     if (!RegisterClassEx(&wnd)) {
         Log::Get()->Err("Не удалось зарегистрировать окно");
         return false;
@@ -67,13 +62,6 @@ window_handle Window::CreateHWND(window_handle parent)
 
     RECT rect = { 0, 0, width, height };
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW | WS_VISIBLE, FALSE);
-#else
-    RegisterClassEx(&wnd);
-    RECT rect{};
-    GetWindowRect(parent, &rect);
-
-    AdjustWindowRect(&rect, WS_CHILD, FALSE);
-#endif
 
     long lwidth = rect.right - rect.left;
     long lheight = rect.bottom - rect.top;
@@ -81,7 +69,6 @@ window_handle Window::CreateHWND(window_handle parent)
     long lleft = (long)posx;
     long ltop = (long)posy;
 
-#ifdef ONLY_RENDER
     _hwnd = CreateWindowEx(NULL, 
         wnd.lpszClassName,
         L"DX11 Window",
@@ -104,14 +91,6 @@ window_handle Window::CreateHWND(window_handle parent)
     UpdateWindow(_hwnd);
 
     return true;
-#else
-    _hwnd = CreateWindowEx(NULL, wnd.lpszClassName, L"DX11 Window", WS_CHILD, lleft, ltop, lwidth, lheight, parent, NULL, NULL, NULL);
-
-    ShowWindow(_hwnd, SW_SHOWNORMAL);
-    UpdateWindow(_hwnd);
-
-    return _hwnd;
-#endif
 }
 
 void Window::RunEvent() {
@@ -128,7 +107,6 @@ void Window::Close() {
     }
 
     _hwnd = nullptr;
-    Log::Get()->Debug("Window Close");
 }
 
 LRESULT Window::WndProc(HWND hwnd, UINT nMsg, WPARAM wParam, LPARAM lParam) {

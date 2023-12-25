@@ -34,30 +34,3 @@ using namespace DirectX;
 #include "Helpers.h"
 
 using namespace ShaderPlayground;
-
-RENDERLIBRARY_API Framework* CreateFrameworkInstance() {
-    return new Framework();
-}
-RENDERLIBRARY_API void DestroyFrameworkInstance(Framework* instance) {
-    delete instance;
-}
-
-#ifdef ONLY_RENDER
-RENDERLIBRARY_API void InitializeFramework(Framework* instance) {
-    instance->Init();
-}
-#else
-RENDERLIBRARY_API void InitializeFramework(Framework* instance, window_handle hwnd) {
-    instance->Init(hwnd);
-}
-//RENDERLIBRARY_API void GetHWND(Framework* instance, window_handle hwnd) {
-//    instance->Init(hwnd);
-//}
-#endif
-
-RENDERLIBRARY_API void RunFramework(Framework* instance) {
-    instance->Run();
-}
-RENDERLIBRARY_API void CloseFramework(Framework* instance) {
-    instance->Close();
-}
