@@ -20,14 +20,10 @@ using namespace DirectX;
 #include "Framework.hpp"
 #include "Helpers.h"
 
-//#include "Memory.hpp"
-//#include "RenderState.hpp"
-//#include "Render.hpp"
 #include "Shader.hpp"
 #include "RenderTarget.hpp"
 #include "DepthShader.hpp"
 #include "Buffer.hpp"
-//#include "Helpers.h"
 #include "Timer.hpp"
 #include "Camera.hpp"
 #include "Light.hpp"
@@ -55,11 +51,7 @@ void Framework::AddInputListener(InputListener* listener) {
     }
 }
 
-#ifdef ONLY_RENDER
 bool Framework::Init() 
-#else
-bool Framework::Init(window_handle hwnd)
-#endif
 {
     Log::Get()->Debug("%s", __FUNCTION__);
 
@@ -73,14 +65,10 @@ bool Framework::Init(window_handle hwnd)
 
     _input->Initialize();
 
-#ifdef ONLY_RENDER
     if (!_wnd->Create(/*desc.wnd*/)) {
         Log::Get()->Err("Не удалось создать окно");
         return false;
     }
-#else
-    _wnd->CreateHWND(hwnd);
-#endif
 
     _wnd->SetInputMgr(_input);
 
@@ -104,6 +92,7 @@ void Framework::Run() {
 
 bool Framework::Frame()
 {
+#if 1
     // обрабатываем события окна
     _wnd->RunEvent();
     // если окно неактивно - завершаем кадр
@@ -125,7 +114,7 @@ bool Framework::Frame()
         return false;
     }
     _render->EndFrame();
-
+#endif
     return true;
 }
 

@@ -27,6 +27,7 @@ using namespace DirectX;
 #include <DX11ViewRender.hpp>
 #include <InputListener.hpp>
 #include <InputBinder.hpp>
+#include <FabricRender.h>
 #include <Exports.h>
 
 using namespace ShaderPlayground;
@@ -35,29 +36,21 @@ using namespace ShaderPlayground;
 #include "StartUp.hpp"
 
 void Start::Launch() {
-//#ifdef ONLY_RENDER
-    Framework* framework = CreateFrameworkInstance();
-    //DX11ViewRender* render = CreateRenderInstance();
-    //InputBinder* input = CreateInputBinderInstance(render);
+#ifdef USE_FABRIC_RENDER
+    CFabricRender* pLocalCFabricRender = new CFabricRender();
 
-    //Allocator::PrintCollection();
+    pLocalCFabricRender->CreateFabricRender();
 
-    //FrameworkDesc desc;
-    //desc.render = render;
-    
-    InitializeFramework(framework/*, desc*/);
-    //AddInputListenerToFramework(framework, input);
+    while (pLocalCFabricRender->RunRender());
 
-    //Log::Get()->Debug("~ %s: %p", __FUNCTION__, GetPtrHandleWindow());
+    delete pLocalCFabricRender;
+#else
+    Framework* pFramework = new Framework();
+    pFramework->Init();
 
-    RunFramework(framework);
-    CloseFramework(framework);
+    pFramework->Run();
+    pFramework->Close();
 
-    delete framework; // mini hack, rework this
-//#endif
-    /*
-    DestroyInputBinderInstance(input);
-    DestroyRenderInstance(render);
-    DestroyFrameworkInstance(framework);
-    */
+    delete pFramework;
+#endif
 }

@@ -6,7 +6,7 @@ namespace ShaderPlayground {
         static Window* _wndthis;
 
         InputManager* _inputmgr;
-        window_handle _hwnd; // дескриптор окна
+        HWND _hwnd; // дескриптор окна
 
         int posx;
         int posy;
@@ -31,11 +31,7 @@ namespace ShaderPlayground {
             return _wndthis;
         }
 
-#ifdef ONLY_RENDER
         RENDERLIBRARY_API bool Create();
-#else
-        RENDERLIBRARY_API window_handle CreateHWND(window_handle parent);
-#endif
 
         // Обработка событий окна
         RENDERLIBRARY_API void RunEvent();

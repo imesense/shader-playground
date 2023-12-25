@@ -42,6 +42,7 @@ using namespace DirectX;
 
 using namespace ShaderPlayground;
 
+#if 0
 LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam);
 
 using window_handle = HWND;
@@ -287,4 +288,116 @@ LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wparam, LPARAM lparam)
     //Log::Get()->Print("ehehehehe");
 
     return DefWindowProcW(hwnd, msg, wparam, lparam);
+}
+
+#endif
+
+using window_handle = HWND;
+
+struct RenderWindow
+{
+    window_handle window = nullptr;
+
+    int posx;
+    int posy;
+
+    int width; // ширина клиентской части окна
+    int height; // высота клиентской части окна
+    bool resizing;
+
+    bool _isexit; // флаг сообщающий о событии выхода
+    bool _active; // окно активно?
+    bool _minimized;
+    bool _maximized;
+    bool _isresize; // если окно изменило размер
+
+    Render* _render;
+    //InputManager* _input;
+
+    RECT clientRect;
+    MSG msg;
+};
+
+Render* pRender = nullptr;
+DX11ViewRender* pViewRender = nullptr;
+RenderWindow* pRenderWindow = nullptr;
+InputManager* pInputManager = nullptr;
+InputBinder* pInputBinder = nullptr;
+
+LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+    switch (message) {
+    case WM_COMMAND:
+        break;
+    case WM_PAINT:
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps);
+        EndPaint(hWnd, &ps);
+    }
+    break;
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+    return 0;
+}
+
+RENDERLIBRARY_API window_handle CreateNativeWindow() {
+    const wchar_t CLASS_NAME[] = L"WND";
+
+    const auto CreatePointer = [&]() -> void
+    {
+        //pRender = new Render();
+        pViewRender = new DX11ViewRender();
+        pRenderWindow = new RenderWindow();
+        pInputManager = new InputManager();
+        pInputBinder = new InputBinder(pViewRender);
+    };
+
+    CreatePointer();
+
+    WNDCLASSEXW wc = {};
+    wc.cbSize = sizeof(WNDCLASSEX);
+    wc.style = CS_HREDRAW | CS_VREDRAW;
+    wc.lpfnWndProc = WindowProc;
+    wc.cbClsExtra = 0;
+    wc.cbWndExtra = 0;
+    wc.hInstance = 0;
+    wc.hbrBackground = CreateSolidBrush(RGB(0, 156, 65));
+    wc.lpszClassName = CLASS_NAME;
+
+    RegisterClassExW(&wc);
+
+    // Create the window.
+
+    pRenderWindow->window = CreateWindowW(
+        CLASS_NAME, // Window class
+        L"NativeWindow",     // Window text
+
+        // Window style
+        WS_POPUP | WS_VISIBLE | WS_SYSMENU,
+
+        // Size and position
+        CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,
+
+        nullptr, // Parent window
+        nullptr, // Menu
+        nullptr, // Instance handle
+        nullptr  // Additional application data
+    );
+
+    ShowWindow(pRenderWindow->window, SW_SHOWNORMAL);
+    UpdateWindow(pRenderWindow->window);
+
+    return pRenderWindow->window;
+}
+
+RENDERLIBRARY_API void DestroyNativeWindow()
+{
+    delete pViewRender;
+    delete pRenderWindow;
+    delete pInputManager;
+    delete pInputBinder;
 }

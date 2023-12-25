@@ -35,6 +35,8 @@ void Render::Resize() {
 bool Render::CreateDevice(HWND hwnd) {
     _hwnd = hwnd;
 
+    Log::Get()->Debug("%s", __FUNCTION__);
+
     Resize();
 
     if (!Createdevice()) {
@@ -65,8 +67,11 @@ bool Render::CreateDevice(HWND hwnd) {
     _pImmediateContext->RSSetViewports(1, &vp);
 
     Initmatrix();
-
+#if 1
     return Init();
+#else
+    return true;
+#endif
 }
 
 bool Render::Createdevice() {
@@ -172,8 +177,9 @@ void Render::EndFrame() {
 }
 
 void Render::Shutdown() {
+#if 1
     Close();
-
+#endif
     if (_pImmediateContext) {
         _pImmediateContext->ClearState();
     }

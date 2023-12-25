@@ -18,6 +18,7 @@ using namespace DirectX;
 #include "Timer.hpp"
 #include "Camera.hpp"
 #include "DX11ViewRender.hpp"
+#include "Log.hpp"
 #include "Helpers.h"
 
 using namespace ShaderPlayground;
@@ -35,6 +36,9 @@ RenderTarget::RenderTarget(DX11ViewRender* render) {
 }
 
 bool RenderTarget::Init(float screenNear, float screenDepth) {
+
+    Log::Get()->Debug("%s", __FUNCTION__);
+
     // Сначала мы создаем текстуру в которую будем выводить shadow map
 
     // создаем текстуру размером SHADOWMAP_WIDTH х SHADOWMAP_HEIGHT
