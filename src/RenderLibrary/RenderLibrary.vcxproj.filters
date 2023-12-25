@@ -28,7 +28,6 @@
     </ClCompile>
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Exports.cpp" />
-    <ClCompile Include="WindowTest.cpp" />
     <ClCompile Include="FabricRender.cpp" />
     <ClCompile Include="FabricDirectXWindow.cpp" />
   </ItemGroup>
@@ -69,7 +68,6 @@
     <ClInclude Include="Utils.hpp" />
     <ClInclude Include="Exports.h" />
     <ClInclude Include="RenderDebugUtils.h" />
-    <ClInclude Include="WindowTest.h" />
     <ClInclude Include="FabricRender.h" />
     <ClInclude Include="FabricDirectXWindow.h" />
   </ItemGroup>
