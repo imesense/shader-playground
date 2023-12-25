@@ -26,11 +26,11 @@
     <ClCompile Include="InputBinder.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="Framework.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Exports.cpp" />
     <ClCompile Include="WindowTest.cpp" />
     <ClCompile Include="FabricRender.cpp" />
+    <ClCompile Include="FabricDirectXWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
@@ -65,13 +65,13 @@
     <ClInclude Include="DX11ViewRender.hpp" />
     <ClInclude Include="ShadowShader.hpp" />
     <ClInclude Include="RenderTarget.hpp" />
-    <ClInclude Include="Framework.hpp" />
     <ClInclude Include="Memory.hpp" />
     <ClInclude Include="Utils.hpp" />
     <ClInclude Include="Exports.h" />
     <ClInclude Include="RenderDebugUtils.h" />
     <ClInclude Include="WindowTest.h" />
     <ClInclude Include="FabricRender.h" />
+    <ClInclude Include="FabricDirectXWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

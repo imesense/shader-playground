@@ -17,7 +17,6 @@ using namespace DirectX;
 #include <RenderState.hpp>
 #include <Render.hpp>
 #include <Log.hpp>
-#include <Framework.hpp>
 #include <DepthShader.hpp>
 #include <RenderTarget.hpp>
 #include <Light.hpp>

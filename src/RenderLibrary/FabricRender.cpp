@@ -17,7 +17,6 @@ using namespace DirectX;
 #include "RenderState.hpp"
 #include "Render.hpp"
 #include "Log.hpp"
-#include "Framework.hpp"
 #include "Helpers.h"
 
 #include "Shader.hpp"
@@ -35,25 +34,19 @@ using namespace DirectX;
 
 using namespace ShaderPlayground;
 
-//CFabricRender* pCFabricRender = nullptr;
-
 bool CFabricRender::bFabricInit = false;
 
 struct Fabric
 {
-    Render* pRender;
-    DX11ViewRender* pDX11ViewRender;
-    InputBinder* pInputBinder;
-    Window* pWindow;
-    InputManager* pInputManager;
-    DepthShader* pDepthShader;
-    ShadowShader* pShadowShader;
-
+    DX11ViewRender* render = nullptr;
+    InputBinder* inputBinder = nullptr;
+    Window* window = nullptr;
+    InputManager* inputManager = nullptr;
 } fabric;
 
 CFabricRender::CFabricRender()
 {
-    
+    this->bFabricInit = false;
 }
 
 CFabricRender::~CFabricRender()
@@ -64,137 +57,72 @@ CFabricRender::~CFabricRender()
 int CFabricRender::CreateFabricRender() {
     Log::Get()->Debug("%s", __FUNCTION__);
 
-    fabric.pDX11ViewRender = new DX11ViewRender();
-
-    if (!fabric.pDX11ViewRender)
+    if (!this->bFabricInit)
     {
-        //-' Добавить лог
-        return ErrorDescription::E_CREATE_VIEW_RENDER;
+        this->bFabricInit = true;
+    }
+    else
+    {
+        exit(NULL);
+        return ErrorDescription::E_REINITIALIZING_FACTORY;
     }
 
-    fabric.pDX11ViewRender->Init();
+    fabric.render = new DX11ViewRender();
+    fabric.inputBinder = new InputBinder(fabric.render);
+    fabric.window = new Window();
 
-    fabric.pInputBinder = new InputBinder(fabric.pDX11ViewRender);
+    fabric.inputManager = new InputManager();
+    fabric.inputManager->Initialize();
 
-    if (!fabric.pInputBinder)
-    {
-        //-' Добавить лог
-        return ErrorDescription::E_INPUT_BINDER;
+    if (!fabric.window->Create()) {
+        Log::Get()->Err("Не удалось создать окно");
+        return false;
     }
 
-    fabric.pWindow = new Window();
+    fabric.window->SetInputMgr(fabric.inputManager);
 
-    if (!fabric.pWindow)
-    {
-        //-' Добавить лог
-        return ErrorDescription::E_WINDOW;
+    if (!fabric.render->CreateDevice(fabric.window->GetHWND())) {
+        Log::Get()->Err("Не удалось создать рендер");
+        return false;
     }
 
-    fabric.pInputManager = new InputManager();
-
-    if (!fabric.pInputManager)
-    {
-        //-' Добавить лог
-        return ErrorDescription::E_INPUT_MANAGER;
-    }
-
-    //fabric.pInputManager->Initialize();
-
-    fabric.pWindow->Create();
-
-    //fabric.pWindow->SetInputMgr(fabric.pInputManager);
-
-    if (!fabric.pDX11ViewRender->CreateDevice(fabric.pWindow->GetHWND()))
-    {
-        //-' Добавить лог
-        return ErrorDescription::E_CREATE_DEVICE;
-    }
-
-    fabric.pDepthShader = new DepthShader(fabric.pDX11ViewRender);
-
-    if (!fabric.pDepthShader)
-    {
-        //-' Добавить лог
-        return ErrorDescription::E_SHADER_DEPTH_INIT;
-    }
-
-    fabric.pShadowShader = new ShadowShader(fabric.pDX11ViewRender);
-
-    if (!fabric.pShadowShader)
-    {
-        //-' Добавить лог
-        return ErrorDescription::E_SHADER_SHADOW_INIT;
-    }
-
-    const auto AddInputListener = [&](InputListener* listener) -> void
-    {
-        fabric.pInputManager->AddListener(listener);
-    };
-
-    AddInputListener(fabric.pInputBinder);
-
-    this->bFabricInit = true;
+    fabric.inputManager->AddListener(fabric.inputBinder);
 
     return ErrorDescription::E_OK;
 }
 
 bool CFabricRender::RunRender()
 {
-    if (this->bFabricInit)
-    {
-        fabric.pWindow->RunEvent();
+    fabric.window->RunEvent();
 
-        if (!fabric.pWindow->IsActive())
-        {
-            return true;
-        }
-
-        if (fabric.pWindow->IsExit())
-        {
-            return false;
-        }
-
-        if (fabric.pWindow->IsResize()) 
-        {
-
-        }
-
-        fabric.pDX11ViewRender->BeginFrame();
-
-        if (!fabric.pDX11ViewRender->Draw())
-        {
-            return false;
-        }
-
-        fabric.pDX11ViewRender->EndFrame();
+    if (!fabric.window->IsActive()) {
+        return true;
     }
+
+    if (fabric.window->IsExit()) {
+        return false;
+    }
+
+    if (fabric.window->IsResize()) {
+    }
+
+    fabric.render->BeginFrame();
+
+    if (!DX11ViewRender::GetDX11ViewRender()->Draw()) {
+        return false;
+    }
+
+    fabric.render->EndFrame();
 
     return true;
 }
 
 void CFabricRender::DestroyFabricRender()
 {
-    if (fabric.pInputManager)
-    {
-        delete fabric.pInputManager;
-        fabric.pInputManager = nullptr;
-    }
+    this->bFabricInit = false;
+    fabric.render->Shutdown();
 
-    if (fabric.pWindow)
-    {
-        delete fabric.pWindow;
-        fabric.pWindow = nullptr;
-    }
-
-    if (fabric.pInputBinder)
-    {
-        delete fabric.pInputBinder;
-        fabric.pInputBinder = nullptr;
-    }
-
-    if (fabric.pDX11ViewRender)
-    {
-        delete fabric.pDX11ViewRender;
-        fabric.pDX11ViewRender = nullptr;
-    }
+    _DELETE(fabric.render);
+    _CLOSE(fabric.window);
+    _CLOSE(fabric.inputManager);
 }

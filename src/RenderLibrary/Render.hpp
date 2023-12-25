@@ -15,9 +15,9 @@ namespace ShaderPlayground {
         RENDERLIBRARY_API void EndFrame();
         RENDERLIBRARY_API void Shutdown();
 
-        RENDERLIBRARY_API virtual bool Init() = 0;
-        RENDERLIBRARY_API virtual bool Draw() = 0;
-        RENDERLIBRARY_API virtual void Close() = 0;
+        //RENDERLIBRARY_API virtual bool Init() = 0;
+        //RENDERLIBRARY_API virtual bool Draw() = 0;
+        //RENDERLIBRARY_API virtual void Close() = 0;
 
         RENDERLIBRARY_API void TurnZBufferOn();
         RENDERLIBRARY_API void TurnZBufferOff();
