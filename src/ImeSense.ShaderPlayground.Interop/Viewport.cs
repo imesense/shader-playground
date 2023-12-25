@@ -27,11 +27,11 @@ public class Viewport : NativeControlHost {
             Console.WriteLine("AppDomain.CurrentDomain.BaseDirectory: " + currentDirectory1);
             Console.WriteLine("System.IO.Directory.GetCurrentDirectory(): " + currentDirectory2);
 
-            if (_nativeWindowHandle != IntPtr.Zero) {
-                Task.Run(() => RunRender());
-            } else { 
-                Debug.Assert(_nativeWindowHandle != IntPtr.Zero); 
-            }
+            //if (_nativeWindowHandle != IntPtr.Zero) {
+            //    Task.Run(() => RunRender());
+            //} else { 
+            //    Debug.Assert(_nativeWindowHandle != IntPtr.Zero); 
+            //}
 
             return new PlatformHandle(_nativeWindowHandle, "DirectX11");
         }

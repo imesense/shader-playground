@@ -91,7 +91,9 @@ bool Render::CreateDevice(HWND hwnd) {
 
     Initmatrix();
 
-    return DX11ViewRender::GetDX11ViewRender()->Init();
+    DX11ViewRender::GetDX11ViewRender()->Init();
+
+    return true;
 }
 
 bool Render::Createdevice() {
