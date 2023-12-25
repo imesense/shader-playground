@@ -67,7 +67,6 @@
     <ClInclude Include="Memory.hpp" />
     <ClInclude Include="Utils.hpp" />
     <ClInclude Include="Exports.h" />
-    <ClInclude Include="RenderDebugUtils.h" />
     <ClInclude Include="FabricRender.h" />
     <ClInclude Include="FabricDirectXWindow.h" />
   </ItemGroup>

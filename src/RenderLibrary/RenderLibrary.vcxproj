@@ -199,7 +199,6 @@
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Memory.hpp" />
     <ClInclude Include="Render.hpp" />
-    <ClInclude Include="RenderDebugUtils.h" />
     <ClInclude Include="RenderState.hpp" />
     <ClInclude Include="RenderTarget.hpp" />
     <ClInclude Include="Shader.hpp" />

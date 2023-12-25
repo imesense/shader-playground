@@ -23,7 +23,7 @@ RenderState::RenderState(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pImmedia
 }
 
 bool RenderState::Init() {
-    Log::Get()->Debug("%s", __FUNCTION__);
+    //Log::Get()->Debug("%s", __FUNCTION__);
 
     if (!Createdepthstencilstate()) {
         return false;

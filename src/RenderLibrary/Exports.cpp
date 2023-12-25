@@ -8,8 +8,6 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
-#include "RenderDebugUtils.h"
-
 using namespace DirectX;
 
 #include "Memory.hpp"
@@ -29,6 +27,7 @@ using namespace DirectX;
 #include "InputManager.hpp"
 #include "Window.hpp"
 #include "Log.hpp"
+#include "FabricDirectXWindow.h"
 #include "Exports.h"
 #include "Helpers.h"
 

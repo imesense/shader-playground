@@ -58,23 +58,23 @@ void Render::Resize() {
 bool Render::CreateDevice(HWND hwnd) {
     _hwnd = hwnd;
 
-    Log::Get()->Debug("%s", __FUNCTION__);
+    //Log::Get()->Debug("%s", __FUNCTION__);
 
     Resize();
 
     if (!Createdevice()) {
-        Log::Get()->Err("Не удалось создать DirectX Device");
+        //Log::Get()->Err("Не удалось создать DirectX Device");
         return false;
     }
 
     if (!Createdepthstencil()) {
-        Log::Get()->Err("Не удалось создать буфер глубины");
+        //Log::Get()->Err("Не удалось создать буфер глубины");
         return false;
     }
 
     _renderstate = new RenderState(_pd3dDevice, _pImmediateContext);
     if (!_renderstate->Init()) {
-        Log::Get()->Err("Не удалось создать render state");
+        //Log::Get()->Err("Не удалось создать render state");
         return false;
     }
 

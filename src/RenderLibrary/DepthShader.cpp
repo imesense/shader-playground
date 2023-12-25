@@ -37,7 +37,7 @@ DepthShader::DepthShader(DX11ViewRender* render) {
 }
 
 bool DepthShader::Init() {
-    Log::Get()->Debug("%s", __FUNCTION__);
+    //Log::Get()->Debug("%s", __FUNCTION__);
 
     // Инициализируем шейдер и входной формат
     _shader = new Shader(_render);

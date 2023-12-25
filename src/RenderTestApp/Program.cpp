@@ -6,8 +6,6 @@
 #include <d3d11.h>
 #include <DirectXMath.h>
 
-#include "RenderDebugUtils.h"
-
 using namespace DirectX;
 
 #include <Memory.hpp>
