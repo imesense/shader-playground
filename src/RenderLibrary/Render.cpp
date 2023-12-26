@@ -49,10 +49,10 @@ Render::~Render() {
 }
 
 void Render::Resize() {
-    RECT rc;
-    GetClientRect(_hwnd, &rc);
-    _width = rc.right - rc.left;
-    _height = rc.bottom - rc.top;
+    //RECT rc;
+    //GetClientRect(_hwnd, &rc);
+    //_width = rc.right - rc.left;
+    //_height = rc.bottom - rc.top;
 }
 
 bool Render::CreateDevice(HWND hwnd) {
@@ -60,7 +60,7 @@ bool Render::CreateDevice(HWND hwnd) {
 
     //Log::Get()->Debug("%s", __FUNCTION__);
 
-    Resize();
+    //Resize();
 
     if (!Createdevice()) {
         //Log::Get()->Err("Не удалось создать DirectX Device");
@@ -81,8 +81,8 @@ bool Render::CreateDevice(HWND hwnd) {
     _pImmediateContext->OMSetRenderTargets(1, &_pRenderTargetView, _pDepthStencilView);
 
     D3D11_VIEWPORT vp{};
-    vp.Width = (FLOAT) _width;
-    vp.Height = (FLOAT) _height;
+    vp.Width = (FLOAT)_width;
+    vp.Height = (FLOAT)_height;
     vp.MinDepth = 0.0f;
     vp.MaxDepth = 1.0f;
     vp.TopLeftX = 0;
@@ -183,7 +183,7 @@ bool Render::Createdepthstencil()
 }
 
 void Render::Initmatrix() {
-    float aspect = (float) _width / (float) _height;
+    float aspect = (float) _width/ (float) _height;
     _projection = XMMatrixPerspectiveFovLH(0.4f * 3.14f, aspect, 1.0f, 1000.0f);
     _ortho = XMMatrixOrthographicLH((float) _width, (float) _height, 0.0f, 1.0f);
 }

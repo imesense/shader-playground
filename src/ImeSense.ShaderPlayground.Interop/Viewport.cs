@@ -21,17 +21,15 @@ public class Viewport : NativeControlHost {
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
             _nativeWindowHandle = Framework.CreateFabricDirectXWindow();
 
+            Framework.CreateScene(_nativeWindowHandle);
+
             string currentDirectory1 = AppDomain.CurrentDomain.BaseDirectory;
             string currentDirectory2 = System.IO.Directory.GetCurrentDirectory();
 
             Console.WriteLine("AppDomain.CurrentDomain.BaseDirectory: " + currentDirectory1);
             Console.WriteLine("System.IO.Directory.GetCurrentDirectory(): " + currentDirectory2);
 
-            //if (_nativeWindowHandle != IntPtr.Zero) {
-            //    Task.Run(() => RunRender());
-            //} else { 
-            //    Debug.Assert(_nativeWindowHandle != IntPtr.Zero); 
-            //}
+            Task.Run(() => RunRender());
 
             return new PlatformHandle(_nativeWindowHandle, "DirectX11");
         }
@@ -50,8 +48,13 @@ public class Viewport : NativeControlHost {
     }
 
     private async void RunRender() {
-        while (true) {
-            await Task.Delay(16); // 60 FPS
-        }
+       // try {
+            while (true) {
+                //Framework.Frame();
+                await Task.Delay(16); // 60 FPS
+            }
+       // } catch (Exception ex) {
+        //    Console.WriteLine($"Exception in RunRender: {ex}");
+       // }
     }
 }
