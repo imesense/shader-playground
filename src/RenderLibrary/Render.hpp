@@ -52,7 +52,7 @@ namespace ShaderPlayground {
 
         HWND _hwnd;
 
-        unsigned int _width;
-        unsigned int _height;
+        unsigned int _width = 640;
+        unsigned int _height = 480;
     };
 }

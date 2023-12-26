@@ -2,6 +2,7 @@
 
 extern "C" {
     RENDERLIBRARY_API HWND CreateFabricDirectXWindow();
+    RENDERLIBRARY_API void CreateScene(HWND ptr);
     RENDERLIBRARY_API void DestroyFabricDirectXWindow();
 }
 

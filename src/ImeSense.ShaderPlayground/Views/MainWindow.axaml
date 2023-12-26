@@ -20,7 +20,7 @@
         <ContentControl Content="{Binding MenuContext}"
                         Grid.Row="0" />
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,2,100">
+        <Grid Grid.Row="1" ColumnDefinitions="*,2,*">
             <DockPanel Grid.Column="0">
                 <StackPanel Orientation="Horizontal"
                             DockPanel.Dock="Top"
@@ -92,8 +92,13 @@
                             Background="#D6D6D6"
                             ResizeDirection="Columns" />
 
-            <Grid Grid.Column="2">
-                <ContentControl x:Name="viewportContentControl" />
+            <Grid Grid.Column="2" RowDefinitions="*,2,*">
+                <ContentControl x:Name="viewportContentControl" 
+                                Grid.Row="0"/>
+                
+                <GridSplitter Grid.Row="1"
+                            Background="#D6D6D6"
+                            ResizeDirection="Columns" />
             </Grid>
         </Grid>
     </Grid>

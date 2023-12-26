@@ -13,4 +13,10 @@ internal class Framework {
 
     [DllImport("C:\\Users\\User\\Documents\\GitHub\\shader-playground\\bin\\x64\\Debug\\RenderLibrary.dll", EntryPoint = "DestroyFabricDirectXWindow", CallingConvention = CallingConvention.Cdecl)]
     public static extern void DestroyFabricDirectXWindow();
+
+    [DllImport("C:\\Users\\User\\Documents\\GitHub\\shader-playground\\bin\\x64\\Debug\\RenderLibrary.dll", EntryPoint = "Frame", CallingConvention = CallingConvention.Cdecl)]
+    public static extern bool Frame();
+
+    [DllImport("C:\\Users\\User\\Documents\\GitHub\\shader-playground\\bin\\x64\\Debug\\RenderLibrary.dll", EntryPoint = "CreateScene", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void CreateScene(IntPtr hWnd);
 }
