@@ -195,7 +195,7 @@ void Render::BeginFrame() {
 }
 
 void Render::EndFrame() {
-    _pSwapChain->Present(0, 0);
+    _pSwapChain->Present(this->UVsyncFlag, 0);
 }
 
 void Render::Shutdown() {

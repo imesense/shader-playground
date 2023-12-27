@@ -50,7 +50,8 @@ public class Viewport : NativeControlHost {
     private async void RunRender() {
        // try {
             while (true) {
-                //Framework.Frame();
+                Framework.Frame();
+            Debug.WriteLine("Frame");
                 await Task.Delay(16); // 60 FPS
             }
        // } catch (Exception ex) {

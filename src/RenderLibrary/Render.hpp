@@ -52,7 +52,9 @@ namespace ShaderPlayground {
 
         HWND _hwnd;
 
-        unsigned int _width = 640;
-        unsigned int _height = 480;
+        UINT _width = 640;
+        UINT _height = 480;
+
+        UINT UVsyncFlag = 0;
     };
 }
