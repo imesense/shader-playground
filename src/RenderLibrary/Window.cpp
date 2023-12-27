@@ -6,7 +6,6 @@
 #include "InputCodes.hpp"
 #include "InputManager.hpp"
 #include "Window.hpp"
-#include "Log.hpp"
 
 using namespace ShaderPlayground;
 

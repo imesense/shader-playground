@@ -26,9 +26,8 @@ using namespace DirectX;
 #include "DX11ViewRender.hpp"
 #include "InputManager.hpp"
 #include "Window.hpp"
-#include "Log.hpp"
-#include "FabricDirectXWindow.h"
-#include "Exports.h"
-#include "Helpers.h"
+#include "FabricDirectXWindow.hpp"
+#include "Exports.hpp"
+#include "Helpers.hpp"
 
 using namespace ShaderPlayground;

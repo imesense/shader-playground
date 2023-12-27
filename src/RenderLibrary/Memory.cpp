@@ -5,7 +5,6 @@
 #include <unordered_set>
 
 #include "Memory.hpp"
-#include "Log.hpp"
 
 #pragma section(".Hook", read)
 

@@ -22,9 +22,8 @@ using namespace DirectX;
 #include "DX11ViewRender.hpp"
 #include "Buffer.hpp"
 #include "Light.hpp"
-#include "Helpers.h"
+#include "Helpers.hpp"
 #include "Utils.hpp"
-#include "Log.hpp"
 
 using namespace ShaderPlayground;
 

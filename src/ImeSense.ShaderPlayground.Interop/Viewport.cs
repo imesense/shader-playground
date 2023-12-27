@@ -11,51 +11,46 @@ using ImeSense.ShaderPlayground.Interop.PlatformInvoke;
 namespace ImeSense.ShaderPlayground.Interop;
 
 public class Viewport : NativeControlHost {
-    private IntPtr _nativeWindowHandle;
+	private IntPtr _nativeWindowHandle;
 
-    public Viewport() {
-        _nativeWindowHandle = IntPtr.Zero;
-    }
+	public Viewport() {
+		_nativeWindowHandle = IntPtr.Zero;
+	}
 
-    protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent) {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-            _nativeWindowHandle = Framework.CreateFabricDirectXWindow();
+	protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent) {
+		if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
+			_nativeWindowHandle = Framework.CreateFabricDirectXWindow();
 
-            Framework.CreateScene(_nativeWindowHandle);
+			Framework.CreateScene(_nativeWindowHandle);
 
-            string currentDirectory1 = AppDomain.CurrentDomain.BaseDirectory;
-            string currentDirectory2 = System.IO.Directory.GetCurrentDirectory();
+			string currentDirectory1 = AppDomain.CurrentDomain.BaseDirectory;
+			string currentDirectory2 = System.IO.Directory.GetCurrentDirectory();
 
-            Console.WriteLine("AppDomain.CurrentDomain.BaseDirectory: " + currentDirectory1);
-            Console.WriteLine("System.IO.Directory.GetCurrentDirectory(): " + currentDirectory2);
+			Console.WriteLine("AppDomain.CurrentDomain.BaseDirectory: " + currentDirectory1);
+			Console.WriteLine("System.IO.Directory.GetCurrentDirectory(): " + currentDirectory2);
 
-            Task.Run(() => RunRender());
+			_ = Task.Run(() => RunRender());
 
-            return new PlatformHandle(_nativeWindowHandle, "DirectX11");
-        }
+			return new PlatformHandle(_nativeWindowHandle, "DirectX11");
+		}
 
-        return base.CreateNativeControlCore(parent);
-    }
+		return base.CreateNativeControlCore(parent);
+	}
 
-    protected override void DestroyNativeControlCore(IPlatformHandle control) {
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-            Framework.DestroyWindow(_nativeWindowHandle);
-            Framework.DestroyFabricDirectXWindow();
-            _nativeWindowHandle = IntPtr.Zero;
-        }
+	protected override void DestroyNativeControlCore(IPlatformHandle control) {
+		if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
+			Framework.DestroyWindow(_nativeWindowHandle);
+			Framework.DestroyFabricDirectXWindow();
+			_nativeWindowHandle = IntPtr.Zero;
+		}
 
-        base.DestroyNativeControlCore(control);
-    }
+		base.DestroyNativeControlCore(control);
+	}
 
-    private async void RunRender() {
-       // try {
-            while (true) {
-                Framework.Frame();
-            Debug.WriteLine("Frame");
-                await Task.Delay(16); // 60 FPS
-            }
-       // } catch (Exception ex) {
-        //    Console.WriteLine($"Exception in RunRender: {ex}");
-       // }
-    }
+	private static void RunRender() {
+        while (true) {
+			Framework.Frame();
+			Debug.WriteLine("Frame 1");
+		}
+	}
 }

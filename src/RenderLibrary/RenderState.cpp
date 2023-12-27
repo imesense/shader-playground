@@ -3,8 +3,7 @@
 #include <d3d11.h>
 
 #include "RenderState.hpp"
-#include "Helpers.h"
-#include "Log.hpp"
+#include "Helpers.hpp"
 
 using namespace ShaderPlayground;
 
