@@ -7,6 +7,6 @@
 #define RENDERLIBRARY_API __declspec(dllimport)
 #endif
 
-#include "framework.h"
+#include "framework.hpp"
 
 #endif // STDAFX_H

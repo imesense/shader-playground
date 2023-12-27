@@ -179,23 +179,21 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BitmapFont.hpp" />
     <ClInclude Include="Buffer.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="DepthShader.hpp" />
-    <ClInclude Include="FabricDirectXWindow.h" />
-    <ClInclude Include="FabricRender.h" />
+    <ClInclude Include="FabricDirectXWindow.hpp" />
+    <ClInclude Include="FabricRender.hpp" />
     <ClInclude Include="DX11ViewRender.hpp" />
-    <ClInclude Include="Exports.h" />
+    <ClInclude Include="Exports.hpp" />
     <ClInclude Include="Frustum.hpp" />
     <ClInclude Include="InputBinder.hpp" />
     <ClInclude Include="InputCodes.hpp" />
     <ClInclude Include="FpsCounter.hpp" />
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="Helpers.h" />
+    <ClInclude Include="framework.hpp" />
+    <ClInclude Include="Helpers.hpp" />
     <ClInclude Include="InputListener.hpp" />
     <ClInclude Include="Light.hpp" />
-    <ClInclude Include="Log.hpp" />
     <ClInclude Include="InputManager.hpp" />
     <ClInclude Include="Memory.hpp" />
     <ClInclude Include="Render.hpp" />
@@ -204,13 +202,11 @@
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="ShadowShader.hpp" />
     <ClInclude Include="StdAfx.h" />
-    <ClInclude Include="Text.hpp" />
     <ClInclude Include="Timer.hpp" />
     <ClInclude Include="Utils.hpp" />
     <ClInclude Include="Window.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BitmapFont.cpp" />
     <ClCompile Include="Buffer.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DepthShader.cpp" />
@@ -224,7 +220,6 @@
     <ClCompile Include="InputBinder.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Light.cpp" />
-    <ClCompile Include="Log.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="RenderState.cpp" />
@@ -237,7 +232,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>

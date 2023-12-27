@@ -14,10 +14,6 @@
 
 using namespace DirectX;
 
-//#include "RenderState.hpp"
-//#include "Render.hpp"
-//#include "Log.hpp"
-//#include "Helpers.h"
 #include "Memory.hpp"
 #include "RenderState.hpp"
 #include "Render.hpp"
@@ -29,9 +25,8 @@ using namespace DirectX;
 #include "ShadowShader.hpp"
 #include "DX11ViewRender.hpp"
 #include "Buffer.hpp"
-#include "Helpers.h"
+#include "Helpers.hpp"
 #include "Utils.hpp"
-#include "Log.hpp"
 #include "DX11ViewRender.hpp"
 
 using namespace ShaderPlayground;

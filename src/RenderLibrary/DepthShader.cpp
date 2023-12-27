@@ -15,14 +15,13 @@ using namespace DirectX;
 #include "RenderTarget.hpp"
 #include "DepthShader.hpp"
 #include "Buffer.hpp"
-#include "Helpers.h"
+#include "Helpers.hpp"
 #include "Timer.hpp"
 #include "Camera.hpp"
 #include "Light.hpp"
 #include "ShadowShader.hpp"
 #include "DX11ViewRender.hpp"
 #include "Utils.hpp"
-#include "Log.hpp"
 
 using namespace ShaderPlayground;
 

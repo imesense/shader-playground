@@ -14,8 +14,7 @@ using namespace DirectX;
 #include "Window.hpp"
 #include "RenderState.hpp"
 #include "Render.hpp"
-#include "Log.hpp"
-#include "Helpers.h"
+#include "Helpers.hpp"
 
 #include "Shader.hpp"
 #include "RenderTarget.hpp"
@@ -28,7 +27,7 @@ using namespace DirectX;
 #include "DX11ViewRender.hpp"
 #include "InputListener.hpp"
 #include "InputBinder.hpp"
-#include "FabricRender.h"
+#include "FabricRender.hpp"
 
 using namespace ShaderPlayground;
 

@@ -18,8 +18,7 @@ using namespace DirectX;
 #include "Timer.hpp"
 #include "Camera.hpp"
 #include "DX11ViewRender.hpp"
-#include "Log.hpp"
-#include "Helpers.h"
+#include "Helpers.hpp"
 
 using namespace ShaderPlayground;
 

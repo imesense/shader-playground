@@ -33,159 +33,162 @@ using namespace DirectX;
 #include "DX11ViewRender.hpp"
 #include "InputManager.hpp"
 #include "Window.hpp"
-#include "Log.hpp"
-#include "Exports.h"
-#include "Helpers.h"
+#include "Exports.hpp"
+#include "Helpers.hpp"
 
-#include "FabricDirectXWindow.h"
+#include "FabricDirectXWindow.hpp"
 
 using namespace ShaderPlayground;
 
 struct FabricDirectXWindow
 {
-    //int posx;
-    //int posy;
+    MSG msg;
+    HWND window;
+    RECT clientRect;
 
-    //int width; // ширина клиентской части окна
-    //int height; // высота клиентской части окна
-    //bool resizing;
+    int posx;
+    int posy;
 
-    //bool _isexit; // флаг сообщающий о событии выхода
-    //bool _active; // окно активно?
-    //bool _minimized;
-    //bool _maximized;
-    //bool _isresize; // если окно изменило размер
+    int width;
+    int height;
 
-    HWND window = nullptr;
+    bool resizing;
 
-    DX11ViewRender* render = nullptr;
-    InputBinder* inputBinder = nullptr;
-    //MSG msg;
-    //RECT clientRect;
+    bool _isexit;
+    bool _active;
+    bool _minimized;
+    bool _maximized;
+    bool _isresize;
 
+    DX11ViewRender* render;
+    InputBinder* inputBinder;
 } fabric_directx_window;
 
-//void UpdateWindowState() {
-//    fabric_directx_window.clientRect.left = fabric_directx_window.posx;
-//    fabric_directx_window.clientRect.top = fabric_directx_window.posy;
-//    fabric_directx_window.clientRect.right = fabric_directx_window.width;
-//    fabric_directx_window.clientRect.bottom = fabric_directx_window.height;
-//    //if (_inputmgr) {
-//    //    _inputmgr->SetWinRect(clientRect);
-//    //}
-//
-//}
+void UpdateWindowState() {
+    fabric_directx_window.clientRect.left = fabric_directx_window.posx;
+    fabric_directx_window.clientRect.top = fabric_directx_window.posy;
+    fabric_directx_window.clientRect.right = fabric_directx_window.width;
+    fabric_directx_window.clientRect.bottom = fabric_directx_window.height;
+    //if (_inputmgr) {
+    //    _inputmgr->SetWinRect(clientRect);
+    //}
+}
+
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
     
+    //switch (message) {
+    //case WM_COMMAND:
+    //    break;
+    //case WM_PAINT:
+    //{
+    //    PAINTSTRUCT ps;
+    //    HDC hdc = BeginPaint(hWnd, &ps);
+
+    //    fabric_directx_window.render->BeginFrame();
+    //    DX11ViewRender::GetDX11ViewRender()->Draw();
+    ////    if (!DX11ViewRender::GetDX11ViewRender()->Draw()) {
+    ////    return 0;
+    ////}
+    //    fabric_directx_window.render->EndFrame();
+
+    //    EndPaint(hWnd, &ps);
+    //}
+    //break;
+    //case WM_DESTROY:
+    //    PostQuitMessage(0);
+    //    break;
+    //default:
+    //    return DefWindowProc(hWnd, message, wParam, lParam);
+    //}
+    //return 0;
+    
+
     switch (message) {
-    case WM_COMMAND:
-        break;
-    case WM_PAINT:
+    case WM_CREATE:
+        return 0;
+    case WM_CLOSE:
+        fabric_directx_window._isexit = true;
+        return 0;
+    /*case WM_PAINT:
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
 
         fabric_directx_window.render->BeginFrame();
-        DX11ViewRender::GetDX11ViewRender()->Draw();
-    //    if (!DX11ViewRender::GetDX11ViewRender()->Draw()) {
-    //    return 0;
-    //}
+        if (!fabric_directx_window.render->Draw())
+            return 0;
         fabric_directx_window.render->EndFrame();
 
         EndPaint(hWnd, &ps);
     }
-    break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
+    break;*/
+    case WM_ACTIVATE:
+        /*if (LOWORD(wparam) != WA_INACTIVE) {
+            objControl._active = true;
+        }
+        else {
+            objControl._active = false;
+        }*/
+        //fabric_directx_window.render->BeginFrame();
+        //if (!fabric_directx_window.render->Draw()) {
+        //    return 0;
+        //}
+        //fabric_directx_window.render->EndFrame();
+        return 0;
+    case WM_MOVE:
+        fabric_directx_window.posx = LOWORD(lParam);
+        fabric_directx_window.posy = HIWORD(lParam);
+        UpdateWindowState();
+        return 0;
+    case WM_SIZE:
+        if (!fabric_directx_window.resizing) {
+            return 0;
+        }
+        fabric_directx_window.width = LOWORD(lParam);
+        fabric_directx_window.height = HIWORD(lParam);
+        fabric_directx_window._isresize = true;
+        if (wParam == SIZE_MINIMIZED) {
+            fabric_directx_window._active = false;
+            fabric_directx_window._minimized = true;
+            fabric_directx_window._maximized = false;
+        }
+        else if (wParam == SIZE_MAXIMIZED) {
+            fabric_directx_window._active = true;
+            fabric_directx_window._minimized = false;
+            fabric_directx_window._maximized = true;
+        }
+        else if (wParam == SIZE_RESTORED) {
+            if (fabric_directx_window._minimized) {
+                fabric_directx_window._active = true;
+                fabric_directx_window._minimized = false;
+            }
+            else if (fabric_directx_window._maximized) {
+                fabric_directx_window._active = true;
+                fabric_directx_window._maximized = false;
+            }
+        }
+        UpdateWindowState();
+        return 0;
+    case WM_MOUSEMOVE:
+    case WM_LBUTTONUP:
+    case WM_LBUTTONDOWN:
+    case WM_MBUTTONUP:
+    case WM_MBUTTONDOWN:
+    case WM_RBUTTONUP:
+    case WM_RBUTTONDOWN:
+    case WM_MOUSEWHEEL:
+    case WM_KEYDOWN:
+    case WM_KEYUP:
+        //Log::Get()->Print("WM_KEYUP");
+        /*if (_inputmgr) {
+            _inputmgr->Run(msg, wParam, lParam);
+        }*/
+        return 0;
     }
-    return 0;
-    
 
-    //switch (message) {
-    //case WM_CREATE:
-    //    return 0;
-    //case WM_CLOSE:
-    //    fabric_directx_window._isexit = true;
-    //    return 0;
-    //case WM_PAINT:
-    //{
-    //    PAINTSTRUCT ps;
-    //    HDC hdc = BeginPaint(hWnd, &ps);
-    //    EndPaint(hWnd, &ps);
+    //Log::Get()->Print("ehehehehe");
 
-    //    //fabric_directx_window.render->BeginFrame();
-    //    //if (!fabric_directx_window.render->Draw()) {
-    //    //    return 0;
-    //    //}
-    //    //fabric_directx_window.render->EndFrame();
-    //}
-    //break;
-    //case WM_ACTIVATE:
-    //    /*if (LOWORD(wparam) != WA_INACTIVE) {
-    //        objControl._active = true;
-    //    }
-    //    else {
-    //        objControl._active = false;
-    //    }*/
-
-    //    return 0;
-    //case WM_MOVE:
-    //    fabric_directx_window.posx = LOWORD(lParam);
-    //    fabric_directx_window.posy = HIWORD(lParam);
-    //    UpdateWindowState();
-    //    return 0;
-    //case WM_SIZE:
-    //    if (!fabric_directx_window.resizing) {
-    //        return 0;
-    //    }
-    //    fabric_directx_window.width = LOWORD(lParam);
-    //    fabric_directx_window.height = HIWORD(lParam);
-    //    fabric_directx_window._isresize = true;
-    //    if (wParam == SIZE_MINIMIZED) {
-    //        fabric_directx_window._active = false;
-    //        fabric_directx_window._minimized = true;
-    //        fabric_directx_window._maximized = false;
-    //    }
-    //    else if (wParam == SIZE_MAXIMIZED) {
-    //        fabric_directx_window._active = true;
-    //        fabric_directx_window._minimized = false;
-    //        fabric_directx_window._maximized = true;
-    //    }
-    //    else if (wParam == SIZE_RESTORED) {
-    //        if (fabric_directx_window._minimized) {
-    //            fabric_directx_window._active = true;
-    //            fabric_directx_window._minimized = false;
-    //        }
-    //        else if (fabric_directx_window._maximized) {
-    //            fabric_directx_window._active = true;
-    //            fabric_directx_window._maximized = false;
-    //        }
-    //    }
-    //    UpdateWindowState();
-    //    return 0;
-    //case WM_MOUSEMOVE:
-    //case WM_LBUTTONUP:
-    //case WM_LBUTTONDOWN:
-    //case WM_MBUTTONUP:
-    //case WM_MBUTTONDOWN:
-    //case WM_RBUTTONUP:
-    //case WM_RBUTTONDOWN:
-    //case WM_MOUSEWHEEL:
-    //case WM_KEYDOWN:
-    //case WM_KEYUP:
-    //    //Log::Get()->Print("WM_KEYUP");
-    //    /*if (_inputmgr) {
-    //        _inputmgr->Run(msg, wParam, lParam);
-    //    }*/
-    //    return 0;
-    //}
-
-    ////Log::Get()->Print("ehehehehe");
-
-    //return DefWindowProcW(hWnd, message, wParam, lParam);
+    return DefWindowProcW(hWnd, message, wParam, lParam);
 }
 
 //void RunEvent() {
@@ -273,19 +276,24 @@ RENDERLIBRARY_API HWND CreateFabricDirectXWindow() {
     return fabric_directx_window.window;
 }
 
-void CreateScene(HWND ptr)
+RENDERLIBRARY_API void CreateScene(HWND ptr)
 {
     fabric_directx_window.render->CreateDevice(ptr);
 }
 
-void MessageLoop()
+RENDERLIBRARY_API void MessageLoop()
 {
-    MSG msg;
-    while (GetMessage(&msg, nullptr, 0, 0))
+    /*while (GetMessage(&fabric_directx_window.msg, 0, 0, 0))
     {
-        TranslateMessage(&msg);
-        DispatchMessage(&msg);
+        TranslateMessage(&fabric_directx_window.msg);
+        DispatchMessage(&fabric_directx_window.msg);
+    }*/
+    while (PeekMessage(&fabric_directx_window.msg, 0, 0, 0, PM_REMOVE)) {
+        TranslateMessage(&fabric_directx_window.msg);
+        DispatchMessage(&fabric_directx_window.msg);
+       // Log::Get()->Print("Active3");
     }
+    //Log::Get()->Print("Active5");
 }
 
 RENDERLIBRARY_API void DestroyFabricDirectXWindow()
@@ -296,30 +304,29 @@ RENDERLIBRARY_API void DestroyFabricDirectXWindow()
 RENDERLIBRARY_API bool Frame()
 {
     MessageLoop();
-
-    // обрабатываем события окна
+     //обрабатываем события окна
     //_wnd->RunEvent();
-    //RunEvent();
     //Log::Get()->Print("- %i", __LINE__);
     // если окно неактивно - завершаем кадр
-    /*if (!fabric_directx_window._active) {
+    /*if (!objControl._active) {
         return true;
     }*/
-    //Log::Get()->Print("- %i", __LINE__);
+   // Log::Get()->Print("- %i", __LINE__);
     // если окно было закрыто, завершаем работу движка
-    /*if (fabric_directx_window._isexit) {
+    if (fabric_directx_window._isexit) {
         return false;
-    }*/
+    }
     //Log::Get()->Print("- %i", __LINE__);
     // если окно изменило размер
-    //if (fabric_directx_window.resizing) {
-    //}
+    if (fabric_directx_window.resizing) {
+    }
     //Log::Get()->Print("- %i", __LINE__);
     fabric_directx_window.render->BeginFrame();
     if (!fabric_directx_window.render->Draw()) {
         return false;
     }
     fabric_directx_window.render->EndFrame();
+
     //Log::Get()->Print("Active0");
    // Log::Get()->Print("- %i", __LINE__);
     return true;

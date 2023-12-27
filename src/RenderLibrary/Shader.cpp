@@ -11,8 +11,7 @@ using namespace DirectX;
 #include "RenderState.hpp"
 #include "Render.hpp"
 #include "Shader.hpp"
-#include "Log.hpp"
-#include "Helpers.h"
+#include "Helpers.hpp"
 
 #define MAXLAYOUT 8
 

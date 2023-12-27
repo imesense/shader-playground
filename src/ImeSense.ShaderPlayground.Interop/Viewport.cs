@@ -29,7 +29,7 @@ public class Viewport : NativeControlHost {
             Console.WriteLine("AppDomain.CurrentDomain.BaseDirectory: " + currentDirectory1);
             Console.WriteLine("System.IO.Directory.GetCurrentDirectory(): " + currentDirectory2);
 
-            Task.Run(() => RunRender());
+            _ = Task.Run(() => RunRender());
 
             return new PlatformHandle(_nativeWindowHandle, "DirectX11");
         }
@@ -47,15 +47,10 @@ public class Viewport : NativeControlHost {
         base.DestroyNativeControlCore(control);
     }
 
-    private async void RunRender() {
-       // try {
-            while (true) {
-                Framework.Frame();
-            Debug.WriteLine("Frame");
-                await Task.Delay(16); // 60 FPS
-            }
-       // } catch (Exception ex) {
-        //    Console.WriteLine($"Exception in RunRender: {ex}");
-       // }
+    private static void RunRender() {
+        while (true) {
+            Framework.Frame();
+            Debug.WriteLine("Frame 1");
+        }
     }
 }

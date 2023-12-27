@@ -19,9 +19,8 @@ using namespace DirectX;
 #include "ShadowShader.hpp"
 #include "DX11ViewRender.hpp"
 #include "Buffer.hpp"
-#include "Helpers.h"
+#include "Helpers.hpp"
 #include "Utils.hpp"
-#include "Log.hpp"
 
 using namespace ShaderPlayground;
 
