@@ -278,38 +278,50 @@ void CreateScene(HWND ptr)
     fabric_directx_window.render->CreateDevice(ptr);
 }
 
+void MessageLoop()
+{
+    MSG msg;
+    while (GetMessage(&msg, nullptr, 0, 0))
+    {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+}
+
 RENDERLIBRARY_API void DestroyFabricDirectXWindow()
 {
     delete fabric_directx_window.window;
 }
 
-//bool Frame()
-//{
-//    // обрабатываем события окна
-//    //_wnd->RunEvent();
-//    RunEvent();
-//    //Log::Get()->Print("- %i", __LINE__);
-//    // если окно неактивно - завершаем кадр
-//    /*if (!fabric_directx_window._active) {
-//        return true;
-//    }*/
-//    //Log::Get()->Print("- %i", __LINE__);
-//    // если окно было закрыто, завершаем работу движка
-//    /*if (fabric_directx_window._isexit) {
-//        return false;
-//    }*/
-//    //Log::Get()->Print("- %i", __LINE__);
-//    // если окно изменило размер
-//    //if (fabric_directx_window.resizing) {
-//    //}
-//    //Log::Get()->Print("- %i", __LINE__);
-//    fabric_directx_window.render->BeginFrame();
-//    //if (!DX11ViewRender::GetDX11ViewRender()->Draw()) {
-//     //   return false;
-//    //}
-//    fabric_directx_window.render->EndFrame();
-//    //Log::Get()->Print("Active0");
-//   // Log::Get()->Print("- %i", __LINE__);
-//    return true;
-//}
+RENDERLIBRARY_API bool Frame()
+{
+    MessageLoop();
+
+    // обрабатываем события окна
+    //_wnd->RunEvent();
+    //RunEvent();
+    //Log::Get()->Print("- %i", __LINE__);
+    // если окно неактивно - завершаем кадр
+    /*if (!fabric_directx_window._active) {
+        return true;
+    }*/
+    //Log::Get()->Print("- %i", __LINE__);
+    // если окно было закрыто, завершаем работу движка
+    /*if (fabric_directx_window._isexit) {
+        return false;
+    }*/
+    //Log::Get()->Print("- %i", __LINE__);
+    // если окно изменило размер
+    //if (fabric_directx_window.resizing) {
+    //}
+    //Log::Get()->Print("- %i", __LINE__);
+    fabric_directx_window.render->BeginFrame();
+    if (!fabric_directx_window.render->Draw()) {
+        return false;
+    }
+    fabric_directx_window.render->EndFrame();
+    //Log::Get()->Print("Active0");
+   // Log::Get()->Print("- %i", __LINE__);
+    return true;
+}
 
