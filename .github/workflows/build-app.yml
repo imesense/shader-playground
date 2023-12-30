@@ -159,6 +159,9 @@ jobs:
       matrix:
         system:
           - windows-latest
+        framework:
+          - net6.0
+          - net7.0
         config:
           - Debug
           - Release
@@ -192,11 +195,12 @@ jobs:
       - name: Build application
         run: |
           dotnet build $env:EditorSolutionPath `
+            --framework ${{ matrix.framework }} `
             --configuration ${{ matrix.config }} `
             --no-restore
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: editor-${{ matrix.config }}-${{ github.sha }}
-          path: bin/${{ matrix.config }}/
+          name: editor-${{ matrix.framework }}-${{ matrix.config }}-${{ github.sha }}
+          path: bin/${{ matrix.config }}/${{ matrix.framework }}/
