@@ -49,8 +49,7 @@ public class Viewport : NativeControlHost {
 
     private static void RunRender() {
         while (true) {
-            Framework.Frame();
-            Debug.WriteLine("Frame 1");
-        }
-    }
+			Framework.Frame();
+		}
+	}
 }
