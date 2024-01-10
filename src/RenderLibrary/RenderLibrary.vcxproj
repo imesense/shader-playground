@@ -255,7 +255,6 @@
     <Import Project="..\..\pkg\glfw.3.3.8\build\native\glfw.targets" Condition="Exists('..\..\pkg\glfw.3.3.8\build\native\glfw.targets')" />
     <Import Project="..\..\pkg\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets" Condition="Exists('..\..\pkg\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" />
     <Import Project="..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets" Condition="Exists('..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" />
-    <Import Project="..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets" Condition="Exists('..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -267,6 +266,5 @@
     <Error Condition="!Exists('..\..\pkg\glfw.3.3.8\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\glfw.3.3.8\build\native\glfw.targets'))" />
     <Error Condition="!Exists('..\..\pkg\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets'))" />
     <Error Condition="!Exists('..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets'))" />
-    <Error Condition="!Exists('..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets'))" />
   </Target>
 </Project>

@@ -37,7 +37,6 @@ namespace ShaderPlayground {
         void Initmatrix();
         void Resize();
 
-        CRenderText* _rendertext;
         RenderState* _renderstate;
 
         ID3D11Device* _pd3dDevice;

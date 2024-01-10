@@ -16,10 +16,6 @@ using namespace DirectX;
 
 #include "Memory.hpp"
 #include "RenderState.hpp"
-#include <SpriteBatch.h>
-#include <SpriteFont.h>
-#include <WICTextureLoader.h>
-#include <CommonStates.h>
 #include <wrl/client.h>
 #include <string>
 #include "RenderText.hpp"
@@ -97,11 +93,7 @@ bool Render::CreateDevice(HWND hwnd) {
 
     DX11ViewRender::GetDX11ViewRender()->Init();
 
-    _rendertext = new CRenderText(_pd3dDevice, _pImmediateContext, _width, _height);
-
-    pLog->Write("Render: ", "%p, %p, %p", _pd3dDevice, _pImmediateContext, _rendertext);
-
-    return true;
+    return true
 }
 
 bool Render::Createdevice() {
@@ -222,8 +214,6 @@ void Render::Shutdown() {
     if (_pImmediateContext) {
         _pImmediateContext->ClearState();
     }
-
-    delete _rendertext;
 
     _CLOSE(_renderstate);
     _RELEASE(_pDepthStencilView);

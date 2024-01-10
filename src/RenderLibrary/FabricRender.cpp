@@ -13,10 +13,6 @@ using namespace DirectX;
 #include "InputManager.hpp"
 #include "Window.hpp"
 #include "RenderState.hpp"
-#include <SpriteBatch.h>
-#include <SpriteFont.h>
-#include <WICTextureLoader.h>
-#include <CommonStates.h>
 #include <wrl/client.h>
 #include <string>
 #include "RenderText.hpp"
@@ -116,10 +112,7 @@ bool CFabricRender::RunRender()
     if (fabric.window->IsResize()) {
     }
 
-
     fabric.render->BeginFrame();
-
-    CRenderText::GetRenderTextInstance()->DrawTextR(L"Hello, DirectX!", DirectX::XMFLOAT2(0, 0));
 
     if (!DX11ViewRender::GetDX11ViewRender()->Draw()) {
         return false;
