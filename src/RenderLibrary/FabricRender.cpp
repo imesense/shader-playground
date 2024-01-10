@@ -13,6 +13,13 @@ using namespace DirectX;
 #include "InputManager.hpp"
 #include "Window.hpp"
 #include "RenderState.hpp"
+#include <SpriteBatch.h>
+#include <SpriteFont.h>
+#include <WICTextureLoader.h>
+#include <CommonStates.h>
+#include <wrl/client.h>
+#include <string>
+#include "RenderText.hpp"
 #include "Render.hpp"
 #include "Helpers.hpp"
 
@@ -28,6 +35,8 @@ using namespace DirectX;
 #include "InputListener.hpp"
 #include "InputBinder.hpp"
 #include "FabricRender.hpp"
+#include "../MultiLogManager/Exports.hpp"
+#include "../MultiLogManager/Log/Log.hpp"
 
 using namespace ShaderPlayground;
 
@@ -63,6 +72,10 @@ int CFabricRender::CreateFabricRender() {
         exit(NULL);
         return ErrorDescription::E_REINITIALIZING_FACTORY;
     }
+
+    pLog = new CLog();
+    pLog->CreateFileSettings();
+    pLog->CreateLog();
 
     fabric.render = new DX11ViewRender();
     fabric.inputBinder = new InputBinder(fabric.render);
@@ -103,7 +116,10 @@ bool CFabricRender::RunRender()
     if (fabric.window->IsResize()) {
     }
 
+
     fabric.render->BeginFrame();
+
+    CRenderText::GetRenderTextInstance()->DrawTextR(L"Hello, DirectX!", DirectX::XMFLOAT2(0, 0));
 
     if (!DX11ViewRender::GetDX11ViewRender()->Draw()) {
         return false;
@@ -116,8 +132,12 @@ bool CFabricRender::RunRender()
 
 void CFabricRender::DestroyFabricRender()
 {
+    pLog->Close();
+
     this->bFabricInit = false;
     fabric.render->Shutdown();
+
+    delete pLog;
 
     _DELETE(fabric.render);
     _CLOSE(fabric.window);

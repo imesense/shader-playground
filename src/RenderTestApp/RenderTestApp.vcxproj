@@ -183,11 +183,13 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets" Condition="Exists('..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" />
+    <Import Project="..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets" Condition="Exists('..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets'))" />
+    <Error Condition="!Exists('..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets'))" />
   </Target>
 </Project>

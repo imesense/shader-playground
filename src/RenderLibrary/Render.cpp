@@ -16,6 +16,13 @@ using namespace DirectX;
 
 #include "Memory.hpp"
 #include "RenderState.hpp"
+#include <SpriteBatch.h>
+#include <SpriteFont.h>
+#include <WICTextureLoader.h>
+#include <CommonStates.h>
+#include <wrl/client.h>
+#include <string>
+#include "RenderText.hpp"
 #include "Render.hpp"
 #include "DepthShader.hpp"
 #include "RenderTarget.hpp"
@@ -28,6 +35,8 @@ using namespace DirectX;
 #include "Helpers.hpp"
 #include "Utils.hpp"
 #include "DX11ViewRender.hpp"
+#include "../MultiLogManager/Exports.hpp"
+#include "../MultiLogManager/Log/Log.hpp"
 
 using namespace ShaderPlayground;
 
@@ -88,6 +97,10 @@ bool Render::CreateDevice(HWND hwnd) {
 
     DX11ViewRender::GetDX11ViewRender()->Init();
 
+    _rendertext = new CRenderText(_pd3dDevice, _pImmediateContext, _width, _height);
+
+    pLog->Write("Render: ", "%p, %p, %p", _pd3dDevice, _pImmediateContext, _rendertext);
+
     return true;
 }
 
@@ -122,6 +135,12 @@ bool Render::Createdevice() {
     HRESULT hr = D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, createDeviceFlags, featureLevels, numFeatureLevels, D3D11_SDK_VERSION, &sd,
         &_pSwapChain, &_pd3dDevice, NULL, &_pImmediateContext);
     if (FAILED(hr)) {
+        return false;
+    }
+
+    hr = _pd3dDevice->CreateDeferredContext(0, &_pSecondContext);
+    if (FAILED(hr)) {
+        // Handle error
         return false;
     }
 
@@ -187,6 +206,10 @@ void Render::BeginFrame() {
     float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f };
     _pImmediateContext->ClearRenderTargetView(_pRenderTargetView, ClearColor);
     _pImmediateContext->ClearDepthStencilView(_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
+
+    // Clear the second rendering context (if needed)
+    _pSecondContext->ClearRenderTargetView(_pRenderTargetView, ClearColor);
+    _pSecondContext->ClearDepthStencilView(_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 void Render::EndFrame() {
@@ -200,11 +223,15 @@ void Render::Shutdown() {
         _pImmediateContext->ClearState();
     }
 
+    delete _rendertext;
+
     _CLOSE(_renderstate);
     _RELEASE(_pDepthStencilView);
     _RELEASE(_pRenderTargetView);
     _RELEASE(_pSwapChain);
     _RELEASE(_pImmediateContext);
+    // Release the second rendering context
+    _RELEASE(_pSecondContext);
     _RELEASE(_pd3dDevice);
 }
 

@@ -2,5 +2,8 @@
 
 namespace ShaderPlayground
 {
-    
+    class CFabricDirectXWindow
+    {
+
+    };
 }

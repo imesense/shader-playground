@@ -27,6 +27,7 @@
     <ClCompile Include="Exports.cpp" />
     <ClCompile Include="FabricRender.cpp" />
     <ClCompile Include="FabricDirectXWindow.cpp" />
+    <ClCompile Include="RenderText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.hpp" />
@@ -63,6 +64,7 @@
     <ClInclude Include="Exports.hpp" />
     <ClInclude Include="FabricRender.hpp" />
     <ClInclude Include="FabricDirectXWindow.hpp" />
+    <ClInclude Include="RenderText.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

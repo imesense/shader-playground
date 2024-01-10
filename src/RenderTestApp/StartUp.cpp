@@ -13,6 +13,13 @@ using namespace DirectX;
 #include <InputManager.hpp>
 #include <Window.hpp>
 #include <RenderState.hpp>
+#include <SpriteBatch.h>
+#include <SpriteFont.h>
+#include <WICTextureLoader.h>
+#include <CommonStates.h>
+#include <wrl/client.h>
+#include <string>
+#include "RenderText.hpp"
 #include <Render.hpp>
 #include <DepthShader.hpp>
 #include <RenderTarget.hpp>

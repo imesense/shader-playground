@@ -10,6 +10,13 @@ using namespace DirectX;
 
 #include "Memory.hpp"
 #include "RenderState.hpp"
+#include <SpriteBatch.h>
+#include <SpriteFont.h>
+#include <WICTextureLoader.h>
+#include <CommonStates.h>
+#include <wrl/client.h>
+#include <string>
+#include "RenderText.hpp"
 #include "Render.hpp"
 #include "DepthShader.hpp"
 #include "RenderTarget.hpp"

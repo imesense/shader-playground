@@ -37,10 +37,12 @@ namespace ShaderPlayground {
         void Initmatrix();
         void Resize();
 
+        CRenderText* _rendertext;
         RenderState* _renderstate;
 
         ID3D11Device* _pd3dDevice;
         ID3D11DeviceContext* _pImmediateContext;
+        ID3D11DeviceContext* _pSecondContext;
         IDXGISwapChain* _pSwapChain;
         ID3D11RenderTargetView* _pRenderTargetView;
         ID3D11DepthStencilView* _pDepthStencilView;

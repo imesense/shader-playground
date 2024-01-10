@@ -199,6 +199,7 @@
     <ClInclude Include="Render.hpp" />
     <ClInclude Include="RenderState.hpp" />
     <ClInclude Include="RenderTarget.hpp" />
+    <ClInclude Include="RenderText.hpp" />
     <ClInclude Include="Shader.hpp" />
     <ClInclude Include="ShadowShader.hpp" />
     <ClInclude Include="StdAfx.h" />
@@ -224,6 +225,7 @@
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="RenderState.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="RenderText.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShadowShader.cpp" />
     <ClCompile Include="StdAfx.cpp">
@@ -240,6 +242,11 @@
     <CopyFileToFolders Include="stone01.jpg" />
     <CopyFileToFolders Include="wall01.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MultiLogManager\MultiLogManager.vcxproj">
+      <Project>{dc429b5c-84ef-4f16-8a2b-26229488106e}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\..\pkg\directxmath.2022.12.12.1\build\native\directxmath.targets" Condition="Exists('..\..\pkg\directxmath.2022.12.12.1\build\native\directxmath.targets')" />
@@ -248,6 +255,7 @@
     <Import Project="..\..\pkg\glfw.3.3.8\build\native\glfw.targets" Condition="Exists('..\..\pkg\glfw.3.3.8\build\native\glfw.targets')" />
     <Import Project="..\..\pkg\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets" Condition="Exists('..\..\pkg\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" />
     <Import Project="..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets" Condition="Exists('..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" />
+    <Import Project="..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets" Condition="Exists('..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -259,5 +267,6 @@
     <Error Condition="!Exists('..\..\pkg\glfw.3.3.8\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\glfw.3.3.8\build\native\glfw.targets'))" />
     <Error Condition="!Exists('..\..\pkg\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\Microsoft.DXSDK.D3DX.9.29.952.8\build\native\Microsoft.DXSDK.D3DX.targets'))" />
     <Error Condition="!Exists('..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\nlohmann.json.3.11.2\build\native\nlohmann.json.targets'))" />
+    <Error Condition="!Exists('..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\pkg\directxtk_uwp.2024.1.1.1\build\native\directxtk_uwp.targets'))" />
   </Target>
 </Project>

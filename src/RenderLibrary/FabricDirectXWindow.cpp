@@ -22,6 +22,13 @@ using namespace DirectX;
 #include "InputListener.hpp"
 #include "InputBinder.hpp"
 #include "RenderState.hpp"
+#include <SpriteBatch.h>
+#include <SpriteFont.h>
+#include <WICTextureLoader.h>
+#include <CommonStates.h>
+#include <wrl/client.h>
+#include <string>
+#include "RenderText.hpp"
 #include "Render.hpp"
 #include "Shader.hpp"
 #include "DepthShader.hpp"
@@ -35,7 +42,8 @@ using namespace DirectX;
 #include "Window.hpp"
 #include "Exports.hpp"
 #include "Helpers.hpp"
-
+#include "../MultiLogManager/Exports.hpp"
+#include "../MultiLogManager/Log/Log.hpp"
 #include "FabricDirectXWindow.hpp"
 
 using namespace ShaderPlayground;
@@ -62,6 +70,7 @@ struct FabricDirectXWindow
 
     DX11ViewRender* render;
     InputBinder* inputBinder;
+
 } fabric_directx_window;
 
 void UpdateWindowState() {
@@ -75,99 +84,16 @@ void UpdateWindowState() {
 }
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-    
-    //switch (message) {
-    //case WM_COMMAND:
-    //    break;
-    //case WM_PAINT:
-    //{
-    //    PAINTSTRUCT ps;
-    //    HDC hdc = BeginPaint(hWnd, &ps);
-
-    //    fabric_directx_window.render->BeginFrame();
-    //    DX11ViewRender::GetDX11ViewRender()->Draw();
-    ////    if (!DX11ViewRender::GetDX11ViewRender()->Draw()) {
-    ////    return 0;
-    ////}
-    //    fabric_directx_window.render->EndFrame();
-
-    //    EndPaint(hWnd, &ps);
-    //}
-    //break;
-    //case WM_DESTROY:
-    //    PostQuitMessage(0);
-    //    break;
-    //default:
-    //    return DefWindowProc(hWnd, message, wParam, lParam);
-    //}
-    //return 0;
-    
-
     switch (message) {
     case WM_CREATE:
         return 0;
     case WM_CLOSE:
-        fabric_directx_window._isexit = true;
         return 0;
-    /*case WM_PAINT:
-    {
-        PAINTSTRUCT ps;
-        HDC hdc = BeginPaint(hWnd, &ps);
-
-        fabric_directx_window.render->BeginFrame();
-        if (!fabric_directx_window.render->Draw())
-            return 0;
-        fabric_directx_window.render->EndFrame();
-
-        EndPaint(hWnd, &ps);
-    }
-    break;*/
     case WM_ACTIVATE:
-        /*if (LOWORD(wparam) != WA_INACTIVE) {
-            objControl._active = true;
-        }
-        else {
-            objControl._active = false;
-        }*/
-        //fabric_directx_window.render->BeginFrame();
-        //if (!fabric_directx_window.render->Draw()) {
-        //    return 0;
-        //}
-        //fabric_directx_window.render->EndFrame();
         return 0;
     case WM_MOVE:
-        fabric_directx_window.posx = LOWORD(lParam);
-        fabric_directx_window.posy = HIWORD(lParam);
-        UpdateWindowState();
         return 0;
     case WM_SIZE:
-        if (!fabric_directx_window.resizing) {
-            return 0;
-        }
-        fabric_directx_window.width = LOWORD(lParam);
-        fabric_directx_window.height = HIWORD(lParam);
-        fabric_directx_window._isresize = true;
-        if (wParam == SIZE_MINIMIZED) {
-            fabric_directx_window._active = false;
-            fabric_directx_window._minimized = true;
-            fabric_directx_window._maximized = false;
-        }
-        else if (wParam == SIZE_MAXIMIZED) {
-            fabric_directx_window._active = true;
-            fabric_directx_window._minimized = false;
-            fabric_directx_window._maximized = true;
-        }
-        else if (wParam == SIZE_RESTORED) {
-            if (fabric_directx_window._minimized) {
-                fabric_directx_window._active = true;
-                fabric_directx_window._minimized = false;
-            }
-            else if (fabric_directx_window._maximized) {
-                fabric_directx_window._active = true;
-                fabric_directx_window._maximized = false;
-            }
-        }
-        UpdateWindowState();
         return 0;
     case WM_MOUSEMOVE:
     case WM_LBUTTONUP:
@@ -183,25 +109,19 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
         /*if (_inputmgr) {
             _inputmgr->Run(msg, wParam, lParam);
         }*/
+        pLog->Write("Update: ", "%s", __FUNCTION__);
         return 0;
     }
-
-    //Log::Get()->Print("ehehehehe");
 
     return DefWindowProcW(hWnd, message, wParam, lParam);
 }
 
-//void RunEvent() {
-//    while (PeekMessage(&fabric_directx_window.msg, 0, 0, 0, PM_REMOVE)) {
-//        TranslateMessage(&fabric_directx_window.msg);
-//        DispatchMessage(&fabric_directx_window.msg);
-//        //Log::Get()->Print("Active3");
-//    }
-//    //Log::Get()->Print("Active5");
-//}
-
 RENDERLIBRARY_API HWND CreateFabricDirectXWindow() {
     const wchar_t CLASS_NAME[] = L"DirectX11";
+
+    pLog = new CLog();
+    pLog->CreateFileSettings();
+    pLog->CreateLog();
 
     fabric_directx_window.render = new DX11ViewRender();
     fabric_directx_window.inputBinder = new InputBinder(fabric_directx_window.render);
@@ -218,117 +138,48 @@ RENDERLIBRARY_API HWND CreateFabricDirectXWindow() {
 
     RegisterClassExW(&wc);
 
-    // Create the window.
-    //RECT rect{};
-
-    //const int top = rect.top;
-    //const int left = rect.left;
-    //const int init_width = rect.right - left;
-    //const int init_height = rect.bottom - top;
-
     fabric_directx_window.window = CreateWindowW(
-        CLASS_NAME, // Window class
-        L"DirectX11 Window",     // Window text
-
-        // Window style
-        WS_POPUP | WS_VISIBLE | WS_SYSMENU,
-
-        // Size and position
-        CW_USEDEFAULT, 0, CW_USEDEFAULT, 0,
-
-        nullptr, // Parent window
-        nullptr, // Menu
-        nullptr, // Instance handle
-        nullptr  // Additional application data
+        CLASS_NAME,
+        L"DirectX11 Window",
+        WS_POPUP | WS_VISIBLE | WS_SYSMENU, CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, 
+        nullptr, nullptr, nullptr, nullptr
     );
-    //fabric_directx_window.window = CreateWindowW(
-    //    0,						// extended style
-    //    wc.lpszClassName,		// window class name
-    //    "DirectX11 Window",				// instance title
-    //    WS_CHILD,				// window style
-    //    left,					// initial window left position
-    //    top,					// initial window top position
-    //    init_width,				// initial window width
-    //    init_height,			// initial window height
-    //    NULL,					// handle to parent window
-    //    NULL,					// handle to menu
-    //    NULL,					// instance of this application
-    //    NULL					// extra creation parameters
-    //);
-    //fabric_directx_window._render = fabric_directx_window.render;
-
-    //if (!fabric_directx_window.render->CreateDevice(fabric_directx_window.window)) {
-       // Log::Get()->Err("Не удалось создать рендер");
-    //    return NULL;
-    //}
-    //else
-    //{
-    //   // Log::Get()->Err("DirectX11 создан");
-    //}
+   
+    pLog->Write("Window HWND pointer: ", "%p", fabric_directx_window.window);
 
     ShowWindow(fabric_directx_window.window, SW_SHOWNORMAL);
-    //if (!fabric_directx_window.render->CreateDevice(fabric_directx_window.window))
-    //{
-    //    return NULL;
-   // }
     UpdateWindow(fabric_directx_window.window);
 
     return fabric_directx_window.window;
 }
 
-RENDERLIBRARY_API void CreateScene(HWND ptr)
-{
+RENDERLIBRARY_API void CreateScene(HWND ptr) {
     fabric_directx_window.render->CreateDevice(ptr);
 }
 
-RENDERLIBRARY_API void MessageLoop()
-{
-    /*while (GetMessage(&fabric_directx_window.msg, 0, 0, 0))
-    {
-        TranslateMessage(&fabric_directx_window.msg);
-        DispatchMessage(&fabric_directx_window.msg);
-    }*/
+RENDERLIBRARY_API void MessageLoop() {
     while (PeekMessage(&fabric_directx_window.msg, 0, 0, 0, PM_REMOVE)) {
         TranslateMessage(&fabric_directx_window.msg);
         DispatchMessage(&fabric_directx_window.msg);
-       // Log::Get()->Print("Active3");
     }
-    //Log::Get()->Print("Active5");
 }
 
-RENDERLIBRARY_API void DestroyFabricDirectXWindow()
-{
+RENDERLIBRARY_API void DestroyFabricDirectXWindow() {
+    delete pLog;
     delete fabric_directx_window.window;
 }
 
-RENDERLIBRARY_API bool Frame()
-{
+RENDERLIBRARY_API bool Frame() {
     MessageLoop();
-     //обрабатываем события окна
-    //_wnd->RunEvent();
-    //Log::Get()->Print("- %i", __LINE__);
-    // если окно неактивно - завершаем кадр
-    /*if (!objControl._active) {
-        return true;
-    }*/
-   // Log::Get()->Print("- %i", __LINE__);
-    // если окно было закрыто, завершаем работу движка
-    if (fabric_directx_window._isexit) {
-        return false;
-    }
-    //Log::Get()->Print("- %i", __LINE__);
-    // если окно изменило размер
-    if (fabric_directx_window.resizing) {
-    }
-    //Log::Get()->Print("- %i", __LINE__);
+
     fabric_directx_window.render->BeginFrame();
+
     if (!fabric_directx_window.render->Draw()) {
         return false;
     }
+
     fabric_directx_window.render->EndFrame();
 
-    //Log::Get()->Print("Active0");
-   // Log::Get()->Print("- %i", __LINE__);
     return true;
 }
 
