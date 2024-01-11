@@ -6,6 +6,7 @@
 #include <string>
 #include <unordered_set>
 #include <vector>
+#include <map>
 #include <d3d11.h>
 #include <DirectXMath.h>
 #include <stdio.h>
@@ -17,8 +18,6 @@ using namespace DirectX;
 #include "Memory.hpp"
 #include "RenderState.hpp"
 #include <wrl/client.h>
-#include <string>
-#include "RenderText.hpp"
 #include "Render.hpp"
 #include "DepthShader.hpp"
 #include "RenderTarget.hpp"
@@ -33,6 +32,8 @@ using namespace DirectX;
 #include "DX11ViewRender.hpp"
 #include "../MultiLogManager/Exports.hpp"
 #include "../MultiLogManager/Log/Log.hpp"
+#include "BitmapFont.h"
+#include "RenderText.hpp"
 
 using namespace ShaderPlayground;
 
@@ -93,7 +94,22 @@ bool Render::CreateDevice(HWND hwnd) {
 
     DX11ViewRender::GetDX11ViewRender()->Init();
 
-    return true
+    m_font = new BitmapFont(this);
+    if (!m_font->Init((char*)"font.fnt"))
+        return false;
+
+    text1 = new Text(this, m_font);
+    text1->Init(L"Hello", 800, 600);
+
+    text2 = new Text(this, m_font);
+    text2->Init(L"World", 800, 600);
+
+    text3 = new Text(this, m_font);
+    //text3->TestInit("Привет Мир");
+
+    text3->Init(L"Привет Мир", 800, 600);
+
+    return true;
 }
 
 bool Render::Createdevice() {
@@ -127,12 +143,6 @@ bool Render::Createdevice() {
     HRESULT hr = D3D11CreateDeviceAndSwapChain(NULL, D3D_DRIVER_TYPE_HARDWARE, NULL, createDeviceFlags, featureLevels, numFeatureLevels, D3D11_SDK_VERSION, &sd,
         &_pSwapChain, &_pd3dDevice, NULL, &_pImmediateContext);
     if (FAILED(hr)) {
-        return false;
-    }
-
-    hr = _pd3dDevice->CreateDeferredContext(0, &_pSecondContext);
-    if (FAILED(hr)) {
-        // Handle error
         return false;
     }
 
@@ -198,13 +208,12 @@ void Render::BeginFrame() {
     float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f };
     _pImmediateContext->ClearRenderTargetView(_pRenderTargetView, ClearColor);
     _pImmediateContext->ClearDepthStencilView(_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
-
-    // Clear the second rendering context (if needed)
-    _pSecondContext->ClearRenderTargetView(_pRenderTargetView, ClearColor);
-    _pSecondContext->ClearDepthStencilView(_pDepthStencilView, D3D11_CLEAR_DEPTH, 1.0f, 0);
 }
 
 void Render::EndFrame() {
+    text1->RenderText(1.0, 1.0, 0.0, 100, 100);
+    text2->RenderText(1.0, 0.0, 1.0, 290, 100);
+    text3->RenderText(0.0, 1.0, 1.0, 100, 180);
     _pSwapChain->Present(this->UVsyncFlag, 0);
 }
 
@@ -220,8 +229,6 @@ void Render::Shutdown() {
     _RELEASE(_pRenderTargetView);
     _RELEASE(_pSwapChain);
     _RELEASE(_pImmediateContext);
-    // Release the second rendering context
-    _RELEASE(_pSecondContext);
     _RELEASE(_pd3dDevice);
 }
 

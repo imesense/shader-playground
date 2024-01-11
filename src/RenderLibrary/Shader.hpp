@@ -12,9 +12,6 @@ namespace ShaderPlayground {
         D3D11_INPUT_ELEMENT_DESC* _layoutformat;
         unsigned int _numlayout;
 
-    private:
-        HRESULT Compileshaderfromfile(const char* FileName, LPCSTR EntryPoint, LPCSTR ShaderModel, ID3DBlob** ppBlobOut);
-
     public:
         RENDERLIBRARY_API Shader(Render* render);
 
@@ -24,6 +21,8 @@ namespace ShaderPlayground {
             unsigned int InputSlot = 0, bool AlignedByteOffset = true,
             D3D11_INPUT_CLASSIFICATION InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA,
             unsigned int InstanceDataStepRate = 0);
+
+        HRESULT Compileshaderfromfile(const char* FileName, LPCSTR EntryPoint, LPCSTR ShaderModel, ID3DBlob** ppBlobOut);
 
         RENDERLIBRARY_API bool CreateShader(const char* namevs, const char* nameps);
         RENDERLIBRARY_API bool AddTexture(const wchar_t* name);

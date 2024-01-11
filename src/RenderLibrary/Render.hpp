@@ -2,8 +2,10 @@
 
 namespace ShaderPlayground {
     class Render {
+        friend class Text;
+        friend class BitmapFont;
         friend class Shader;
-
+        
     public:
         RENDERLIBRARY_API Render();
         RENDERLIBRARY_API virtual ~Render();
@@ -31,17 +33,36 @@ namespace ShaderPlayground {
         //    _aligned_free(p);
         //}
 
+        ID3D11Device* GetDeviceD3D11()
+        {
+            return _pd3dDevice;
+        }
+
+        ID3D11DeviceContext* GetDeviceD3D11Context()
+        {
+            return _pImmediateContext;
+        }
+
+        XMMATRIX GetOrTho()
+        {
+            return this->_ortho;
+        }
+
     protected:
         bool Createdevice();
         bool Createdepthstencil();
         void Initmatrix();
         void Resize();
 
+        BitmapFont* m_font;
+        Text* text1;
+        Text* text2;
+        Text* text3;
+
         RenderState* _renderstate;
 
         ID3D11Device* _pd3dDevice;
         ID3D11DeviceContext* _pImmediateContext;
-        ID3D11DeviceContext* _pSecondContext;
         IDXGISwapChain* _pSwapChain;
         ID3D11RenderTargetView* _pRenderTargetView;
         ID3D11DepthStencilView* _pDepthStencilView;

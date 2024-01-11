@@ -52,7 +52,7 @@ bool Window::Create()
     wnd.lpszClassName = L"D3D11F";
     wnd.cbSize = sizeof(WNDCLASSEX);
 
-    if (!RegisterClassEx(&wnd)) {
+    if (!RegisterClassExW(&wnd)) {
         //Log::Get()->Err("Не удалось зарегистрировать окно");
         return false;
     }
@@ -66,7 +66,7 @@ bool Window::Create()
     long lleft = (long)posx;
     long ltop = (long)posy;
 
-    _hwnd = CreateWindowEx(NULL, 
+    _hwnd = CreateWindowExW(NULL, 
         wnd.lpszClassName,
         L"DX11 Window",
         WS_OVERLAPPEDWINDOW | WS_VISIBLE, 

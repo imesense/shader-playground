@@ -3,6 +3,7 @@
 #include <list>
 #include <string>
 #include <unordered_set>
+#include <map>
 #include <d3d11.h>
 #include <DirectXMath.h>
 
@@ -14,8 +15,6 @@ using namespace DirectX;
 #include <Window.hpp>
 #include <RenderState.hpp>
 #include <wrl/client.h>
-#include <string>
-#include "RenderText.hpp"
 #include <Render.hpp>
 #include <DepthShader.hpp>
 #include <RenderTarget.hpp>
@@ -28,6 +27,8 @@ using namespace DirectX;
 #include <InputBinder.hpp>
 #include <FabricRender.hpp>
 #include <Exports.hpp>
+#include "BitmapFont.h"
+#include "RenderText.hpp"
 
 using namespace ShaderPlayground;
 

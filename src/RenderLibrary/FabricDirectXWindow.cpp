@@ -11,6 +11,7 @@
 #include <stddef.h>
 #include <string>
 #include <unordered_set>
+#include <map>
 #include <vector>
 #include <d3d11.h>
 #include <DirectXMath.h>
@@ -23,8 +24,6 @@ using namespace DirectX;
 #include "InputBinder.hpp"
 #include "RenderState.hpp"
 #include <wrl/client.h>
-#include <string>
-#include "RenderText.hpp"
 #include "Render.hpp"
 #include "Shader.hpp"
 #include "DepthShader.hpp"
@@ -41,6 +40,8 @@ using namespace DirectX;
 #include "../MultiLogManager/Exports.hpp"
 #include "../MultiLogManager/Log/Log.hpp"
 #include "FabricDirectXWindow.hpp"
+#include "BitmapFont.h"
+#include "RenderText.hpp"
 
 using namespace ShaderPlayground;
 

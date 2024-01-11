@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <unordered_set>
 #include <vector>
+#include <map>
 #include <d3d11.h>
 #include <DirectXMath.h>
 
@@ -11,8 +12,6 @@ using namespace DirectX;
 #include "Memory.hpp"
 #include "RenderState.hpp"
 #include <wrl/client.h>
-#include <string>
-#include "RenderText.hpp"
 #include "Render.hpp"
 #include "Shader.hpp"
 #include "Light.hpp"
@@ -27,6 +26,8 @@ using namespace DirectX;
 #include "Light.hpp"
 #include "Helpers.hpp"
 #include "Utils.hpp"
+#include "BitmapFont.h"
+#include "RenderText.hpp"
 
 using namespace ShaderPlayground;
 

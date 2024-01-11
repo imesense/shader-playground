@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <d3d11.h>
+#include <map>
 #include <DirectXMath.h>
 #include <D3DCompiler.h>
 #include <D3DX11async.h>
@@ -10,11 +11,11 @@ using namespace DirectX;
 
 #include "RenderState.hpp"
 #include <wrl/client.h>
-#include <string>
-#include "RenderText.hpp"
 #include "Render.hpp"
 #include "Shader.hpp"
 #include "Helpers.hpp"
+#include "BitmapFont.h"
+#include "RenderText.hpp"
 
 #define MAXLAYOUT 8
 
@@ -147,7 +148,7 @@ HRESULT Shader::Compileshaderfromfile(const char* FileName, LPCSTR EntryPoint, L
 
 bool Shader::AddTexture(const wchar_t* name) {
     ID3D11ShaderResourceView* texture = nullptr;
-    HRESULT hr = D3DX11CreateShaderResourceViewFromFile(_render->_pd3dDevice, name, NULL, NULL, &texture, NULL);
+    HRESULT hr = D3DX11CreateShaderResourceViewFromFileW(_render->_pd3dDevice, name, NULL, NULL, &texture, NULL);
     if (FAILED(hr)) {
         //Log::Get()->Err("Не удалось загрузить текстуру %ls", name);
         return false;
