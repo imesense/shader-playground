@@ -1,3 +1,5 @@
+using System.Reactive;
+
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
@@ -10,6 +12,13 @@ public class MainViewModel : ReactiveObject {
         _menuViewModel = menuViewModel;
 
         MenuContext = _menuViewModel;
+
+        PlayCommand = ReactiveCommand.Create(() => {
+        });
+        StopCommand = ReactiveCommand.Create(() => {
+        });
+        SettingsCommand = ReactiveCommand.Create(() => {
+        });
     }
 
 #if DEBUG
@@ -17,6 +26,9 @@ public class MainViewModel : ReactiveObject {
         _menuViewModel = null!;
 
         MenuContext = null!;
+        PlayCommand = null!;
+        StopCommand = null!;
+        SettingsCommand = null!;
     }
 #endif
 
@@ -40,4 +52,14 @@ public class MainViewModel : ReactiveObject {
 
     [Reactive]
     public ReactiveObject MenuContext { get; init; }
+
+    [Reactive]
+    public string Resolution { get; set; } = "800x600";
+
+    [Reactive]
+    public string Frame { get; set; } = "60";
+
+    public ReactiveCommand<Unit, Unit> PlayCommand { get; private set; }
+    public ReactiveCommand<Unit, Unit> StopCommand { get; private set; }
+    public ReactiveCommand<Unit, Unit> SettingsCommand { get; private set; }
 }
