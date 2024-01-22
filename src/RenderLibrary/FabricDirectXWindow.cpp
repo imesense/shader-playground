@@ -40,7 +40,7 @@ using namespace DirectX;
 #include "../MultiLogManager/Exports.hpp"
 #include "../MultiLogManager/Log/Log.hpp"
 #include "FabricDirectXWindow.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;

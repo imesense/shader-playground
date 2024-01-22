@@ -39,10 +39,20 @@ using namespace DirectX;
 #include "FabricRender.hpp"
 #include "../MultiLogManager/Exports.hpp"
 #include "../MultiLogManager/Log/Log.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;
+
+Text::Text()
+{
+
+}
+
+Text::~Text()
+{
+
+}
 
 Text::Text(Render* render, BitmapFont* font)
 {
@@ -70,17 +80,18 @@ bool Text::Init(const std::wstring& text, int screenWidth, int screenHeight)
 
 bool Text::m_InitBuffers(const std::wstring& text, int screenWidth, int screenHeight)
 {
-	int vertnum = text.size() * 6;
+	UINT vertnum = cast<UINT>(text.size()) * 6;
+
 	VertexFont* vertex = new VertexFont[vertnum];
 	if (!vertex)
 		return false;
 
 	m_font->BuildVertexArray(vertex, text.c_str(), screenWidth, screenHeight);
 
-	m_numindex = text.size() * 6;
+	m_numindex = cast<UINT>(text.size()) * 6;
 	unsigned long* indices = new unsigned long[m_numindex];
 
-	for (int i = 0; i < m_numindex; i++)
+	for (UINT i = 0; i < m_numindex; i++)
 		indices[i] = i;
 
 	HRESULT result;
@@ -111,8 +122,8 @@ bool Text::m_InitBuffers(const std::wstring& text, int screenWidth, int screenHe
 	if (FAILED(result))
 		return false;
 
-	_DELETE_ARRAY(vertex);
-	_DELETE_ARRAY(indices);
+    deleteArray(vertex);
+    deleteArray(indices);
 
 	return true;
 }
@@ -125,8 +136,8 @@ void Text::RenderText(float r, float g, float b, float x, float y)
 
 void Text::Close()
 {
-	_RELEASE(m_vertexBuffer);
-	_RELEASE(m_indexBuffer);
+    ReleasePtr(m_vertexBuffer);
+    ReleasePtr(m_indexBuffer);
 }
 
 void Text::m_RenderBuffers()

@@ -14,7 +14,7 @@ using namespace DirectX;
 #include "Render.hpp"
 #include "Shader.hpp"
 #include "Helpers.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 #define MAXLAYOUT 8
@@ -28,6 +28,11 @@ Shader::Shader(Render* render) {
     _layout = nullptr;
     _layoutformat = nullptr;
     _numlayout = 0;
+}
+
+Shader::~Shader()
+{
+
 }
 
 void Shader::AddInputElementDesc(const char* SemanticName, DXGI_FORMAT format) {
@@ -119,10 +124,11 @@ bool Shader::CreateShader(const char* namevs, const char* nameps) {
         //Log::Get()->Err("Не удалось создать формат ввода");
         return false;
     }
-    _DELETE_ARRAY(_layoutformat);
 
-    _RELEASE(vertexShaderBuffer);
-    _RELEASE(pixelShaderBuffer);
+    deleteArray(_layoutformat);
+
+    ReleasePtr(vertexShaderBuffer);
+    ReleasePtr(pixelShaderBuffer);
 
     return true;
 }
@@ -142,7 +148,7 @@ HRESULT Shader::Compileshaderfromfile(const char* FileName, LPCSTR EntryPoint, L
         //Log::Get()->Err((char*)pErrorBlob->GetBufferPointer());
     }
 
-    _RELEASE(pErrorBlob);
+    ReleasePtr(pErrorBlob);
     return hr;
 }
 
@@ -163,17 +169,20 @@ void Shader::Draw() {
     _render->_pImmediateContext->IASetInputLayout(_layout);
     _render->_pImmediateContext->VSSetShader(_vertexShader, NULL, 0);
     _render->_pImmediateContext->PSSetShader(_pixelShader, NULL, 0);
+
     if (!_textures.empty()) {
         _render->_pImmediateContext->PSSetShaderResources(0, static_cast<UINT>(_textures.size()), &_textures[0]);
     }
 }
 
 void Shader::Close() {
-    _RELEASE(_vertexShader);
-    _RELEASE(_pixelShader);
-    _RELEASE(_layout);
+    ReleasePtr(_vertexShader);
+    ReleasePtr(_pixelShader);
+    ReleasePtr(_layout);
+
     for (int i = 0; i < _textures.size(); i++) {
-        _RELEASE(_textures[i]);
+        ReleasePtr(_textures[i]);
     }
+
     _textures.clear();
 }

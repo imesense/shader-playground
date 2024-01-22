@@ -21,13 +21,23 @@ using namespace DirectX;
 #include "Camera.hpp"
 #include "DX11ViewRender.hpp"
 #include "Helpers.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;
 
 const int SHADOWMAP_WIDTH = 1024;
 const int SHADOWMAP_HEIGHT = 1024;
+
+RenderTarget::RenderTarget()
+{
+
+}
+
+RenderTarget::~RenderTarget()
+{
+
+}
 
 RenderTarget::RenderTarget(DX11ViewRender* render) {
     _RTTexture = nullptr;
@@ -127,11 +137,11 @@ bool RenderTarget::Init(float screenNear, float screenDepth) {
 }
 
 void RenderTarget::Close() {
-    _RELEASE(_DSV);
-    _RELEASE(_DSTexture);
-    _RELEASE(_SRV);
-    _RELEASE(_RTV);
-    _RELEASE(_RTTexture);
+    ReleasePtr(_DSV);
+    ReleasePtr(_DSTexture);
+    ReleasePtr(_SRV);
+    ReleasePtr(_RTV);
+    ReleasePtr(_RTTexture);
 }
 
 void RenderTarget::SetRenderTarget() {

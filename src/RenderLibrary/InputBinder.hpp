@@ -8,9 +8,10 @@ namespace ShaderPlayground {
         DX11ViewRender* _render;
 
     public:
-        RENDERLIBRARY_API InputBinder(DX11ViewRender* render);
+        InputBinder(DX11ViewRender* render);
+        virtual ~InputBinder();
 
-        RENDERLIBRARY_API bool KeyPressed(const KeyEvent& arg);
-        RENDERLIBRARY_API bool KeyReleased(const KeyEvent& arg);
+        bool KeyPressed(const KeyEvent& arg);
+        bool KeyReleased(const KeyEvent& arg);
     };
 }

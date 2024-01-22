@@ -24,13 +24,21 @@ using namespace DirectX;
 #include "DX11ViewRender.hpp"
 #include "InputBinder.hpp"
 #include "Helpers.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
+#include "../MultiLogManager/Exports.hpp"
+#include "../MultiLogManager/Log/Log.hpp"
 
 using namespace ShaderPlayground;
 
 InputBinder::InputBinder(DX11ViewRender* render) {
+    pLog->Write("Init", "[%s]", __FUNCTION__);
     _render = render;
+}
+
+InputBinder::~InputBinder()
+{
+
 }
 
 bool InputBinder::KeyPressed(const KeyEvent& arg) {

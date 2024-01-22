@@ -40,19 +40,10 @@ using namespace DirectX;
 #include "FabricRender.hpp"
 #include "../MultiLogManager/Exports.hpp"
 #include "../MultiLogManager/Log/Log.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;
-
-//inline wchar_t* CharToWChar(char* mbString)
-//{
-//    int len = 0;
-//    len = (int)strlen(mbString) + 1;
-//    wchar_t* ucString = new wchar_t[len];
-//    mbstowcs(ucString, mbString, len);
-//    return ucString;
-//}
 
 BitmapFont::BitmapFont(Render* render)
 {
@@ -68,8 +59,15 @@ BitmapFont::BitmapFont(Render* render)
 	m_HeightTex = 0;
 }
 
+BitmapFont::~BitmapFont()
+{
+
+}
+
 bool BitmapFont::Init(const char* fontFilename)
 {
+    pLog->Write("Init", "[%s]: %s", __FUNCTION__, fontFilename);
+
 	if (!m_parse(fontFilename))
 		return false;
 
@@ -83,8 +81,16 @@ bool BitmapFont::Init(const char* fontFilename)
 	std::string vsPath = CombinedPathForResources(vertexShader);
 	std::string psPath = CombinedPathForResources(pixelShader);
 
-	if (!m_InitShader(vsPath.c_str(), psPath.c_str()))
-		return false;
+    pLog->Write("Init Shader", "[%s]: %s", __FUNCTION__, vsPath.c_str());
+    pLog->Write("Init Shader", "[%s]: %s", __FUNCTION__, psPath.c_str());
+
+    if (!m_InitShader(vsPath.c_str(), psPath.c_str()))
+    {
+        pLog->Write("Not found shaders", "[%s]", __FUNCTION__);
+        return false;
+    }
+
+    pLog->Write("Init", "[%s]: OK", __FUNCTION__);
 
 	return true;
 }
@@ -139,29 +145,18 @@ bool BitmapFont::m_parse(const char* fontFilename)
 				{
 					Converter >> str;
 
-					/*
-					inline wchar_t* CharToWChar(char* mbString)
-					{
-						int len = 0;
-						len = (int)strlen(mbString) + 1;
-						wchar_t* ucString = new wchar_t[len];
-						mbstowcs(ucString, mbString, len);
-						return ucString;
-					}
-					*/
-
                     auto l_CharToWChar = [&](char* mbString) -> wchar_t*
-                        {
-                            int len = 0;
-                            len = (int)strlen(mbString) + 1;
-                            wchar_t* ucString = new wchar_t[len];
-                            mbstowcs(ucString, mbString, len);
-                            return ucString;
-                        };
+                    {
+                        int len = 0;
+                        len = (int)strlen(mbString) + 1;
+                        wchar_t* ucString = new wchar_t[len];
+                        mbstowcs(ucString, mbString, len);
+                        return ucString;
+                    };
 
 					wchar_t* name = l_CharToWChar((char*)str.substr(1, Value.length() - 2).c_str());
 					m_file = name;
-					_DELETE_ARRAY(name);
+                    deleteArray(name);
 				}
 			}
 		}
@@ -207,25 +202,42 @@ bool BitmapFont::m_parse(const char* fontFilename)
 
 bool BitmapFont::m_InitShader(const char* vsFilename, const char* psFilename)
 {
+    ID3DBlob* pixelShaderBuffer = nullptr;
 	ID3DBlob* vertexShaderBuffer = nullptr;
-	HRESULT hr = _shader->Compileshaderfromfile(vsFilename, "VS", "vs_4_0", &vertexShaderBuffer);
-	if (FAILED(hr))
-		return false;
 
-	ID3DBlob* pixelShaderBuffer = nullptr;
-	HRESULT result = _shader->Compileshaderfromfile(psFilename, "PS", "ps_4_0", &pixelShaderBuffer);
-	if (FAILED(hr))
-		return false;
+	HRESULT result = _shader->Compileshaderfromfile(vsFilename, "VS", "vs_4_0", &vertexShaderBuffer);
+
+    if (FAILED(result))
+    {
+        pLog->Write("Error", "[%s]: vs shader: %s", __FUNCTION__, vsFilename);
+        return false;
+    }
+
+	result = _shader->Compileshaderfromfile(psFilename, "PS", "ps_4_0", &pixelShaderBuffer);
+
+    if (FAILED(result))
+    {
+        pLog->Write("Error", "[%s]: ps shader: %s", __FUNCTION__, psFilename);
+        return false;
+    }
 
 	result = m_render->GetDeviceD3D11()->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), NULL, &m_vertexShader);
-	if (FAILED(result))
-		return false;
+
+    if (FAILED(result))
+    {
+        pLog->Write("Error", "[%s]: CreateVertexShader", __FUNCTION__);
+        return false;
+    }
 
 	result = m_render->GetDeviceD3D11()->CreatePixelShader(pixelShaderBuffer->GetBufferPointer(), pixelShaderBuffer->GetBufferSize(), NULL, &m_pixelShader);
-	if (FAILED(result))
-		return false;
 
-	D3D11_INPUT_ELEMENT_DESC polygonLayout[2];
+    if (FAILED(result))
+    {
+        pLog->Write("Error", "[%s]: CreatePixelShader", __FUNCTION__);
+        return false;
+    }
+
+    D3D11_INPUT_ELEMENT_DESC polygonLayout[2]{};
 	polygonLayout[0].SemanticName = "POSITION";
 	polygonLayout[0].SemanticIndex = 0;
 	polygonLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
@@ -244,13 +256,17 @@ bool BitmapFont::m_InitShader(const char* vsFilename, const char* psFilename)
 	unsigned int numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
 	result = m_render->GetDeviceD3D11()->CreateInputLayout(polygonLayout, numElements, vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), &m_layout);
-	if (FAILED(result))
-		return false;
 
-	_RELEASE(vertexShaderBuffer);
-	_RELEASE(pixelShaderBuffer);
+    if (FAILED(result))
+    {
+        pLog->Write("Error", "[%s]: m_render->GetDeviceD3D11()->CreateInputLayout", __FUNCTION__);
+        return false;
+    }
 
-	D3D11_BUFFER_DESC BufferDesc;
+    ReleasePtr(vertexShaderBuffer);
+    ReleasePtr(pixelShaderBuffer);
+
+    D3D11_BUFFER_DESC BufferDesc{};
 	BufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	BufferDesc.ByteWidth = sizeof(ConstantBuffer);
 	BufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
@@ -259,8 +275,12 @@ bool BitmapFont::m_InitShader(const char* vsFilename, const char* psFilename)
 	BufferDesc.StructureByteStride = 0;
 
 	result = m_render->GetDeviceD3D11()->CreateBuffer(&BufferDesc, NULL, &m_constantBuffer);
-	if (FAILED(result))
-		return false;
+
+    if (FAILED(result))
+    {
+        pLog->Write("Error", "[%s]: m_render->GetDeviceD3D11()->CreateBuffer", __FUNCTION__);
+        return false;
+    }
 
 	BufferDesc.Usage = D3D11_USAGE_DEFAULT;
 	BufferDesc.ByteWidth = sizeof(PixelBufferType);
@@ -270,10 +290,14 @@ bool BitmapFont::m_InitShader(const char* vsFilename, const char* psFilename)
 	BufferDesc.StructureByteStride = 0;
 
 	result = m_render->GetDeviceD3D11()->CreateBuffer(&BufferDesc, NULL, &m_pixelBuffer);
-	if (FAILED(result))
-		return false;
 
-	D3D11_SAMPLER_DESC samplerDesc;
+    if (FAILED(result))
+    {
+        pLog->Write("Error", "[%s]: m_render->GetDeviceD3D11()->CreateBuffer", __FUNCTION__);
+        return false;
+    }
+
+    D3D11_SAMPLER_DESC samplerDesc{};
 	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
 	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
 	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
@@ -289,8 +313,12 @@ bool BitmapFont::m_InitShader(const char* vsFilename, const char* psFilename)
 	samplerDesc.MaxLOD = D3D11_FLOAT32_MAX;
 
 	result = m_render->GetDeviceD3D11()->CreateSamplerState(&samplerDesc, &m_sampleState);
-	if (FAILED(result))
-		return false;
+
+    if (FAILED(result))
+    {
+        pLog->Write("Error", "[%s]: m_render->GetDeviceD3D11()->CreateSamplerState", __FUNCTION__);
+        return false;
+    }
 
 	return true;
 }
@@ -303,6 +331,7 @@ void BitmapFont::BuildVertexArray(VertexFont* vertices, const wchar_t* sentence,
 	float drawY = (float)screenHeight / 2;
 
 	int index = 0;
+
 	for (int i = 0; i < numLetters; i++)
 	{
 		float CharX = m_Chars[sentence[i]].srcX;
@@ -380,11 +409,13 @@ void BitmapFont::m_RenderShader(unsigned int index)
 
 void BitmapFont::Close()
 {
-	_RELEASE(m_constantBuffer);
-	_RELEASE(m_pixelBuffer);
-	_RELEASE(m_vertexShader);
-	_RELEASE(m_pixelShader);
-	_RELEASE(m_layout);
-	_RELEASE(m_sampleState);
-	_RELEASE(m_texture);
+    ReleasePtr(m_constantBuffer);
+    ReleasePtr(m_pixelBuffer);
+    ReleasePtr(m_vertexShader);
+    ReleasePtr(m_pixelShader);
+    ReleasePtr(m_layout);
+    ReleasePtr(m_sampleState);
+    ReleasePtr(m_texture);
+
+    pLog->Write("Memory", "%p, %p, %p, %p, %p, %p", m_constantBuffer, m_pixelBuffer, m_vertexShader, m_pixelShader, m_layout, m_sampleState, m_texture);
 }

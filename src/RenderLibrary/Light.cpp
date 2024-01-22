@@ -8,6 +8,16 @@ using namespace DirectX;
 
 using namespace ShaderPlayground;
 
+Light::Light()
+{
+
+}
+
+Light::~Light()
+{
+
+}
+
 void Light::SetAmbientColor(float red, float green, float blue, float alpha) {
     _ambientColor = XMFLOAT4(red, green, blue, alpha);
 }

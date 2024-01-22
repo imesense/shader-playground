@@ -9,6 +9,16 @@ using namespace DirectX;
 
 using namespace ShaderPlayground;
 
+Frustum::Frustum()
+{
+
+}
+
+Frustum::~Frustum()
+{
+
+}
+
 void Frustum::ConstructFrustum(float screenDepth, CXMMATRIX projectionMatrix, CXMMATRIX viewMatrix) {
     XMMATRIX projMatrix = projectionMatrix;
 

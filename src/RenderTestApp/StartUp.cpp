@@ -27,7 +27,7 @@ using namespace DirectX;
 #include <InputBinder.hpp>
 #include <FabricRender.hpp>
 #include <Exports.hpp>
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;

@@ -24,7 +24,7 @@ using namespace DirectX;
 #include "Helpers.hpp"
 #include "Utils.hpp"
 #include <string>
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;
@@ -53,6 +53,11 @@ DX11ViewRender::DX11ViewRender() {
     _key_s = false;
     _key_x = false;
     GetInstance = this;
+}
+
+DX11ViewRender::~DX11ViewRender()
+{
+
 }
 
 bool DX11ViewRender::Init() {
@@ -304,15 +309,15 @@ void DX11ViewRender::RenderSceneToWindow() {
 }
 
 void DX11ViewRender::Close() {
-    _CLOSE(_RenderTexture);
-    _CLOSE(_DepthShader);
-    _CLOSE(_ShadowShader);
+    ClosePtr(_RenderTexture);
+    ClosePtr(_DepthShader);
+    ClosePtr(_ShadowShader);
 
-    _RELEASE(_vb_ground);
-    _RELEASE(_ib_ground);
-    _RELEASE(_vb_box);
-    _RELEASE(_ib_box);
-    _RELEASE(_texture_ground);
-    _RELEASE(_texture_box1);
-    _RELEASE(_texture_box2);
+    ReleasePtr(_vb_ground);
+    ReleasePtr(_ib_ground);
+    ReleasePtr(_vb_box);
+    ReleasePtr(_ib_box);
+    ReleasePtr(_texture_ground);
+    ReleasePtr(_texture_box1);
+    ReleasePtr(_texture_box2);
 }

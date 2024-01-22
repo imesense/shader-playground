@@ -25,8 +25,7 @@ using namespace DirectX;
 #include <DX11ViewRender.hpp>
 #include <InputListener.hpp>
 #include <InputBinder.hpp>
-
-#include <BitmapFont.h>
+#include <BitmapFont.hpp>
 #include <RenderText.hpp>
 
 using namespace ShaderPlayground;

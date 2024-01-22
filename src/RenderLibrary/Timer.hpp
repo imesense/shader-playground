@@ -10,9 +10,12 @@ namespace ShaderPlayground {
         float _frameTime;
 
     public:
-        RENDERLIBRARY_API bool Init();
-        RENDERLIBRARY_API void Frame();
+        Timer();
+        virtual ~Timer();
 
-        RENDERLIBRARY_API float GetTime() const;
+        bool Init();
+        void Frame();
+
+        float GetTime() const;
     };
 }

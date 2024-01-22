@@ -8,8 +8,11 @@ namespace ShaderPlayground {
         unsigned long _startTime;
 
     public:
-        RENDERLIBRARY_API void Initialize();
-        RENDERLIBRARY_API void Frame();
-        RENDERLIBRARY_API int GetFps() const;
+        FpsCounter();
+        virtual ~FpsCounter();
+
+        void Initialize();
+        void Frame();
+        int GetFps() const;
     };
 }

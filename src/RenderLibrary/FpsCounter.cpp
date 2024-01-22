@@ -6,6 +6,16 @@
 
 using namespace ShaderPlayground;
 
+FpsCounter::FpsCounter()
+{
+
+}
+
+FpsCounter::~FpsCounter()
+{
+
+}
+
 void FpsCounter::Initialize() {
     _fps = 0;
     _count = 0;

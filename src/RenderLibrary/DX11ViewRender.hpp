@@ -45,14 +45,15 @@ namespace ShaderPlayground {
         bool _key_x;
 
     public:
-        RENDERLIBRARY_API DX11ViewRender();
+        DX11ViewRender();
+        virtual ~DX11ViewRender();
 
-        RENDERLIBRARY_API bool Init();
-        RENDERLIBRARY_API bool Draw();
-        RENDERLIBRARY_API void Close();
+        bool Init();
+        bool Draw();
+        void Close();
 
-        RENDERLIBRARY_API void RenderSceneToTexture();
-        RENDERLIBRARY_API void RenderSceneToWindow();
+        void RenderSceneToTexture();
+        void RenderSceneToWindow();
 
         static DX11ViewRender* GetDX11ViewRender()
         {

@@ -7,6 +7,16 @@
 
 using namespace ShaderPlayground;
 
+RenderState::RenderState()
+{
+
+}
+
+RenderState::~RenderState()
+{
+
+}
+
 RenderState::RenderState(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pImmediateContext) {
     _pd3dDevice = pd3dDevice;
     _pImmediateContext = pImmediateContext;
@@ -124,11 +134,11 @@ bool RenderState::Createsamplerstate() {
 }
 
 void RenderState::Close() {
-    _RELEASE(_pAlphaEnableBlendingState);
-    _RELEASE(_pAlphaDisableBlendingState);
-    _RELEASE(_pDepthEnableStencilState);
-    _RELEASE(_pDepthDisabledStencilState);
-    _RELEASE(_pSampleState);
+    ReleasePtr(_pAlphaEnableBlendingState);
+    ReleasePtr(_pAlphaDisableBlendingState);
+    ReleasePtr(_pDepthEnableStencilState);
+    ReleasePtr(_pDepthDisabledStencilState);
+    ReleasePtr(_pSampleState);
 }
 
 void RenderState::TurnZBufferOn() {

@@ -32,7 +32,7 @@ using namespace DirectX;
 #include "DX11ViewRender.hpp"
 #include "../MultiLogManager/Exports.hpp"
 #include "../MultiLogManager/Log/Log.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;
@@ -153,7 +153,7 @@ bool Render::Createdevice() {
     }
 
     hr = _pd3dDevice->CreateRenderTargetView(pBackBuffer, NULL, &_pRenderTargetView);
-    _RELEASE(pBackBuffer);
+    ReleasePtr(pBackBuffer);
     if (FAILED(hr)) {
         return false;
     }
@@ -193,7 +193,7 @@ bool Render::Createdepthstencil()
         return false;
     }
 
-    _RELEASE(pDepthStencil);
+    ReleasePtr(pDepthStencil);
 
     return true;
 }
@@ -224,12 +224,12 @@ void Render::Shutdown() {
         _pImmediateContext->ClearState();
     }
 
-    _CLOSE(_renderstate);
-    _RELEASE(_pDepthStencilView);
-    _RELEASE(_pRenderTargetView);
-    _RELEASE(_pSwapChain);
-    _RELEASE(_pImmediateContext);
-    _RELEASE(_pd3dDevice);
+    ClosePtr(_renderstate);
+    ReleasePtr(_pDepthStencilView);
+    ReleasePtr(_pRenderTargetView);
+    ReleasePtr(_pSwapChain);
+    ReleasePtr(_pImmediateContext);
+    ReleasePtr(_pd3dDevice);
 }
 
 void Render::TurnZBufferOn() {

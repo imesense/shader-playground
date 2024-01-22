@@ -4,47 +4,52 @@
 #include <stdlib.h>
 #include <string>
 
-#define _DELETE(p) { \
-    if (p) { \
-        delete (p); \
-        (p) = nullptr; \
-    } \
-}
-#define _DELETE_ARRAY(p) { \
-    if (p) { \
-        delete[] (p); \
-        (p) = nullptr; \
-    } \
-}
-#define _RELEASE(p) { \
-    if (p) { \
-        (p)->Release(); \
-        (p) = nullptr; \
-    } \
-}
-#define _CLOSE(p) { \
-    if (p) { \
-        (p)->Close(); \
-        delete (p); \
-        (p) = nullptr; \
-    } \
-}
+namespace ShaderPlayground
+{
+    template <typename T>
+    constexpr inline void deletePrt(T*& ptr) noexcept
+    {
+        if (ptr != nullptr)
+        {
+            delete ptr;
+            ptr = nullptr;
+        }
+    }
 
-#define _VERSION_FRAMEWORK 7
+    template <typename T>
+    constexpr inline void deleteArray(T*& ptr) noexcept
+    {
+        if (ptr != nullptr)
+        {
+            delete[] ptr;
+            ptr = nullptr;
+        }
+    }
 
-inline wchar_t* CharToWChar_17(char* mbString) {
-    int len = 0;
-    len = (int) strlen(mbString) + 1;
-    wchar_t* ucString = new wchar_t[len];
+    template <typename T>
+    constexpr inline void ReleasePtr(T*& ptr) noexcept
+    {
+        if (ptr != nullptr)
+        {
+            ptr->Release();
+            ptr = nullptr;
+        }
+    }
 
-    size_t convertedChars = 0;
-    mbstowcs_s(&convertedChars, ucString, len, mbString, len - 1);
+    template <typename T>
+    constexpr inline void ClosePtr(T*& ptr) noexcept
+    {
+        if (ptr != nullptr)
+        {
+            ptr->Close();
+            delete ptr;
+            ptr = nullptr;
+        }
+    }
 
-    return ucString;
-}
-
-inline std::wstring intToStr(int i) {
-    wchar_t str[255];
-    swprintf_s(str, 255, L"%d", i);
-    return str;
+    template <typename To, typename From>
+    constexpr inline To cast(const From& value) noexcept 
+    {
+        return static_cast<To>(value);
+    }
 }

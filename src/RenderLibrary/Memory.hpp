@@ -3,18 +3,18 @@
 namespace ShaderPlayground {
     class Allocator {
     public:
-        RENDERLIBRARY_API Allocator() {}
-        RENDERLIBRARY_API ~Allocator() {}
+        Allocator() {}
+        virtual ~Allocator() {}
 
-        RENDERLIBRARY_API void* operator new(std::size_t size);
-        RENDERLIBRARY_API void operator delete(void* ptr) noexcept;
+        void* operator new(std::size_t size);
+        void operator delete(void* ptr) noexcept;
 
-        RENDERLIBRARY_API void* operator new[](std::size_t size);
-        RENDERLIBRARY_API void operator delete[](void* ptr) noexcept;
+        void* operator new[](std::size_t size);
+        void operator delete[](void* ptr) noexcept;
 
-        RENDERLIBRARY_API static void AddToCollection(void* ptr);
-        RENDERLIBRARY_API static void RemoveFromCollection(void* ptr);
-        RENDERLIBRARY_API static void PrintCollection();
+        static void AddToCollection(void* ptr);
+        static void RemoveFromCollection(void* ptr);
+        static void PrintCollection();
 
     private:
         static std::unordered_set<void*> objectCollection;

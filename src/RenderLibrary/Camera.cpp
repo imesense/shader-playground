@@ -31,6 +31,11 @@ Camera::Camera() {
     _time.Init();
 }
 
+Camera::~Camera()
+{
+
+}
+
 void Camera::Render() {
     _time.Frame();
     _frameTime = _time.GetTime();

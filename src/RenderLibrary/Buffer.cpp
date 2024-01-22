@@ -8,6 +8,16 @@
 
 using namespace ShaderPlayground;
 
+Buffer::Buffer()
+{
+
+}
+
+Buffer::~Buffer()
+{
+
+}
+
 ID3D11Buffer* Buffer::CreateVertexBuffer(ID3D11Device* device, int size, bool dynamic, const void* mem) {
     ID3D11Buffer* vb = nullptr;
 

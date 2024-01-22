@@ -179,7 +179,7 @@
     </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BitmapFont.h" />
+    <ClInclude Include="BitmapFont.hpp" />
     <ClInclude Include="Buffer.hpp" />
     <ClInclude Include="Camera.hpp" />
     <ClInclude Include="DepthShader.hpp" />

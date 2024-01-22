@@ -30,12 +30,15 @@ namespace ShaderPlayground
         {
             XMMATRIX WVP;
         };
+
         struct PixelBufferType
         {
             XMFLOAT4 pixelColor;
         };
+
     public:
         BitmapFont(Render* render);
+        virtual ~BitmapFont();
 
         bool Init(const char* fontFilename);
         void RenderBitmapFont(unsigned int index, float r, float g, float b, float x, float y);

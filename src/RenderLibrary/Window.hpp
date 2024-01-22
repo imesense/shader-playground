@@ -25,59 +25,63 @@ namespace ShaderPlayground {
         void UpdateWindowState();
 
     public:
-        RENDERLIBRARY_API Window();
+        Window();
+        virtual ~Window();
 
-        RENDERLIBRARY_API static Window* Get() {
+        static Window* Get() {
             return _wndthis;
         }
 
-        RENDERLIBRARY_API bool Create();
+        bool Create();
 
         // Обработка событий окна
-        RENDERLIBRARY_API void RunEvent();
+        void RunEvent();
 
         // Закрыть окно.
-        RENDERLIBRARY_API void Close();
+        void Close();
 
-        RENDERLIBRARY_API void SetInputMgr(InputManager* inputmgr);
+        void SetInputMgr(InputManager* inputmgr);
 
-        RENDERLIBRARY_API HWND GetHWND() const {
+        HWND GetHWND() const {
             return _hwnd;
         }
 
-        RENDERLIBRARY_API int GetLeft() const {
+        int GetLeft() const {
             return posx;
         }
-        RENDERLIBRARY_API int GetTop() const {
+
+        int GetTop() const {
             return posy;
         }
-        RENDERLIBRARY_API int GetWidth() const {
+
+        int GetWidth() const {
             return width;
         }
-        RENDERLIBRARY_API int GetHeight() const {
+
+        int GetHeight() const {
             return height;
         }
 
         // сообщает, было ли сообщение о выходе
-        RENDERLIBRARY_API bool IsExit() const {
+        bool IsExit() const {
             return _isexit;
         }
 
         // сообщает об активности окна
-        RENDERLIBRARY_API bool IsActive() const {
+        bool IsActive() const {
             return _active;
         }
 
         // сообщает об изменении окна
         // предупреждение: после вызова оповещает окно об обработке события
-        RENDERLIBRARY_API bool IsResize() {
+        bool IsResize() {
             bool ret = _isresize;
             _isresize = false;
             return ret;
         }
 
         // обработка событий
-        RENDERLIBRARY_API LRESULT WndProc(HWND hwnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
+        LRESULT WndProc(HWND hwnd, UINT nMsg, WPARAM wParam, LPARAM lParam);
     };
 
     // обработка событий

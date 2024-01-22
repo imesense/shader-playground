@@ -31,7 +31,7 @@ using namespace DirectX;
 #include "FabricDirectXWindow.hpp"
 #include "Exports.hpp"
 #include "Helpers.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;

@@ -22,15 +22,18 @@ namespace ShaderPlayground {
         bool Createsamplerstate();
 
     public:
-        RENDERLIBRARY_API RenderState(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pImmediateContext);
+        RenderState();
+        virtual ~RenderState();
 
-        RENDERLIBRARY_API bool Init();
-        RENDERLIBRARY_API void Close();
+        RenderState(ID3D11Device* pd3dDevice, ID3D11DeviceContext* pImmediateContext);
 
-        RENDERLIBRARY_API void TurnZBufferOn();
-        RENDERLIBRARY_API void TurnZBufferOff();
+        bool Init();
+        void Close();
 
-        RENDERLIBRARY_API void TurnOnAlphaBlending();
-        RENDERLIBRARY_API void TurnOffAlphaBlending();
+        void TurnZBufferOn();
+        void TurnZBufferOff();
+
+        void TurnOnAlphaBlending();
+        void TurnOffAlphaBlending();
     };
 }

@@ -32,7 +32,7 @@ using namespace DirectX;
 #include "FabricRender.hpp"
 #include "../MultiLogManager/Exports.hpp"
 #include "../MultiLogManager/Log/Log.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;
@@ -133,7 +133,7 @@ void CFabricRender::DestroyFabricRender()
 
     delete pLog;
 
-    _DELETE(fabric.render);
-    _CLOSE(fabric.window);
-    _CLOSE(fabric.inputManager);
+    deletePrt(fabric.render);
+    ClosePtr(fabric.window);
+    ClosePtr(fabric.inputManager);
 }

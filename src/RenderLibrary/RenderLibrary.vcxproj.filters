@@ -66,7 +66,7 @@
     <ClInclude Include="FabricRender.hpp" />
     <ClInclude Include="FabricDirectXWindow.hpp" />
     <ClInclude Include="RenderText.hpp" />
-    <ClInclude Include="BitmapFont.h" />
+    <ClInclude Include="BitmapFont.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />

@@ -4,6 +4,16 @@
 
 using namespace ShaderPlayground;
 
+Timer::Timer()
+{
+
+}
+
+Timer::~Timer()
+{
+
+}
+
 bool Timer::Init() {
     QueryPerformanceFrequency((LARGE_INTEGER*) &_frequency);
     if (_frequency == 0) {

@@ -30,6 +30,11 @@ Window::Window(void) :
     }
 }
 
+Window::~Window()
+{
+
+}
+
 bool Window::Create()
 {
     //Log::Get()->Debug("%s", __FUNCTION__);

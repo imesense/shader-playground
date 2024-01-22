@@ -14,12 +14,13 @@ namespace ShaderPlayground {
         ID3D11Buffer* _lightBuffer2;
 
     public:
-        RENDERLIBRARY_API ShadowShader(DX11ViewRender* render);
+        ShadowShader(DX11ViewRender* render);
+        virtual ~ShadowShader();
 
-        RENDERLIBRARY_API bool Init();
-        RENDERLIBRARY_API void Close();
+        bool Init();
+        void Close();
 
-        RENDERLIBRARY_API void Render(int indexCount, CXMMATRIX worldMatrix, CXMMATRIX WVP, CXMMATRIX WVPlight,
+        void Render(int indexCount, CXMMATRIX worldMatrix, CXMMATRIX WVP, CXMMATRIX WVPlight,
             ID3D11ShaderResourceView* texture, ID3D11ShaderResourceView* depthMapTexture,
             Light& light);
     };

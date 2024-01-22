@@ -25,7 +25,7 @@ using namespace DirectX;
 #include "ShadowShader.hpp"
 #include "DX11ViewRender.hpp"
 #include "Utils.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;
@@ -38,6 +38,11 @@ DepthShader::DepthShader(DX11ViewRender* render) {
     _shader = nullptr;
     _matrixBuffer = nullptr;
     _render = render;
+}
+
+DepthShader::~DepthShader()
+{
+
 }
 
 bool DepthShader::Init() {
@@ -75,6 +80,6 @@ void DepthShader::Render(int index, CXMMATRIX wvp) {
 
 void DepthShader::Close()
 {
-    _CLOSE(_shader);
-    _RELEASE(_matrixBuffer);
+    ClosePtr(_shader);
+    ReleasePtr(_matrixBuffer);
 }

@@ -12,19 +12,22 @@ namespace ShaderPlayground {
         XMFLOAT3 _lookAt;
 
     public:
-        RENDERLIBRARY_API void SetAmbientColor(float, float, float, float);
-        RENDERLIBRARY_API void SetDiffuseColor(float, float, float, float);
-        RENDERLIBRARY_API void SetPosition(float, float, float);
-        RENDERLIBRARY_API void SetLookAt(float, float, float);
+        Light();
+        virtual ~Light();
 
-        RENDERLIBRARY_API XMFLOAT4 GetAmbientColor();
-        RENDERLIBRARY_API XMFLOAT4 GetDiffuseColor();
-        RENDERLIBRARY_API XMFLOAT3 GetPosition();
+        void SetAmbientColor(float, float, float, float);
+        void SetDiffuseColor(float, float, float, float);
+        void SetPosition(float, float, float);
+        void SetLookAt(float, float, float);
 
-        RENDERLIBRARY_API void GenerateViewMatrix();
-        RENDERLIBRARY_API void GenerateProjectionMatrix(float, float);
+        XMFLOAT4 GetAmbientColor();
+        XMFLOAT4 GetDiffuseColor();
+        XMFLOAT3 GetPosition();
 
-        RENDERLIBRARY_API XMMATRIX GetViewMatrix();
-        RENDERLIBRARY_API XMMATRIX GetProjectionMatrix();
+        void GenerateViewMatrix();
+        void GenerateProjectionMatrix(float, float);
+
+        XMMATRIX GetViewMatrix();
+        XMMATRIX GetProjectionMatrix();
     };
 }

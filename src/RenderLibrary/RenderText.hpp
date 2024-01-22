@@ -5,6 +5,9 @@ namespace ShaderPlayground
     class Text
     {
     public:
+        Text();
+        virtual ~Text();
+
         Text(Render* render, BitmapFont* font);
 
         bool TestInit(const char* text);
@@ -21,6 +24,6 @@ namespace ShaderPlayground
         BitmapFont* m_font;
         ID3D11Buffer* m_vertexBuffer;
         ID3D11Buffer* m_indexBuffer;
-        int m_numindex;
+        UINT m_numindex;
     };
 }

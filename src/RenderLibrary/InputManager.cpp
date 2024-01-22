@@ -7,6 +7,7 @@
 #include "InputCodes.hpp"
 #include "InputManager.hpp"
 #include "InputListener.hpp"
+#include "Helpers.hpp"
 
 using namespace ShaderPlayground;
 
@@ -48,13 +49,13 @@ void InputManager::Run(const UINT& msg, WPARAM wParam, LPARAM lParam) {
     case WM_KEYDOWN:
         KeyIndex = static_cast<KeyCodes>(wParam);
         GetKeyboardState(lpKeyState);
-        ToUnicode(wParam, HIWORD(lParam) & 0xFF, lpKeyState, buffer, 1, 0);
+        ToUnicode(cast<UINT>(wParam), HIWORD(lParam) & 0xFF, lpKeyState, buffer, 1, 0);
         EventKey(KeyIndex, buffer[0], true);
         break;
     case WM_KEYUP:
         KeyIndex = static_cast<KeyCodes>(wParam);
         GetKeyboardState(lpKeyState);
-        ToUnicode(wParam, HIWORD(lParam) & 0xFF, lpKeyState, buffer, 1, 0);
+        ToUnicode(cast<UINT>(wParam), HIWORD(lParam) & 0xFF, lpKeyState, buffer, 1, 0);
         EventKey(KeyIndex, buffer[0], false);
         break;
     case WM_LBUTTONDOWN:

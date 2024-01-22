@@ -26,7 +26,7 @@ using namespace DirectX;
 #include "Light.hpp"
 #include "Helpers.hpp"
 #include "Utils.hpp"
-#include "BitmapFont.h"
+#include "BitmapFont.hpp"
 #include "RenderText.hpp"
 
 using namespace ShaderPlayground;
@@ -55,6 +55,11 @@ ShadowShader::ShadowShader(DX11ViewRender* render) {
     _matrixBuffer = nullptr;
     _lightBuffer = nullptr;
     _lightBuffer2 = nullptr;
+}
+
+ShadowShader::~ShadowShader()
+{
+
 }
 
 bool ShadowShader::Init() {
@@ -153,10 +158,10 @@ void ShadowShader::Render(int indexCount, CXMMATRIX worldMatrix, CXMMATRIX WVP, 
 }
 
 void ShadowShader::Close() {
-    _CLOSE(_shader);
-    _RELEASE(_sampleStateWrap);
-    _RELEASE(_sampleStateClamp);
-    _RELEASE(_matrixBuffer);
-    _RELEASE(_lightBuffer);
-    _RELEASE(_lightBuffer2);
+    ClosePtr(_shader);
+    ReleasePtr(_sampleStateWrap);
+    ReleasePtr(_sampleStateClamp);
+    ReleasePtr(_matrixBuffer);
+    ReleasePtr(_lightBuffer);
+    ReleasePtr(_lightBuffer2);
 }
