@@ -1,23 +1,28 @@
-<UserControl x:Class="ImeSense.ShaderPlayground.Views.MenuView"
-             x:DataType="vm:MenuViewModel"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:vm="using:ImeSense.ShaderPlayground.ViewModels"
-             mc:Ignorable="d">
+<UserControl
+    x:Class="ImeSense.ShaderPlayground.Views.MenuView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:vm="using:ImeSense.ShaderPlayground.ViewModels"
+    x:DataType="vm:MenuViewModel"
+    mc:Ignorable="d">
     <Design.DataContext>
         <vm:MenuViewModel />
     </Design.DataContext>
 
     <Menu>
-        <MenuItem Header="{Binding FileHeader}"
-                  Margin="0,4" />
-        <MenuItem Header="{Binding ToolsHeader}"
-                  Margin="0,4" />
-        <MenuItem Header="{Binding SettingsHeader}"
-                  Margin="0,4" />
-        <MenuItem Header="{Binding HelpHeader}"
-                  Margin="0,4" />
+        <MenuItem
+            Header="{Binding FileHeader}"
+            Margin="0,4" />
+        <MenuItem
+            Header="{Binding ToolsHeader}"
+            Margin="0,4" />
+        <MenuItem
+            Header="{Binding SettingsHeader}"
+            Margin="0,4" />
+        <MenuItem
+            Header="{Binding HelpHeader}"
+            Margin="0,4" />
     </Menu>
 </UserControl>

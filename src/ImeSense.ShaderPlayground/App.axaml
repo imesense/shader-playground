@@ -1,8 +1,9 @@
-<Application x:Class="ImeSense.ShaderPlayground.App"
-             xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:l="using:ImeSense.ShaderPlayground"
-             RequestedThemeVariant="Dark">
+<Application
+    x:Class="ImeSense.ShaderPlayground.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:l="using:ImeSense.ShaderPlayground"
+    RequestedThemeVariant="Dark">
     <Application.DataTemplates>
         <l:ViewLocator />
     </Application.DataTemplates>

@@ -1,150 +1,179 @@
-<Window x:Class="ImeSense.ShaderPlayground.Views.MainWindow"
-        x:DataType="vm:MainViewModel"
-        xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:ae="using:AvaloniaEdit"
-        xmlns:vm="using:ImeSense.ShaderPlayground.ViewModels"
-        mc:Ignorable="d"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="{Binding WindowTitle}"
-        Height="{Binding WindowHeight}"
-        Width="{Binding WindowWidth}"
-        WindowStartupLocation="CenterScreen">
+<Window
+    x:Class="ImeSense.ShaderPlayground.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ae="using:AvaloniaEdit"
+    xmlns:vm="using:ImeSense.ShaderPlayground.ViewModels"
+    Title="{Binding WindowTitle}"
+    Width="{Binding WindowWidth}"
+    Height="{Binding WindowHeight}"
+    x:DataType="vm:MainViewModel"
+    Icon="/Assets/avalonia-logo.ico"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Design.DataContext>
         <vm:MainViewModel />
     </Design.DataContext>
 
     <Grid RowDefinitions="Auto,*">
-        <ContentControl Content="{Binding MenuContext}"
-                        Grid.Row="0" />
+        <ContentControl
+            Grid.Row="0"
+            Content="{Binding MenuContext}" />
 
-        <Grid Grid.Row="1"
-              ColumnDefinitions="*,2,*">
-            <ScrollViewer Grid.Column="0"
-                          HorizontalScrollBarVisibility="Auto"
-                          VerticalScrollBarVisibility="Auto">
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,2,*">
+            <ScrollViewer
+                Grid.Column="0"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto">
                 <DockPanel Height="{Binding #rootGrid.Height}">
-                    <StackPanel Orientation="Horizontal"
-                                DockPanel.Dock="Top"
-                                Spacing="5"
-                                Margin="3">
-                        <ToggleButton x:Name="wordWrap"
-                                      ToolTip.Tip="Word wrap"
-                                      IsChecked="{Binding #Editor.WordWrap}">
+                    <StackPanel
+                        Margin="3"
+                        DockPanel.Dock="Top"
+                        Orientation="Horizontal"
+                        Spacing="5">
+                        <ToggleButton
+                            x:Name="wordWrap"
+                            IsChecked="{Binding #Editor.WordWrap}"
+                            ToolTip.Tip="Word wrap">
                             <ToggleButton.Content>
-                                <Path Fill="{Binding $parent.Foreground}"
-                                      Data="M2.75 5C2.33579 5 2 5.33579 2 5.75C2 6.16421 2.33579 6.5 2.75 6.5H21.25C21.6642 6.5 22 6.16421 22 5.75C22 5.33579 21.6642 5 21.25 5H2.75Z M2.75 11.5C2.33579 11.5 2 11.8358 2 12.25C2 12.6642 2.33579 13 2.75 13H19C20.3807 13 21.5 14.1193 21.5 15.5C21.5 16.8807 20.3807 18 19 18H14.5607L15.2803 17.2803C15.5732 16.9874 15.5732 16.5126 15.2803 16.2197C14.9874 15.9268 14.5126 15.9268 14.2197 16.2197L12.2197 18.2197C11.9268 18.5126 11.9268 18.9874 12.2197 19.2803L14.2197 21.2803C14.5126 21.5732 14.9874 21.5732 15.2803 21.2803C15.5732 20.9874 15.5732 20.5126 15.2803 20.2197L14.5607 19.5H19C21.2091 19.5 23 17.7091 23 15.5C23 13.2909 21.2091 11.5 19 11.5H2.75Z M2 18.75C2 18.3358 2.33579 18 2.75 18H9.25C9.66421 18 10 18.3358 10 18.75C10 19.1642 9.66421 19.5 9.25 19.5H2.75C2.33579 19.5 2 19.1642 2 18.75Z" />
+                                <Path
+                                    Data="M2.75 5C2.33579 5 2 5.33579 2 5.75C2 6.16421 2.33579 6.5 2.75 6.5H21.25C21.6642 6.5 22 6.16421 22 5.75C22 5.33579 21.6642 5 21.25 5H2.75Z M2.75 11.5C2.33579 11.5 2 11.8358 2 12.25C2 12.6642 2.33579 13 2.75 13H19C20.3807 13 21.5 14.1193 21.5 15.5C21.5 16.8807 20.3807 18 19 18H14.5607L15.2803 17.2803C15.5732 16.9874 15.5732 16.5126 15.2803 16.2197C14.9874 15.9268 14.5126 15.9268 14.2197 16.2197L12.2197 18.2197C11.9268 18.5126 11.9268 18.9874 12.2197 19.2803L14.2197 21.2803C14.5126 21.5732 14.9874 21.5732 15.2803 21.2803C15.5732 20.9874 15.5732 20.5126 15.2803 20.2197L14.5607 19.5H19C21.2091 19.5 23 17.7091 23 15.5C23 13.2909 21.2091 11.5 19 11.5H2.75Z M2 18.75C2 18.3358 2.33579 18 2.75 18H9.25C9.66421 18 10 18.3358 10 18.75C10 19.1642 9.66421 19.5 9.25 19.5H2.75C2.33579 19.5 2 19.1642 2 18.75Z"
+                                    Fill="{Binding $parent.Foreground}" />
                             </ToggleButton.Content>
                         </ToggleButton>
 
-                        <ToggleButton x:Name="viewTabs"
-                                      Content="Табуляция"
-                                      IsChecked="{Binding #Editor.Options.ShowTabs}"
-                                      VerticalAlignment="Stretch"
-                                      VerticalContentAlignment="Center"/>
-                        <ToggleButton x:Name="viewSpaces"
-                                      Content="Пробелы"
-                                      IsChecked="{Binding #Editor.Options.ShowSpaces}"
-                                      VerticalAlignment="Stretch"
-                                      VerticalContentAlignment="Center"/>
-                        <ToggleButton x:Name="viewEOL"
-                                      Content="Окончание строк"
-                                      IsChecked="{Binding #Editor.Options.ShowEndOfLine}"
-                                      VerticalAlignment="Stretch"
-                                      VerticalContentAlignment="Center"/>
-                        <ToggleButton x:Name="viewColumnRules"
-                                      Content="Вертикальные линии"
-                                      IsChecked="{Binding #Editor.Options.ShowColumnRulers}"
-                                      VerticalAlignment="Stretch"
-                                      VerticalContentAlignment="Center"/>
+                        <ToggleButton
+                            x:Name="viewTabs"
+                            Content="Табуляция"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding #Editor.Options.ShowTabs}" />
+                        <ToggleButton
+                            x:Name="viewSpaces"
+                            Content="Пробелы"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding #Editor.Options.ShowSpaces}" />
+                        <ToggleButton
+                            x:Name="viewEOL"
+                            Content="Окончание строк"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding #Editor.Options.ShowEndOfLine}" />
+                        <ToggleButton
+                            x:Name="viewColumnRules"
+                            Content="Вертикальные линии"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            IsChecked="{Binding #Editor.Options.ShowColumnRulers}" />
 
-                        <!--<Button Name="addControlBtn" 
-                            Content="Add Button" 
-                            VerticalAlignment="Stretch" 
-                            VerticalContentAlignment="Center"/>       
-                        <Button Name="clearControlBtn" 
-                            Content="Clear Buttons" 
-                            VerticalAlignment="Stretch" 
+                        <!--<Button Name="addControlBtn"
+                            Content="Add Button"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Center"/>
+                        <Button Name="clearControlBtn"
+                            Content="Clear Buttons"
+                            VerticalAlignment="Stretch"
                             VerticalContentAlignment="Center"/>-->
 
-                        <ComboBox x:Name="syntaxModeCombo"
-                                  VerticalAlignment="Stretch"
-                                  VerticalContentAlignment="Center"/>
+                        <ComboBox
+                            x:Name="syntaxModeCombo"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Center" />
 
-                        <Button x:Name="changeThemeBtn"
-                                Content="Тема"
-                                VerticalAlignment="Stretch"
-                                VerticalContentAlignment="Center"/>
+                        <Button
+                            x:Name="changeThemeBtn"
+                            Content="Тема"
+                            VerticalAlignment="Stretch"
+                            VerticalContentAlignment="Center" />
                     </StackPanel>
 
-                    <StackPanel x:Name="StatusBar"
-                                Background="Purple"
-                                Height="25"
-                                DockPanel.Dock="Bottom"
-                                Orientation="Horizontal">
-                        <TextBlock x:Name="StatusText"
-                                   Foreground="White"
-                                   Text="Ready"
-                                   Margin="5 0 0 0"
-                                   VerticalAlignment="Center"
-                                   FontSize="12" />
+                    <StackPanel
+                        x:Name="StatusBar"
+                        Height="25"
+                        Background="Purple"
+                        DockPanel.Dock="Bottom"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            x:Name="StatusText"
+                            Text="Ready"
+                            Margin="5,0,0,0"
+                            VerticalAlignment="Center"
+                            FontSize="12"
+                            Foreground="White" />
                     </StackPanel>
 
-                    <ae:TextEditor x:Name="Editor"
-                                   FontFamily="Cascadia Code,Consolas,Menlo,Monospace"
-                                   Margin="5"
-                                   HorizontalScrollBarVisibility="Hidden"
-                                   VerticalScrollBarVisibility="Hidden"
-                                   FontWeight="Light"
-                                   FontSize="14" />
+                    <ae:TextEditor
+                        x:Name="Editor"
+                        Margin="5"
+                        FontFamily="Cascadia Code,Consolas,Menlo,Monospace"
+                        FontSize="14"
+                        FontWeight="Light"
+                        HorizontalScrollBarVisibility="Hidden"
+                        VerticalScrollBarVisibility="Hidden" />
                 </DockPanel>
             </ScrollViewer>
 
-            <GridSplitter Grid.Column="1"
-                          Background="#D6D6D6"
-                          ResizeDirection="Columns" />
+            <GridSplitter
+                Grid.Column="1"
+                Background="#D6D6D6"
+                ResizeDirection="Columns" />
 
-            <Grid Grid.Column="2"
-                  RowDefinitions="*,2,*">
-                <Grid Grid.Row="0"
-                      RowDefinitions="*,Auto,Auto">
-                    <ContentControl x:Name="viewportContentControl"
-                                    Grid.Row="0" />
+            <Grid
+                Grid.Column="2"
+                RowDefinitions="*,2,*">
+                <Grid
+                    Grid.Row="0"
+                    RowDefinitions="*,Auto,Auto">
+                    <ContentControl
+                        x:Name="viewportContentControl"
+                        Grid.Row="0" />
 
-                    <StackPanel Orientation="Horizontal"
-                                Grid.Row="1"
-                                HorizontalAlignment="Center">
-                        <Button Content="Play"
-                                Command="{Binding PlayCommand}" />
-                        <Button Content="Stop"
-                                Command="{Binding StopCommand}" />
-                        <Button Content="Settings"
-                                Command="{Binding SettingsCommand}" />
+                    <StackPanel
+                        Grid.Row="1"
+                        HorizontalAlignment="Center"
+                        Orientation="Horizontal">
+                        <Button
+                            Content="Play"
+                            Command="{Binding PlayCommand}" />
+                        <Button
+                            Content="Stop"
+                            Command="{Binding StopCommand}" />
+                        <Button
+                            Content="Settings"
+                            Command="{Binding SettingsCommand}" />
                     </StackPanel>
 
-                    <Grid Grid.Row="2"
-                          ColumnDefinitions="*,*,*,*"
-                          HorizontalAlignment="Center">
-                        <Label Content="Resolution:"
-                               Grid.Column="0"/>
-                        <Label Content="{Binding Resolution}"
-                               Grid.Column="1" />
+                    <Grid
+                        Grid.Row="2"
+                        HorizontalAlignment="Center"
+                        ColumnDefinitions="*,*,*,*">
+                        <Label
+                            Grid.Column="0"
+                            Content="Resolution:" />
+                        <Label
+                            Grid.Column="1"
+                            Content="{Binding Resolution}" />
 
-                        <Label Content="Frame:"
-                               Grid.Column="2" />
-                        <Label Content="{Binding Frame}"
-                               Grid.Column="3" />
+                        <Label
+                            Grid.Column="2"
+                            Content="Frame:" />
+                        <Label
+                            Grid.Column="3"
+                            Content="{Binding Frame}" />
                     </Grid>
                 </Grid>
 
-                <GridSplitter Grid.Row="1"
-                              Background="#D6D6D6"
-                              ResizeDirection="Columns" />
+                <GridSplitter
+                    Grid.Row="1"
+                    Background="#D6D6D6"
+                    ResizeDirection="Columns" />
 
-                <Grid Grid.Row="2">
-                </Grid>
+                <Grid Grid.Row="2" />
             </Grid>
         </Grid>
     </Grid>
